@@ -3,17 +3,17 @@
 
 /**
  * A letter is a character and a score.
- *
+ * The Game class will need to initialize all available letters. Their scores will be associated to them.
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.0
+ * @version 0.1
  */
 public class Letter {
 
     public enum Character {A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z}
 
     private final Character character;
-    private final int score;
-    // add a tile value attribute, default is 1
+    private final int value;
+    private String premium;
 
     /**
      * The Game class will need to call this for every available letter in the game, this way
@@ -21,7 +21,7 @@ public class Letter {
      */
     public Letter(Character character) {
         this.character = character;
-        this.score = this.getValueFromCharacter(character);
+        this.value = this.getValueFromCharacter(character);
     }
 
     private int getValueFromCharacter(Character c) {
@@ -53,8 +53,26 @@ public class Letter {
         }
     }
 
-    public int getScore() {
-        return score;
+    public int getValue() {
+        return this.value;
+    }
+
+    /**
+     * This shall not be set in the constructor because the letters are created without a premium
+     * Only letters that are placed can then have a premium set.
+     * @param premium is one of
+     *         NONE = "None";
+     *         DL = "Double Letter";
+     *         TL = "Triple Letter";
+     *         DW = "Double Word";
+     *         TW = "Triple Word";
+     */
+    public void setPremium(String premium){
+        this.premium = premium;
+    }
+
+    public String getPremium(){
+        return this.premium;
     }
 
     @Override
