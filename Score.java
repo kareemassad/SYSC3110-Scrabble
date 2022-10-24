@@ -1,6 +1,9 @@
 /*
 Class Score is in charge of calculating and updating the score of a player
  */
+
+// TODO needs to add score of all adjoining words
+
 import java.util.ArrayList;
 
 public class Score {

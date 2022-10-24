@@ -2,6 +2,8 @@
 Class Player is in charge of all details pertaining to a player, including their hand, score, etc.
  */
 
+// TODO update hand
+
 public class Player {
     private Hand hand;
     private int score;
