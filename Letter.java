@@ -1,11 +1,8 @@
-
-// the Game class will need to initialize all available letters. Their scores will be associated to them
-
 /**
  * A letter is a character and a score.
  * The Game class will need to initialize all available letters. Their scores will be associated to them.
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.1
+ * @version 0.2
  */
 public class Letter {
 
@@ -22,6 +19,42 @@ public class Letter {
     public Letter(Character character) {
         this.character = character;
         this.value = this.getValueFromCharacter(character);
+    }
+
+    public Letter(char letter){
+        this(getCharacterFromChar(java.lang.Character.toUpperCase(letter)));
+    }
+
+    public static Character getCharacterFromChar(char c){
+        switch (c) {
+            case 'A': return Character.A;
+            case 'B': return Character.B;
+            case 'C': return Character.C;
+            case 'D': return Character.D;
+            case 'E': return Character.E;
+            case 'F': return Character.F;
+            case 'G': return Character.G;
+            case 'H': return Character.H;
+            case 'I': return Character.I;
+            case 'J': return Character.J;
+            case 'K': return Character.K;
+            case 'L': return Character.L;
+            case 'M': return Character.M;
+            case 'N': return Character.N;
+            case 'O': return Character.O;
+            case 'P': return Character.P;
+            case 'Q': return Character.Q;
+            case 'R': return Character.R;
+            case 'S': return Character.S;
+            case 'T': return Character.T;
+            case 'U': return Character.U;
+            case 'V': return Character.V;
+            case 'W': return Character.W;
+            case 'X': return Character.X;
+            case 'Y': return Character.Y;
+            case 'Z': return Character.Z;
+            default: throw new IllegalArgumentException("No such letter!");
+        }
     }
 
     private int getValueFromCharacter(Character c) {
@@ -77,6 +110,8 @@ public class Letter {
 
     @Override
     public String toString() {
-        return this.character.name();
+        StringBuilder s = new StringBuilder();
+        s.append(this.character.name().charAt(0)); // we print L if we have letter L1
+        return s.toString();
     }
 }
