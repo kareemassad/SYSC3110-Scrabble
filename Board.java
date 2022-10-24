@@ -61,9 +61,8 @@ public class Board {
      * @param tile The tile that's going to be placed
      * @param row The row cord
      * @param col The column cord
-     * @param dir The direction the word will be placed
      */
-    public void place_tile(int tile, int row, int col, int dir){
+    public void place_word(char tile, int row, int col){
         if(row < 0 || row > 14 || col < 0 || col > 14){
             return;
         }
