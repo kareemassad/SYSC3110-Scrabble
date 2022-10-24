@@ -103,7 +103,11 @@ public class Word {
         System.out.println(wordLetters.toString());
         System.out.println(wordString.toString());
         Bag letterBag = new Bag();
-
+        Hand newHand = new Hand();
+        newHand.drawFromBag(7);
+        System.out.println(newHand);
+        newHand.drawFromBag(2);
+        System.out.println(newHand);
     }
 
 

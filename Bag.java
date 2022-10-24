@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A word can have up to 7 letters
@@ -8,7 +9,7 @@ import java.util.Collections;
  */
 
 public class Bag {
-    ArrayList<Letter> gameLetters;
+    public static ArrayList<Letter> gameLetters;
 
     public Bag(){
         this.gameLetters = new ArrayList<Letter>();
@@ -141,5 +142,19 @@ public class Bag {
                 I1, I2, I3, I4, I5, I6, I7, I8, I9, J1, K1, L1, L2, L3, L4, M1, M2, N1, N2, N3, N4, N5, N6,
                 O1, O2, O3, O4, O5, O6, O7, O8, P1, P2, Q1, R1, R2, R3, R4, R5, R6, S1, S2, S3, S4,
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
+    }
+
+    public ArrayList<Letter> getGameLetters(){
+        return this.gameLetters;
+    }
+
+    public static ArrayList<Letter> drawLetters(Integer numberOfLetters){
+        ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
+        for (int i = 0; i < numberOfLetters; i++) {
+            int randomNum = ThreadLocalRandom.current().nextInt(0,  Bag.gameLetters.size());
+            lettersDrawn.add(Bag.gameLetters.get(randomNum)); // add the letter at the random index
+            Bag.gameLetters.remove(randomNum); // then remove it from the game letters
+        }
+        return lettersDrawn;
     }
 }
