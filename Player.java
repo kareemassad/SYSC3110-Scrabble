@@ -2,29 +2,35 @@
 Class Player is in charge of all details pertaining to a player, including their hand, score, etc.
  */
 
+// TODO update hand
+
 public class Player {
-    public Hand hand;
-    public Score score;
-    public String name;
+    private Hand hand;
+    private int score;
+    private String name;
 
     public int playerID; // might be useful in Game
 
 
-    /* Creates a player description in the format to be printed, with elements name, score, and hand.
-     * @return s is the string created of the player description.
+    /* Updates the score
+     *
+     * @author Becca Young 101183297
      */
-    public String playerDescription() {
-        String s = new String("Player: " + this.name + "\nScore: " + this.score.getTotalScore()
-                    + "\n Tiles: " + this.hand.toString() + "\n");
-        return s;
+    public void setScore(Score score) {
+        this.score = score.getTotalScore();
     }
 
-
-    /* Sets the name of the Player
-     * @param name is the name of the player.
-     * */
-    public void setName(String name) {
-        this.name = name;
+    /* Creates a player description in the format to be printed, with elements name, score, and hand to print at start
+     * of player turn.
+     *
+     * @author Becca Young 101183297
+     * @param player is the player which the description is created for.
+     * @return s is the string created of the player description.
+     */
+    public String playerDescription(Player player) {
+        String s = new String("Player: " + player.name + "\nScore: " + player.score
+                + "\n Tiles: " + player.hand.toString() + "\n");
+        return s;
     }
 
     /*
