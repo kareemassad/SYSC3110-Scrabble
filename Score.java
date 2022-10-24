@@ -1,26 +1,48 @@
 /*
 Class Score is in charge of calculating and updating the score of a player
  */
+import java.util.ArrayList;
 
 public class Score {
-    private int totalScore = 0;
-    public int wordScore = 0;
+    private int wordScore = 0;
+    private final Word word;
 
-    public int getTotalScore() {
-        return totalScore;
-    }
-
-    public void addTurnScore(){
+    public Score(Word word) {
+        this.word = word;
         calculateWord();
-
-        // for all newly created words
-            // calculateWord();
-
-        totalScore += wordScore;
     }
 
-    public void adjustPremiums(String input){
+    /* Returns the total score of a word played.
+     *
+     * @author Becca Young 101183297
+     * @return wordScore the total score of a word played
+     */
+    public int getTotalScore() {
+        calculateWord();
+        return wordScore;
+    }
 
+    /* Adds the score of a word played to the total score of a player
+     *
+     * @author Becca Young 101183297
+     */
+    public void addTurnScore(Player player){                 // To be used in class Game
+        calculateWord();
+        player.setScore(new Score(word));
+    }
+
+    /* Calculates the score of a word played
+     *
+     * @author Becca Young 101183297
+     */
+    private void calculateWord() {
+        this.wordScore = 0;
+        ArrayList<Letter> letters = word.getLetters();
+
+        // need a way to assign whether a letter is on a premium ... Go in board? Word? Letter? New class ????
+        // method getPremuium(letter)
+
+        // This part may be delegated to wherever getPremium is
         String NONE, DL, TL, DW, TW;
         NONE = "None";
         DL = "Double Letter";
@@ -28,14 +50,15 @@ public class Score {
         DW = "Double Word";
         TW = "Triple Word";
 
-        for (char (letter.c) : input) {
-            String premium = getPremium(letter); // don't know where this would go, likely board or letter
+        for (Letter letter : letters) {
+            String premium = letter.getPremium();
+            this.wordScore += letter.getScore();
 
             if (premium.equals(DL)) {
-                this.wordScore += letter.getValue();
+                this.wordScore += letter.getScore();
             }
             else if (premium.equals(TL)) {
-                this.wordScore += 2 * letter.getValue();
+                this.wordScore += 2 * letter.getScore();
             }
             else if (premium.equals(DW)) {
                 this.wordScore *= 2;
@@ -44,32 +67,8 @@ public class Score {
                 this.wordScore *= 3;
             }
             if (!premium.equals(NONE)) {
-                board.removePremium();
+                board.removePremium();                                             // Premuium goes away after first use.
             }
-
-
         }
-
-        // for letters in word
-            // if letter is on double letter
-                // add letter value to wordScore
-                // removePremium();
-            // if letter is on triple letter
-                // add 2 * letter value to wordScore
-                 // removePremium();
-            // if letter is on double word
-                // multiply wordScore by 2
-                // removePremium();
-            // if letter is on triple word
-                // multiply wordScore by 3
-                // removePremium();
-    }
-
-    public void calculateWord() {
-        int wordScore = 0;
-        // for letter in word
-            // add letter value to word Score
-
-        adjustPremiums();
     }
 }
