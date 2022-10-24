@@ -2,6 +2,13 @@
 Class Score is in charge of calculating and updating the score of a player
  */
 
+/**
+ * Class Score is in charge of calculating and updating the score of a player
+ * @author Becca
+ * @author Laurence Lamarche-Cliche 101173070
+ * @version 0.1
+ */
+
 public class Score {
     private int totalScore = 0;
     public int wordScore = 0;
@@ -11,7 +18,6 @@ public class Score {
     }
 
     public void addTurnScore(){
-        calculateWord();
 
         // for all newly created words
             // calculateWord();
@@ -19,7 +25,7 @@ public class Score {
         totalScore += wordScore;
     }
 
-    public void adjustPremiums(String input){
+    public void adjustPremiums(Word word){
 
         String NONE, DL, TL, DW, TW;
         NONE = "None";
@@ -28,8 +34,8 @@ public class Score {
         DW = "Double Word";
         TW = "Triple Word";
 
-        for (char (letter.c) : input) {
-            String premium = getPremium(letter); // don't know where this would go, likely board or letter
+        for (Letter letter : word.getLetters()) {
+            String premium = letter.getPremium(); // don't know where this would go, likely board or letter
 
             if (premium.equals(DL)) {
                 this.wordScore += letter.getValue();
@@ -44,11 +50,12 @@ public class Score {
                 this.wordScore *= 3;
             }
             if (!premium.equals(NONE)) {
-                board.removePremium();
+                //do nothing
             }
 
-
         }
+
+
 
         // for letters in word
             // if letter is on double letter
@@ -65,11 +72,12 @@ public class Score {
                 // removePremium();
     }
 
-    public void calculateWord() {
-        int wordScore = 0;
-        // for letter in word
-            // add letter value to word Score
 
-        adjustPremiums();
+    public void calculateWord(Word word) {
+        int wordScore = 0;
+        for (Letter letter: word.getLetters()) {
+            wordScore += letter.getValue();
+            // for now we don't need the premiums in here
+        }
     }
 }
