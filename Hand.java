@@ -14,6 +14,7 @@ public class Hand{
         this.letters = new ArrayList<Letter>();
         //This could also be initialized with 7 letters to start if we prefer
     }
+
     /**
      * This draws the requested number of letters from the Bag and adds them to the existing hand
      * This should be called with numLetters = 7 when the Hand is empty.
@@ -30,6 +31,20 @@ public class Hand{
         }
     }
 
+    /**
+     * This removes the requested letter from the Hand (when it is played, it should no remain in the hand).
+     * If two identical letters are present, this will only remove one occurence of the letter.
+     * Calling removeFromHand("A") on a Hand containing INEWAAT will result in the hand becoming INEWAT
+     * Only one letter can be removed at a time with this method.
+     */
+    public void removeFromHand(String letterToRemove){
+        letterToRemove.toUpperCase();
+        for (int i = 0; i < this.letters.size(); i++){
+            if (letterToRemove.equals(this.letters.get(i).toString())){
+                this.letters.remove(i);
+            }
+        }
+    }
     // needed for Player
     public String toString() {
         StringBuilder hand = null;
