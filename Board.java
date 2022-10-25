@@ -20,7 +20,7 @@ public class Board {
     public Board() {
         this.direction = direction;
         this.scrabble_board = new char[15][15];
-        this.temp_board = new char[16][16];
+        this.temp_board = new char[15][15];
         this.temp_rack = new ArrayList<Character>();
         this.create_board();
     }
@@ -70,35 +70,35 @@ public class Board {
      * @param row The row cord
      * @param col The column cord
      */
-    public void place_word(char word, int row, int col, int dir){
-        if(row < 0 || row > 14 || col < 0 || col > 14){
+    public void place_word(String word, int row, int col, int dir) {
+        if (row < 0 || row > 14 || col < 0 || col > 14) {
             return;
         }
 
-        if (temp_board[row][col] == ' ' || temp_board[row][col] == '*'){
-            if(temp_rack.get(word) != ' '){
-                temp_board[row][col] = temp_rack.get(word);
-                temp_rack.remove(word);
-                temp_rack.add('!');
-            }
-            else{
-                return;
+        for (int i = 0; i < word.length(); i++) {
+            if (dir == RIGHT) {
+                this.scrabble_board[row][col + 1] = word.charAt(i);
+            } else if (dir == DOWN) {
+                this.scrabble_board[row + 1][col] = word.charAt(i);
             }
         }
-        else{
-            if(dir == RIGHT){
-                place_word(word, row, col + 1, dir);
-                return;
-            }
-            else if (dir == DOWN) {
-                place_word(word, row - 1, col, dir);
-                return;
-            }
-        }
+    }
 
+    public void store_board(){
+        for(int x = 0; x < 15; x++){
+            for(int y = 0; y < 15; y++){
+                temp_board[x][y] = scrabble_board[x][y];
+            }
+        }
     }
     public static void main(String[] args){
         Board b = new Board();
+        //b.create_board();
+        String c = "Word";
+
+        b.place_word(c, 0,0,0);
+
+        b.get_scrabble_board();
     }
 }
 
