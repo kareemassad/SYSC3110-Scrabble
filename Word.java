@@ -40,9 +40,9 @@ public class Word {
      * Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
      * Where H, O, W and L are Letter objects.
      */
-    public Word(ArrayList<Letter> letters, ArrayList<String> premium){
+    public Word(ArrayList<Letter> letters, ArrayList<String> premiums){
         this.letters = new ArrayList<Letter>(letters);
-        this.premiums = new ArrayList<String>(premium);
+        this.premiums = new ArrayList<String>(premiums);
         for (int i = 0; i < this.letters.size(); i++) {
             letters.get(i).setPremium(premiums.get(i)); // set the premium for each letter to the corresponding String
         }

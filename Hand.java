@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 
 public class Hand{
-    ArrayList<Letter> letters;
+    private ArrayList<Letter> letters;
 
     public Hand(){
         this.letters = new ArrayList<Letter>();
