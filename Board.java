@@ -25,10 +25,6 @@ public class Board {
         this.create_board();
     }
 
-    public char[][] get_scrabble_board(){
-        return scrabble_board;
-    }
-
     public void create_board()
     {
         int i;
@@ -75,12 +71,14 @@ public class Board {
             return;
         }
 
-        for (int i = 0; i < word.length(); i++) {
+        for (int k = 0; k < word.length(); k++) {
             if (dir == RIGHT) {
-                this.scrabble_board[row][col + 1] = word.charAt(i);
+                this.scrabble_board[row][col + 1] = word.charAt(k);
+                this.temp_board[row][col] = scrabble_board[row][col + 1];
             } else if (dir == DOWN) {
-                this.scrabble_board[row + 1][col] = word.charAt(i);
+                this.scrabble_board[row + 1][col] = word.charAt(k);
             }
+            System.out.println(temp_board[row][col]);
         }
     }
 
@@ -98,7 +96,7 @@ public class Board {
 
         b.place_word(c, 0,0,0);
 
-        b.get_scrabble_board();
+        //b.get_scrabble_board();
     }
 }
 
