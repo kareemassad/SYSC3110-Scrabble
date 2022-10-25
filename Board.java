@@ -9,16 +9,24 @@ import java.util.HashMap;
  */
 public class Board {
 
+    private final int RIGHT = 0;
+    private final int DOWN =  1;
+    private int direction;
     private char[][] scrabble_board;
     private char[][] temp_board;
     private ArrayList<Character> temp_rack;
     private static HashMap<String, String> boardScores;
 
     public Board() {
+        this.direction = direction;
         this.scrabble_board = new char[15][15];
         this.temp_board = new char[16][16];
         this.temp_rack = new ArrayList<Character>();
         this.create_board();
+    }
+
+    public char[][] get_scrabble_board(){
+        return scrabble_board;
     }
 
     public void create_board()
@@ -58,22 +66,39 @@ public class Board {
 
     /**
      * Place a tile on the board
-     * @param tile The tile that's going to be placed
+     * @param word The tile that's going to be placed
      * @param row The row cord
      * @param col The column cord
      */
-    public void place_word(char tile, int row, int col){
+    public void place_word(char word, int row, int col, int dir){
         if(row < 0 || row > 14 || col < 0 || col > 14){
             return;
         }
 
         if (temp_board[row][col] == ' ' || temp_board[row][col] == '*'){
-            if(temp_rack.get(tile) != ' '){
-                temp_board[row][col] = temp_rack.get(tile);
-                temp_rack.remove(tile);
+            if(temp_rack.get(word) != ' '){
+                temp_board[row][col] = temp_rack.get(word);
+                temp_rack.remove(word);
                 temp_rack.add('!');
             }
+            else{
+                return;
+            }
         }
+        else{
+            if(dir == RIGHT){
+                place_word(word, row, col + 1, dir);
+                return;
+            }
+            else if (dir == DOWN) {
+                place_word(word, row - 1, col, dir);
+                return;
+            }
+        }
+
+    }
+    public static void main(String[] args){
+        Board b = new Board();
     }
 }
 
