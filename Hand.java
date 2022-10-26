@@ -23,7 +23,7 @@ public class Hand {
     public void drawFromBag(Integer numLetters) {
         if (this.letters.size() == 0) {
             this.letters = Bag.drawLetters(numLetters);
-        } else if ((this.letters.size() + numLetters) > 7) {
+        } else if ((this.letters.size() + numLetters) > 8) {
             System.out.println("you are requesting to draw more letters than you can have");
         } else {
             this.letters.addAll(Bag.drawLetters(numLetters));
@@ -53,7 +53,7 @@ public class Hand {
         StringBuilder hand = null;
         hand = new StringBuilder();
         for (Letter letter : this.letters) {
-            hand.append(letter.toString() + ", ");
+            hand.append(letter.toString());
         }
         return hand.toString();
     }
