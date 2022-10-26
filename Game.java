@@ -147,7 +147,7 @@ public class Game {
             System.out.println("\n >>> Current player: " + game.currentPlayer.playerDescription(game.currentPlayer));
 
             // print board
-            game.board.print_board();
+            game.board.print_board(game.board.get_board());
 
             // play
             game.play(game.currentPlayer);

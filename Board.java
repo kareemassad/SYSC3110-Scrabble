@@ -33,14 +33,14 @@ public class Board {
                 "\n     A     B     C     D     E     F     G     H     I     J     K     L     M     N     O   \n");
         System.out.print(
                 "   _________________________________________________________________________________________ \n");
-        System.out.print(
-                "  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |\n");
 
-        for (i = 14; i >= 0; i--) {
-            if (i < 10)
-                System.out.print(i + " ");
+        for (i = 0; i < 15; i++) {
+            System.out.print(
+                    "  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |\n");
+            if (i < 9)
+                System.out.print(i + 1 + " ");
             else
-                System.out.print(i);
+                System.out.print(i + 1);
 
             for (j = 0; j < 15; j++) {
                 System.out.print("|  ");
@@ -51,13 +51,7 @@ public class Board {
             System.out.print("|\n");
             System.out.print(
                     "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
-            if (i != 0)
-                System.out.print(
-                        "\n  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |\n");
-
-            if (i == 0) {
-                System.out.print("\n   ");
-            }
+            System.out.print("\n");
         }
     }
 
@@ -75,12 +69,59 @@ public class Board {
 
         for (int k = 0; k < word.length(); k++) {
             if (dir == RIGHT) {
-                this.scrabble_board[row][col + 1] = word.charAt(k);
-                this.temp_board[row][col] = scrabble_board[row][col + 1];
+                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
+                col++;
+
+                // System.out.println(scrabble_board[row][col + 1]);
             } else if (dir == DOWN) {
-                this.scrabble_board[row + 1][col] = word.charAt(k);
+                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
+                row++;
             }
-            // System.out.println(temp_board[row][col]);
+
+        }
+    }
+
+    public char[][] get_board() {
+        return this.scrabble_board;
+    }
+
+    public void print_board(char[][] b) {
+
+        int i;
+        int j;
+
+        System.out.print(
+                "\n     A     B     C     D     E     F     G     H     I     J     K     L     M     N     O   \n");
+        System.out.print(
+                "   _________________________________________________________________________________________ \n");
+
+        for (i = 0; i < 15; i++) {
+            System.out.print(
+                    "  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |\n");
+            if (i < 9)
+                System.out.print(i + 1 + " ");
+            else
+                System.out.print(i + 1);
+            for (j = 0; j < 15; j++) {
+                if (b[i][j] == ' ') {
+                    if (i < 9) {
+                        System.out.print(b[i][j]);
+
+                    } else {
+                        System.out.print(b[i][j]);
+
+                    }
+                }
+                System.out.print("|  ");
+                System.out.print(scrabble_board[i][j]);
+                System.out.print("  ");
+            }
+
+            System.out.print("|\n");
+            System.out.print(
+                    "  |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|");
+            System.out.print("\n");
+
         }
     }
 
@@ -96,9 +137,11 @@ public class Board {
         Board b = new Board();
         // b.create_board();
         String c = "Word";
+        String d = "Day";
 
         b.place_word(c, 0, 0, 0);
+        b.place_word(d, 0, 3, 1);
 
-        // b.get_scrabble_board();
+        b.print_board(b.scrabble_board);
     }
 }
