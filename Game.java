@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-
+/**
+ * The main class of the game. This class will be responsible to use the other
+ * classes to play the game.
+ *
+ * @author Kareem EL Assad 101107739
+ * @version 0.0
  */
 
 public class Game {
@@ -31,6 +35,11 @@ public class Game {
         System.out.println("\n >>> How many players are playing? (int)");
         Scanner scanner = new Scanner(System.in);
         int num_players = scanner.nextInt();
+
+        if (num_players < 2 || num_players > 4) {
+            System.out.println("\n >>> Invalid number of players. Please enter a number between 2 and 4.");
+            init_game(game);
+        }
 
         // create players
         System.out.println("\n >>> Adding " + num_players + " players");
