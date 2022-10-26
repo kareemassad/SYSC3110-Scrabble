@@ -22,7 +22,7 @@ public class Board {
         this.scrabble_board = new char[15][15];
         this.temp_board = new char[15][15];
         this.temp_rack = new ArrayList<Character>();
-        this.create_board();
+        // this.create_board();
     }
 
     public void create_board() {
@@ -69,16 +69,20 @@ public class Board {
 
         for (int k = 0; k < word.length(); k++) {
             if (dir == RIGHT) {
-                this.scrabble_board[row][col] = word.toUpperCase().charAt(k);
+                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
                 col++;
 
                 // System.out.println(scrabble_board[row][col + 1]);
             } else if (dir == DOWN) {
-                this.scrabble_board[row][col] = word.toUpperCase().charAt(k);
+                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
                 row++;
             }
 
         }
+    }
+
+    public char[][] get_board() {
+        return this.scrabble_board;
     }
 
     public void print_board(char[][] b) {

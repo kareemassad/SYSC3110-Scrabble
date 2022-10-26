@@ -4,6 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A word can have up to 7 letters
+ * 
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.1
  */
@@ -11,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Bag {
     public static ArrayList<Letter> gameLetters;
 
-    public Bag(){
+    public Bag() {
         this.gameLetters = new ArrayList<Letter>();
         Letter A1 = new Letter(Letter.Character.A);
         Letter A2 = new Letter(Letter.Character.A);
@@ -144,14 +145,20 @@ public class Bag {
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
     }
 
-    public ArrayList<Letter> getGameLetters(){
+    public ArrayList<Letter> getGameLetters() {
         return this.gameLetters;
     }
 
-    public static ArrayList<Letter> drawLetters(Integer numberOfLetters){
+    public void print_bag() {
+        // Print the letters in the bag
+        System.out.println(
+                ">>> Bag: There are 9 A's, 2 B's, 2 C's, 4 D's, 12 E's, 2 F's, 3 G's, 2 H's, 9 I's, 1 J's, 1 K's, 4 L's, 2 M's, 6 N's, 8 O's, 2 P's, 1 Q's, 6 R's, 4 S's, 6 T's, 4 U's, 2 V's, 2 W's, 1 X's, 2 Y's, 1 Z's");
+    }
+
+    public static ArrayList<Letter> drawLetters(Integer numberOfLetters) {
         ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
         for (int i = 0; i < numberOfLetters; i++) {
-            int randomNum = ThreadLocalRandom.current().nextInt(0,  Bag.gameLetters.size());
+            int randomNum = ThreadLocalRandom.current().nextInt(0, Bag.gameLetters.size());
             lettersDrawn.add(Bag.gameLetters.get(randomNum)); // add the letter at the random index
             Bag.gameLetters.remove(randomNum); // then remove it from the game letters
         }
