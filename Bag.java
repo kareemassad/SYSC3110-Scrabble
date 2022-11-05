@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -10,10 +9,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 
 public class Bag {
-    public static ArrayList<Letter> gameLetters;
+    public static HashSet<Letter> gameLetters;
 
     public Bag() {
-        this.gameLetters = new ArrayList<Letter>();
+        this.gameLetters = new HashSet<>();
         Letter A1 = new Letter(Letter.Character.A);
         Letter A2 = new Letter(Letter.Character.A);
         Letter A3 = new Letter(Letter.Character.A);
@@ -138,6 +137,7 @@ public class Bag {
 
         Letter Z1 = new Letter(Letter.Character.Z);
 
+
         Collections.addAll(gameLetters, A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, C1, C2, D1, D2, D3, D4,
                 E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11, E12, F1, F2, G1, G2, G3, H1, H2,
                 I1, I2, I3, I4, I5, I6, I7, I8, I9, J1, K1, L1, L2, L3, L4, M1, M2, N1, N2, N3, N4, N5, N6,
@@ -145,7 +145,7 @@ public class Bag {
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
     }
 
-    public ArrayList<Letter> getGameLetters() {
+    public HashSet<Letter> getGameLetters() {
         return this.gameLetters;
     }
 
@@ -155,12 +155,32 @@ public class Bag {
                 ">>> Bag: There are 9 A's, 2 B's, 2 C's, 4 D's, 12 E's, 2 F's, 3 G's, 2 H's, 9 I's, 1 J's, 1 K's, 4 L's, 2 M's, 6 N's, 8 O's, 2 P's, 1 Q's, 6 R's, 4 S's, 6 T's, 4 U's, 2 V's, 2 W's, 1 X's, 2 Y's, 1 Z's");
     }
 
-    public static ArrayList<Letter> drawLetters(Integer numberOfLetters) {
-        ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
+    private static <E> E getRandomElement(Set<? extends E> set) {
+        Random random = new Random();
+        // Generate a random number using nextInt
+        // method of the Random class.
+        int randomNumber = random.nextInt(set.size());
+        Iterator<? extends E> iterator = set.iterator();
+        int currentIndex = 0;
+        E randomElement = null;
+        // iterate the HashSet
+        while (iterator.hasNext()) {
+            randomElement = iterator.next();
+            // if current index is equal to random number
+            if (currentIndex == randomNumber)
+                return randomElement;
+            // increase the current index
+            currentIndex++;
+        }
+        return randomElement;
+    }
+
+    public static HashSet<Letter> drawLetters(Integer numberOfLetters) {
+        HashSet<Letter> lettersDrawn = new HashSet<Letter>();
         for (int i = 0; i < numberOfLetters; i++) {
-            int randomNum = ThreadLocalRandom.current().nextInt(0, Bag.gameLetters.size());
-            lettersDrawn.add(Bag.gameLetters.get(randomNum)); // add the letter at the random index
-            Bag.gameLetters.remove(randomNum); // then remove it from the game letters
+            Letter randomLetter = Bag.getRandomElement(Bag.gameLetters);
+            lettersDrawn.add(Bag.getRandomElement(Bag.gameLetters));
+            Bag.gameLetters.remove(randomLetter); // this might break
         }
         return lettersDrawn;
     }
