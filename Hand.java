@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
 /**
  *
@@ -9,10 +8,10 @@ import java.util.HashSet;
  */
 
 public class Hand {
-    private HashSet<Letter> letters;
+    private ArrayList<Letter> letters;
 
     public Hand() {
-        this.letters = new HashSet<Letter>();
+        this.letters = new ArrayList<Letter>();
         // This could also be initialized with 7 letters to start if we prefer
     }
 
@@ -42,9 +41,9 @@ public class Hand {
      */
     public void removeFromHand(String letterToRemove) {
         letterToRemove.toUpperCase();
-        for (Letter letter: this.letters){
-            if (letterToRemove.equals(letter.toString())){
-                this.letters.remove(letter);
+        for (int i = 0; i < this.letters.size(); i++) {
+            if (letterToRemove.equals(this.letters.get(i).toString())) {
+                this.letters.remove(i);
             }
         }
     }
