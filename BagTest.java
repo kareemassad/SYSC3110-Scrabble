@@ -16,7 +16,7 @@ public class BagTest {
     public void initiateBagContents(){
         // initializing bag with all game letters required
         Bag b = new Bag();
-        ArrayList<Letter> gameLettersInBag = b.getGameLetters();
+        HashSet<Letter> gameLettersInBag = b.getGameLetters();
 
         // doing the same with an array
         HashSet<Letter> gameLetters = new HashSet<>();
@@ -172,11 +172,8 @@ public class BagTest {
         assertEquals(2, draw2Letters.size());
         ArrayList<Letter> draw3Letters = Bag.drawLetters(3);
         assertEquals(3, draw3Letters.size());
-
-        // the following test breaks...
         ArrayList<Letter> draw4Letters = Bag.drawLetters(4);
         assertEquals(4, draw4Letters.size());
-
         ArrayList<Letter> draw5Letters = Bag.drawLetters(5);
         assertEquals(5, draw5Letters.size());
 
