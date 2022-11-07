@@ -8,7 +8,7 @@ import java.util.HashSet;
 /**
  * This is testing the Bag Class
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.0
+ * @version 0.1
  */
 public class BagTest {
 
@@ -152,7 +152,7 @@ public class BagTest {
 
 
         for (Letter letter : gameLetters) {
-            assertTrue(gameLettersInBag.contains(letter));
+            assertTrue(gameLettersInBag.containsAll(gameLetters));
         }
     }
 
@@ -162,6 +162,7 @@ public class BagTest {
         assertEquals(98, b.getGameLetters().size());
         // the expected size will need to be changed to 100 when we add Blank Tiles
     }
+
 
     @Test
     public void testDrawLetters(){
@@ -176,9 +177,10 @@ public class BagTest {
         assertEquals(4, draw4Letters.size());
         ArrayList<Letter> draw5Letters = Bag.drawLetters(5);
         assertEquals(5, draw5Letters.size());
-
-
-
+        ArrayList<Letter> draw6Letters = Bag.drawLetters(6);
+        assertEquals(6, draw6Letters.size());
+        ArrayList<Letter> draw7Letters = Bag.drawLetters(7);
+        assertEquals(7, draw7Letters.size());
 
     }
 
