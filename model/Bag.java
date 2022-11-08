@@ -1,6 +1,10 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
+
+import model.Letter.Character;
 
 /**
  * A word can have up to 7 letters

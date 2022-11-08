@@ -1,4 +1,4 @@
-# SYSC3303-Scrabble
+# SYSC3110-Scrabble
 
 ## SYSC 3110 Project - Group 35
 
