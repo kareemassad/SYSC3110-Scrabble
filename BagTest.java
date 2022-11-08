@@ -1,18 +1,25 @@
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+import static org.junit.Assert.*;
+import org.junit.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
 /**
- * A word can have up to 7 letters
- *
+ * This is testing the Bag Class
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.1
  */
+public class BagTest {
 
-public class Bag {
-    public static HashSet<Letter> gameLetters;
+    @Test
+    public void initiateBagContents(){
+        // initializing bag with all game letters required
+        Bag b = new Bag();
+        HashSet<Letter> gameLettersInBag = b.getGameLetters();
 
-    public Bag() {
-        this.gameLetters = new HashSet<>();
+        // doing the same with an array
+        HashSet<Letter> gameLetters = new HashSet<>();
         Letter A1 = new Letter(Letter.Character.A);
         Letter A2 = new Letter(Letter.Character.A);
         Letter A3 = new Letter(Letter.Character.A);
@@ -137,51 +144,45 @@ public class Bag {
 
         Letter Z1 = new Letter(Letter.Character.Z);
 
-
         Collections.addAll(gameLetters, A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, C1, C2, D1, D2, D3, D4,
                 E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11, E12, F1, F2, G1, G2, G3, H1, H2,
                 I1, I2, I3, I4, I5, I6, I7, I8, I9, J1, K1, L1, L2, L3, L4, M1, M2, N1, N2, N3, N4, N5, N6,
                 O1, O2, O3, O4, O5, O6, O7, O8, P1, P2, Q1, R1, R2, R3, R4, R5, R6, S1, S2, S3, S4,
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
-    }
 
-    public HashSet<Letter> getGameLetters() {
-        return this.gameLetters;
-    }
 
-    public void print_bag() {
-        // Print the letters in the bag
-        System.out.println(
-                ">>> Bag: There are 9 A's, 2 B's, 2 C's, 4 D's, 12 E's, 2 F's, 3 G's, 2 H's, 9 I's, 1 J's, 1 K's, 4 L's, 2 M's, 6 N's, 8 O's, 2 P's, 1 Q's, 6 R's, 4 S's, 6 T's, 4 U's, 2 V's, 2 W's, 1 X's, 2 Y's, 1 Z's");
-    }
-
-    private static <E> E getRandomElement(Set<? extends E> set) {
-        Random random = new Random();
-        // Generate a random number using nextInt
-        // method of the Random class.
-        int randomNumber = random.nextInt(set.size());
-        Iterator<? extends E> iterator = set.iterator();
-        int currentIndex = 0;
-        E randomElement = null;
-        // iterate the HashSet
-        while (iterator.hasNext()) {
-            randomElement = iterator.next();
-            // if current index is equal to random number
-            if (currentIndex == randomNumber)
-                return randomElement;
-            // increase the current index
-            currentIndex++;
+        for (Letter letter : gameLetters) {
+            assertTrue(gameLettersInBag.containsAll(gameLetters));
         }
-        return randomElement;
     }
 
-    public static ArrayList<Letter> drawLetters(Integer numberOfLetters) {
-        ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
-        for (int i = 0; i < numberOfLetters; i++) {
-            Letter randomLetter = Bag.getRandomElement(Bag.gameLetters);
-            lettersDrawn.add(randomLetter);
-            Bag.gameLetters.remove(randomLetter); // test this
-        }
-        return lettersDrawn;
+    @Test
+    public void initialBagContainsRightLetterAmounts(){
+        Bag b = new Bag();
+        assertEquals(98, b.getGameLetters().size());
+        // the expected size will need to be changed to 100 when we add Blank Tiles
     }
+
+
+    @Test
+    public void testDrawLetters(){
+        Bag b = new Bag();
+        ArrayList<Letter> draw1Letter = Bag.drawLetters(1);
+        assertEquals(1, draw1Letter.size());
+        ArrayList<Letter> draw2Letters = Bag.drawLetters(2);
+        assertEquals(2, draw2Letters.size());
+        ArrayList<Letter> draw3Letters = Bag.drawLetters(3);
+        assertEquals(3, draw3Letters.size());
+        ArrayList<Letter> draw4Letters = Bag.drawLetters(4);
+        assertEquals(4, draw4Letters.size());
+        ArrayList<Letter> draw5Letters = Bag.drawLetters(5);
+        assertEquals(5, draw5Letters.size());
+        ArrayList<Letter> draw6Letters = Bag.drawLetters(6);
+        assertEquals(6, draw6Letters.size());
+        ArrayList<Letter> draw7Letters = Bag.drawLetters(7);
+        assertEquals(7, draw7Letters.size());
+
+    }
+
+
 }
