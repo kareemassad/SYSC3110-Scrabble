@@ -31,7 +31,8 @@ public class Letter {
     }
 
     public static Character getCharacterFromChar(char c) {
-        switch (c) {
+        char cUpper = java.lang.Character.toUpperCase(c);
+        switch (cUpper) {
             case 'A':
                 return Character.A;
             case 'B':
