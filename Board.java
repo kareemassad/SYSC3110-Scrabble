@@ -9,8 +9,15 @@ import java.util.HashMap;
  */
 public class Board {
 
+    public static final char TWO_LETTER_BONUS = 49;
+    public static final char THREE_LETTER_BONUS = 50;
+    public static final char TWO_WORD_BONUS = 51;
+    public static final char THREE_WORD_BONUS = 52;
+    public static final char CENTER_SQUARE = 53;
+
     private final int RIGHT = 0;
     private final int DOWN = 1;
+    public final int BOARD_SIZE = 15;
     private int direction;
     private char[][] scrabble_board;
     private char[][] temp_board;
@@ -19,8 +26,8 @@ public class Board {
 
     public Board() {
         this.direction = direction;
-        this.scrabble_board = new char[15][15];
-        this.temp_board = new char[15][15];
+        this.scrabble_board = new char[BOARD_SIZE][BOARD_SIZE];
+        this.temp_board = new char[BOARD_SIZE][BOARD_SIZE];
         this.temp_rack = new ArrayList<Character>();
         // this.create_board();
     }
