@@ -20,15 +20,6 @@ public class Player {
     }
 
     /*
-     * Updates the score
-     *
-     * @author Becca Young 101183297
-     */
-    public void setScore(Score score) {
-        this.score = score.getTotalScore();
-    }
-
-    /*
      * Creates a player description in the format to be printed, with elements name,
      * score, and hand to print at start
      * of player turn.
@@ -36,13 +27,20 @@ public class Player {
      * @author Becca Young 101183297
      * 
      * @param player is the player which the description is created for.
-     * 
      * @return s is the string created of the player description.
      */
     public String playerDescription(Player player) {
         String s = new String("Player ID: " + player.player_ID + "\n Score: " + player.score
                 + "\n Tiles: " + player.hand.toString() + "\n");
         return s;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public Hand getHand() {
+        return this.hand;
     }
 
     // set hand method
@@ -58,23 +56,8 @@ public class Player {
         this.hand.drawFromBag(words_to_replace);
     }
 
-    /*
-     * Plays a word, under player so that score is updated for player according to
-     * play.
-     */
-    /*
-     * public void playWord() {
-     * String input = new String();
-     * if (checkLegality(input) == true) {
-     * addToBoard(input);
-     * score.addTurnScore(); // might be better in game, thought it could go here
-     * though because
-     * hand.addTiles(); // score and hand are affected for the player
-     * }
-     * else {
-     * playWord();
-     * }
-     * }
-     * 
-     */
+    public void addScore(Word word){
+        Score turnScore = new Score(word);
+        this.score += turnScore.getWordScore();
+    }
 }
