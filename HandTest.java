@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * This is testing the Hand Class
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.0
+ * @version 0.1
  */
 public class HandTest {
 
