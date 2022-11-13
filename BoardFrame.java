@@ -1,13 +1,11 @@
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
 import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.TransferHandler;
-import javax.swing.plaf.basic.BasicListUI;
 
 /**
  * Creates the board GUI
@@ -71,7 +69,7 @@ public class BoardFrame extends JFrame {
     //Board initialization
     JPanel grid_panel = new JPanel();
     JLabel[][] grid = new JLabel[15][15];
-    JTextArea[][] squares = new JTextArea[15][15];
+    JPanel[][] squares = new JPanel[15][15];
 
     public BoardFrame(){
         super("Scrabble");
@@ -136,16 +134,16 @@ public class BoardFrame extends JFrame {
         player_num3.setHorizontalAlignment(JLabel.CENTER);
         player_num4.setHorizontalAlignment(JLabel.CENTER);
 
-        //Set drag and drop
-        letter_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        letter_list.setTransferHandler(new ListHandler());
-
-        letter_list.setDragEnabled(true);
-
         player_rack1.add(player_num1);
         player_rack2.add(player_num2);
         player_rack3.add(player_num3);
         player_rack4.add(player_num4);
+
+        //Set drag and drop
+        letter_list.setDragEnabled(true);
+        letter_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        letter_list.setTransferHandler(new export_handler());
+
 
         list_model.addElement("A");
         list_model.addElement("B");
@@ -157,45 +155,23 @@ public class BoardFrame extends JFrame {
         rack_panel.add(player_rack3);
         rack_panel.add(player_rack4);
 
-//        player_grid_panel.setLayout(new GridLayout(1,7));
-//        for(Letter L : hand.getHand()){
-//
-//            sb.append(L == null ? "" : hand.toString());
-//
-//            JPanel player_tile = new JPanel();
-//            JLabel bag_letter = new JLabel("TEST");
-//
-//            player_tile.setBorder(BorderFactory.createEtchedBorder());
-//            bag_letter.setHorizontalAlignment(JLabel.CENTER);
-//            bag_letter.setVerticalAlignment(JLabel.CENTER);
-//            player_tile.setPreferredSize(new Dimension(50,50));
-//            player_tile.add(bag_letter);
-//
-//            rack_grid[i] = player_tile;
-//            player_grid_panel.add(player_tile);
-//            player_rack1.add(player_grid_panel);
-//        }
-//
-//        player_num1.setText(sb.toString());
-
         //Scrabble board config
         grid_panel.setLayout(new GridLayout(15, 15));
-
         for(int row = 0; row < 15; row++){
             for(int col = 0; col < 15; col++){
-                JTextArea tile = new JTextArea();
-                tile.setEditable(true);
-                tile.setDragEnabled(true);
-
+                Font f = new Font(Font.DIALOG, Font.BOLD, 30);
+                JPanel tile = new JPanel();
+                JLabel tile_content = new JLabel();
+                tile_content.setFont(f);
+                tile_content.setHorizontalAlignment(JLabel.CENTER);
+                tile_content.setTransferHandler(new import_handler());
                 tile.setBorder(BorderFactory.createEtchedBorder());
 
-                tile.setPreferredSize(new Dimension(50,50));
-
-                tile.setDropMode(DropMode.INSERT);
-                tile.setTransferHandler(new ListHandler());
+                tile_content.setPreferredSize(new Dimension(50,43));
+                tile.add(tile_content);
 
                 squares[row][col] = tile;
-                //grid[row][col] = tile_content;
+                grid[row][col] = tile_content;
                 grid_panel.add(tile);
             }
         }
@@ -207,30 +183,44 @@ public class BoardFrame extends JFrame {
         this.add(grid_panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    private class import_handler extends TransferHandler {
+        public final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
+
+        public boolean canImport(TransferSupport support) {
+            return support.isDataFlavorSupported(SUPPORTED_DATE_FLAVOR);
+        }
+
+        public boolean importData(TransferSupport support) {
+            boolean accept = false;
+            if (canImport(support)) {
+                try {
+                    Transferable t = support.getTransferable();
+                    Object value = t.getTransferData(SUPPORTED_DATE_FLAVOR);
+                    if (value instanceof String) {
+                        Component component = support.getComponent();
+                        if (component instanceof JLabel) {
+                            ((JLabel) component).setText(value.toString());
+                            accept = true;
+                        }
+                    }
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
+            }
+            return accept;
+        }
 
     }
 
-    private class ListHandler extends TransferHandler{
+    private class export_handler extends TransferHandler {
         private int[] indices = null;
         private int addIndex = -1; //Location where items were added
         private int addCount = 0;  //Number of items added.
-        /**
-         * We only support importing strings.
-         */
-        public boolean canImport(TransferHandler.TransferSupport info) {
-            // Check for String flavor
-            if (!info.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-                return false;
-            }
-            return true;
-        }
 
-        /**
-         * Bundle up the selected items in a single list for export.
-         * Each line is separated by a newline.
-         */
         protected Transferable createTransferable(JComponent c) {
-            JList list = (JList)c;
+            JList list = (JList) c;
             indices = list.getSelectedIndices();
             Object[] values = list.getSelectedValues();
 
@@ -247,62 +237,10 @@ public class BoardFrame extends JFrame {
             return new StringSelection(buff.toString());
         }
 
-        /**
-         * We support both copy and move actions.
-         */
         public int getSourceActions(JComponent c) {
             return TransferHandler.COPY_OR_MOVE;
         }
 
-        /**
-         * Perform the actual import.  This demo only supports drag and drop.
-         */
-        public boolean importData(TransferHandler.TransferSupport info) {
-            if (!info.isDrop()) {
-                return false;
-            }
-
-            JList list = (JList)info.getComponent();
-            DefaultListModel listModel = (DefaultListModel)list.getModel();
-            JList.DropLocation dl = (JList.DropLocation)info.getDropLocation();
-            int index = dl.getIndex();
-            boolean insert = dl.isInsert();
-
-            // Get the string that is being dropped.
-            Transferable t = info.getTransferable();
-            String data;
-            try {
-                data = (String)t.getTransferData(DataFlavor.stringFlavor);
-            }
-            catch (Exception e) { return false; }
-
-            // Wherever there is a newline in the incoming data,
-            // break it into a separate item in the list.
-            String[] values = data.split("\n");
-
-            addIndex = index;
-            addCount = values.length;
-
-            // Perform the actual import.
-            for (int i = 0; i < values.length; i++) {
-                if (insert) {
-                    listModel.add(index++, values[i]);
-                } else {
-                    // If the items go beyond the end of the current
-                    // list, add them in.
-                    if (index < listModel.getSize()) {
-                        listModel.set(index++, values[i]);
-                    } else {
-                        listModel.add(index++, values[i]);
-                    }
-                }
-            }
-            return true;
-        }
-
-        /**
-         * Remove the items moved from the list.
-         */
         protected void exportDone(JComponent c, Transferable data, int action) {
             JList source = (JList)c;
             DefaultListModel listModel  = (DefaultListModel)source.getModel();
@@ -318,6 +256,67 @@ public class BoardFrame extends JFrame {
             addIndex = -1;
         }
     }
+
+//            if (!support.isDrop()) {
+//                return false;
+//            }
+//
+//            JList list = (JList)support.getComponent();
+//            DefaultListModel listModel = (DefaultListModel)list.getModel();
+//            JList.DropLocation dl = (JList.DropLocation)support.getDropLocation();
+//            int index = dl.getIndex();
+//            boolean insert = dl.isInsert();
+//
+//            // Get the string that is being dropped.
+//            Transferable t = support.getTransferable();
+//            String data;
+//            try {
+//                data = (String)t.getTransferData(DataFlavor.stringFlavor);
+//            }
+//            catch (Exception e) { return false; }
+//
+//            // Wherever there is a newline in the incoming data,
+//            // break it into a separate item in the list.
+//            String[] values = data.split("\n");
+//
+//            addIndex = index;
+//            addCount = values.length;
+//
+//            // Perform the actual import.
+//            for (int i = 0; i < values.length; i++) {
+//                if (insert) {
+//                    listModel.add(index++, values[i]);
+//                } else {
+//                    // If the items go beyond the end of the current
+//                    // list, add them in.
+//                    if (index < listModel.getSize()) {
+//                        listModel.set(index++, values[i]);
+//                    } else {
+//                        listModel.add(index++, values[i]);
+//                    }
+//                }
+//            }
+//            return true;
+
+
+        /**
+         * Remove the items moved from the list.
+         */
+//        protected void exportDone(JComponent c, Transferable data, int action) {
+//            JList source = (JList)c;
+//            DefaultListModel listModel  = (DefaultListModel)source.getModel();
+//
+//            if (action == TransferHandler.MOVE) {
+//                for (int i = indices.length - 1; i >= 0; i--) {
+//                    listModel.remove(indices[i]);
+//                }
+//            }
+//
+//            indices = null;
+//            addCount = 0;
+//            addIndex = -1;
+//        }
+
 
     public static void main(String[] args){
         EventQueue.invokeLater(() ->{
