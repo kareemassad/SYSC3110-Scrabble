@@ -24,6 +24,7 @@ public class Letter {
     public Letter(Character character) {
         this.character = character;
         this.value = this.getValueFromCharacter(character);
+        this.premium = "NONE";
     }
 
     public Letter(char letter) {

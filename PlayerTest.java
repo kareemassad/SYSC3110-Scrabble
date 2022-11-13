@@ -1,6 +1,11 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * This is testing the Player Class
+ * @author Laurence Lamarche-Cliche 101173070
+ * @version 0.0
+ */
 public class PlayerTest {
 
     @Test
@@ -28,7 +33,7 @@ public class PlayerTest {
         Player p = new Player(0);
         Word hi = new Word("HI");
         p.addScore(hi);
-        assertEquals(2, p.getScore());
+        assertEquals(5, p.getScore());
     }
 
     @Test
