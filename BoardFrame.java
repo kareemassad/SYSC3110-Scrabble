@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -16,6 +18,12 @@ public class BoardFrame extends JFrame {
     JButton submit_button = new JButton("Submit");
     JPanel play_panel = new JPanel();
     JButton play_button = new JButton("Play");
+
+    //Player count initialization
+    JComboBox num_combo_box;
+    JLabel num_players_label = new JLabel("Choose Number of Players");
+    JPanel combo_box_panel = new JPanel();
+    String[] num_of_players = new String[3];
 
     //Scoreboard initialization
     JPanel score_panel = new JPanel();
@@ -38,13 +46,16 @@ public class BoardFrame extends JFrame {
     JScrollPane scroll_pane = new JScrollPane(text_area);
 
     //Player rack initialization
+//    StringBuilder sb = new StringBuilder();
+//    String c = hand.toString();
+
     JPanel rack_panel = new JPanel();
     JPanel player_rack1 = new JPanel();
     JPanel player_rack2 = new JPanel();
     JPanel player_rack3 = new JPanel();
     JPanel player_rack4 = new JPanel();
 
-    JLabel player_num1 = new JLabel("Player 1 Rack");
+    JLabel player_num1 = new JLabel();
     JLabel player_num2 = new JLabel("Player 2 Rack");
     JLabel player_num3 = new JLabel("Player 3 Rack");
     JLabel player_num4 = new JLabel("Player 4 Rack");
@@ -66,12 +77,23 @@ public class BoardFrame extends JFrame {
         this.setLayout(new BorderLayout());
 
         //South panel config
-        south_panel.setLayout(new GridLayout(1,2));
+        south_panel.setLayout(new GridLayout(1,3));
         play_panel.add(play_button);
         submit_panel.add(submit_button);
-        south_panel.add(play_panel);
         south_panel.add(submit_panel);
+        south_panel.add(play_panel);
         south_panel.setPreferredSize(new Dimension(0,100));
+
+        //Player count config
+        combo_box_panel.setLayout(new GridLayout(2,1));
+        num_of_players[0] = "2";
+        num_of_players[1] = "3";
+        num_of_players[2] = "4";
+        num_combo_box = new JComboBox(num_of_players);
+        num_combo_box.setPreferredSize(new Dimension(50,50));
+        combo_box_panel.add(num_players_label);
+        combo_box_panel.add(num_combo_box);
+        south_panel.add(combo_box_panel);
 
         //Scoreboard config
         score_panel.setLayout(new GridLayout(1,4));
@@ -93,6 +115,8 @@ public class BoardFrame extends JFrame {
         //Text area config
         text_area.setEditable(false);
         scroll_pane.setPreferredSize(new Dimension(300,0));
+        TextAreaOutputStream out = new TextAreaOutputStream(text_area);
+        System.setOut(new PrintStream(out));
 
         //Rack config
         rack_panel.setLayout(new GridLayout(4,1));
@@ -119,22 +143,26 @@ public class BoardFrame extends JFrame {
         rack_panel.add(player_rack3);
         rack_panel.add(player_rack4);
 
-        player_grid_panel.setLayout(new GridLayout(1,7));
-        for(int i = 0; i < 7; i++){
-            JPanel player_tile = new JPanel();
-            JLabel bag_letter = new JLabel("TEST");
-
-            player_tile.setBorder(BorderFactory.createEtchedBorder());
-            bag_letter.setHorizontalAlignment(JLabel.CENTER);
-            bag_letter.setVerticalAlignment(JLabel.CENTER);
-            player_tile.setPreferredSize(new Dimension(50,50));
-            player_tile.add(bag_letter);
-
-            rack_grid[i] = player_tile;
-            player_grid_panel.add(player_tile);
-            player_rack1.add(player_grid_panel);
-        }
-
+//        player_grid_panel.setLayout(new GridLayout(1,7));
+//        for(Letter L : hand.getHand()){
+//
+//            sb.append(L == null ? "" : hand.toString());
+//
+//            JPanel player_tile = new JPanel();
+//            JLabel bag_letter = new JLabel("TEST");
+//
+//            player_tile.setBorder(BorderFactory.createEtchedBorder());
+//            bag_letter.setHorizontalAlignment(JLabel.CENTER);
+//            bag_letter.setVerticalAlignment(JLabel.CENTER);
+//            player_tile.setPreferredSize(new Dimension(50,50));
+//            player_tile.add(bag_letter);
+//
+//            rack_grid[i] = player_tile;
+//            player_grid_panel.add(player_tile);
+//            player_rack1.add(player_grid_panel);
+//        }
+//
+//        player_num1.setText(sb.toString());
 
         //Scrabble board config
         grid_panel.setLayout(new GridLayout(15, 15));
