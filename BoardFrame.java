@@ -1,7 +1,6 @@
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
 import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +10,7 @@ import javax.swing.TransferHandler;
  * Creates the board GUI
  * @author Keefer Belanger 101152085
  */
-public class BoardFrame extends JFrame {
+public class BoardFrame extends JFrame implements BoardView{
 
     Board board;
     Letter character;
@@ -64,7 +63,10 @@ public class BoardFrame extends JFrame {
     JLabel player_num4 = new JLabel("Player 4 Rack");
 
     DefaultListModel list_model = new DefaultListModel();
-    JList letter_list = new JList(list_model);
+    JList letter_list1 = new JList(list_model);
+    JList letter_list2 = new JList(list_model);
+    JList letter_list3 = new JList(list_model);
+    JList letter_list4 = new JList(list_model);
 
     //Board initialization
     JPanel grid_panel = new JPanel();
@@ -79,6 +81,7 @@ public class BoardFrame extends JFrame {
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
+//        play_button.addActionListener();
         play_panel.add(play_button);
         submit_panel.add(submit_button);
         south_panel.add(submit_panel);
@@ -140,15 +143,18 @@ public class BoardFrame extends JFrame {
         player_rack4.add(player_num4);
 
         //Set drag and drop
-        letter_list.setDragEnabled(true);
-        letter_list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        letter_list.setTransferHandler(new export_handler());
+        letter_list1.setDragEnabled(true);
+        letter_list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        letter_list1.setTransferHandler(new export_handler());
 
-
+//        list_model.addElement(bag.getGameLetters());
         list_model.addElement("A");
         list_model.addElement("B");
         list_model.addElement("C");
-        player_rack1.add(letter_list);
+        player_rack1.add(letter_list1);
+        player_rack2.add(letter_list2);
+        player_rack3.add(letter_list3);
+        player_rack4.add(letter_list4);
 
         rack_panel.add(player_rack1);
         rack_panel.add(player_rack2);
@@ -257,6 +263,7 @@ public class BoardFrame extends JFrame {
         }
     }
 
+
 //            if (!support.isDrop()) {
 //                return false;
 //            }
@@ -318,9 +325,9 @@ public class BoardFrame extends JFrame {
 //        }
 
 
-    public static void main(String[] args){
-        EventQueue.invokeLater(() ->{
-            new BoardFrame();
-        });
-    }
+//    public static void main(String[] args){
+//        EventQueue.invokeLater(() ->{
+//            new BoardFrame();
+//        });
+//    }
 }
