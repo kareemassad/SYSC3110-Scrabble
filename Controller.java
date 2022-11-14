@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +17,25 @@ public class Controller implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(view.play_button)){
+
+        if(e.getSource() == view.submit_button){
+            System.out.println("Hello");
+        }
+
+
+        if (e.getSource() == view.num_combo_box) {
+            // get number of players from combo box
+            int num_players = Integer.parseInt((String) view.num_combo_box.getSelectedItem());
+            // create players
+            System.out.println("\n >>> Adding " + num_players + " players");
+            for (int i = 0; i < num_players; i++) {
+                game.players.add(new Player(i));
+            }
+            // print player info
+            for (Player player : game.players) {
+                System.out.println(player.playerDescription(player));
+            }
+
             game.bag = new Bag();
             game.bag.getGameLetters();
 
@@ -24,23 +43,13 @@ public class Controller implements ActionListener {
             System.out.println("\n >>> Creating each player's hand");
             for (Player player : game.players) {
                 player.setHand(7);
-                view.list_model.addElement(game.hand.getHand().toString());
+                view.list_model.addElement(player.getHand());
+                view.letter_list1 = new JList(view.list_model);
             }
             // print player info
             for (Player player : game.players) {
                 System.out.println(player.playerDescription(player));
             }
-        }
-        if(e.getSource() == view.num_combo_box){
-            System.out.println("Test");
-            int player_numbers = view.num_combo_box.getSelectedIndex() + 2;
-            for (int i = 0; i < player_numbers; i++) {
-                game.players.add(new Player(i));
-            }
-            for (Player player : game.players) {
-                System.out.println(player.playerDescription(player));
-            }
-            view.num_combo_box.setEnabled(false);
         }
     }
 }

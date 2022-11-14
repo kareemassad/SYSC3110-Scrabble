@@ -54,6 +54,10 @@ public class Player {
         return s;
     }
 
+    public String getHand() {
+        return this.hand.toString();
+    }
+
     // set hand method
     public void setHand(int num_letters) {
         this.hand.drawFromBag(num_letters);
