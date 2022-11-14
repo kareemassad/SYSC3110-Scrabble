@@ -1,19 +1,8 @@
 import java.util.ArrayList;
 
 /*
-
+Class Player is in charge of all details pertaining to a player, including their hand, score, etc.
  */
-
-/**
- * Class Player is in charge of all details pertaining to a player, including
- * their hand, score, etc.
- *
- * @author Becca Young 101183297
- * @author Kareem EL Assad 101107739
- * @version 0.0
- */
-
-// TODO update hand
 
 public class Player {
     private Hand hand;
@@ -29,24 +18,12 @@ public class Player {
     }
 
     /*
-<<<<<<< HEAD
-=======
-     * Updates the score
-     *
-     * @author Becca Young 101183297
-     */
-    // public void setScore(Score score) {
-    // this.score = score.getTotalScore();
-    // }
-
-    /*
->>>>>>> c2a8525c5d3b17fd76614b466af43eb5d5e6566a
      * Creates a player description in the format to be printed, with elements name,
      * score, and hand to print at start
      * of player turn.
      *
      * @author Becca Young 101183297
-     * 
+     *
      * @param player is the player which the description is created for.
      * @return s is the string created of the player description.
      */

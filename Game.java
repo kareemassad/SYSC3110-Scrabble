@@ -119,6 +119,8 @@ public class Game {
                 // it will place t,e,s,t on the board at 0,0, 0,1, 0,2, 0,3 horizontally
                 // place word
                 board.place_word(word, row, col, dir);
+                // check legality
+                Legality legality = new Legality(word);
                 // add score to player's total score
                 curr_player.addScore(new Word(word));
                 // remove tiles from player's hand

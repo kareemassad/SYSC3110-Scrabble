@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03bb9705-c766-44c8-8690-894eb4420da8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Letter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Letter.java" afterDir="false" />
+    <list default="true" id="2e19380a-2c4c-444a-9634-d253213461f0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/BagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/BagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SYSC3110-Scrabble.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SYSC3110-Scrabble.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/Score.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -26,14 +27,17 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
-  <component name="ProjectId" id="2GeduPEX8cX0dEy7VkjpiptLPYU" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="2HWHqDEKfZlSGp9iOFZtbyl2PR7" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true"
   }
@@ -41,11 +45,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="03bb9705-c766-44c8-8690-894eb4420da8" name="Changes" comment="" />
-      <created>1666753208542</created>
+      <changelist id="2e19380a-2c4c-444a-9634-d253213461f0" name="Changes" comment="" />
+      <created>1668394115966</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1666753208542</updated>
+      <updated>1668394115966</updated>
     </task>
     <servers />
   </component>

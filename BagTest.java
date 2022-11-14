@@ -1,9 +1,13 @@
-import static org.junit.Assert.*;
+//import static org.junit.Assert.*;
+//import org.junit.*;
+
 import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+
+import static org.junit.Assert.*;
 
 /**
  * This is testing the Bag Class
