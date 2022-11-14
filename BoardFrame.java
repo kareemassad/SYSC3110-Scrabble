@@ -1,8 +1,6 @@
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +20,14 @@ public class BoardFrame extends JFrame{
     JPanel submit_panel = new JPanel();
     JButton submit_button = new JButton("Submit");
     JPanel play_panel = new JPanel();
-    JButton play_button = new JButton("Play");
+//    JButton play_button = new JButton("Play");
 
     //Player count initialization
+
+//    JButton player_2 = new JButton();
+//    JButton player_3 = new JButton();
+//    JButton player_4 = new JButton();
+
     JComboBox num_combo_box;
     JLabel num_players_label = new JLabel("Choose Number of Players");
     JPanel combo_box_panel = new JPanel();
@@ -86,8 +89,9 @@ public class BoardFrame extends JFrame{
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
-        play_button.addActionListener(controller);
-        play_panel.add(play_button);
+//        play_button.addActionListener(controller);
+        submit_button.addActionListener(controller);
+//        play_panel.add(play_button);
         submit_panel.add(submit_button);
         south_panel.add(submit_panel);
         south_panel.add(play_panel);
@@ -155,6 +159,14 @@ public class BoardFrame extends JFrame{
         letter_list1.setTransferHandler(new export_handler());
 
 //        list_model.addElement(bag.getGameLetters());
+
+        //Example
+        list_model.addElement("A");
+        list_model.addElement("B");
+        list_model.addElement("C");
+        list_model.addElement("D");
+        list_model.addElement("E");
+
         player_rack1.add(letter_list1);
         player_rack2.add(letter_list2);
         player_rack3.add(letter_list3);
@@ -266,9 +278,9 @@ public class BoardFrame extends JFrame{
         }
     }
 
-    public static void main(String[] args){
-        EventQueue.invokeLater(() ->{
-            new BoardFrame();
-        });
-    }
+//    public static void main(String[] args){
+//        EventQueue.invokeLater(() ->{
+//            new BoardFrame();
+//        });
+//    }
 }

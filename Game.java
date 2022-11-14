@@ -17,7 +17,7 @@ public class Game {
     public Hand hand;
     public ArrayList<Player> players;
     private int currentPlayerIndex;
-    private Player currentPlayer;
+    public Player currentPlayer;
     private int turnNumber;
     private int maxTurns;
 
@@ -150,6 +150,8 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
 //        game.init_game(game);
+
+
 
         // game loop
         while (game.turnNumber < game.maxTurns) {

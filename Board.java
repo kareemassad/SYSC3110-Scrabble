@@ -31,7 +31,7 @@ public class Board {
 //        this.scrabble_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_rack = new ArrayList<Character>();
-        this.frame = new BoardFrame();
+//        this.frame = new BoardFrame();
     }
 
 //    public void create_board() {
