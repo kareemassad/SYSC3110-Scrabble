@@ -35,10 +35,10 @@ This deliverable is the second milestone of a series of four milestones.
 •	We decided to use a .txt file to store the legal words. This will allow us to easily create different scrabble legal word sets. It is currently stored in the Words folder and imported into java in the Legality Class.
 •	We decided to design it so all of the classes are separated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Game.
 •	We chose to refactor the Bag class to use a HashMap instead of an ArrayList to store the letters. We wanted to do this to improve the efficiency of accessing letters from the bag.
-•	We chose to implement a drag and drop logic for the GUI such that a player can place its letters on the board. This implies that we need to have a “submit” button so that the score is only calculated once the player is done with his word.
-•	the private class import_handler is for the grid squares, 
-•	The private class import_data is the actual transferable, the item that gets dragged over (it is a Sting)
-•	The private class export holds the protected function exported_ . As soon as you click on something to drag it, will create a transferable. The getSourceAction method gets a click. The export_done method is for the rack. As soon as a Letter is dragged out of the rack, it will put the letter out of the rack. 
+•	We chose to implement a drag and drop logic for the GUI such that a player can place its letters on the board. This implies that we need to have a “submit” button so that the score is only calculated once the player is done with his word. This also involved using two private classes inside BoardFrame:
+  •	the private class import_handler is for the grid squares, and is necessary to know if the data can be transfered onto the grid squares on to the board.
+The method import_data gets the actual transferable, the item that gets dragged over.
+  •	The private class export_handler holds the protected function createTransferable. As soon as a player clicks on something to drag it, this method will create a transferable. The exportDone method is to manage a player's rack. As soon as a Letter is dragged out of the rack, it will remove the letter  from the rack such that it can no longer be used. 
 •	We have decided to hardcode the size of the scrabble board (15x15) since the size of a Scrabble board does not change.
 
 
