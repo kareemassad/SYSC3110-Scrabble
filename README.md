@@ -17,11 +17,11 @@ This deliverable is the second milestone of a series of four milestones.
 
 ## Known Issues
 
-1.	We are not currently scoring and validating the placement of words on the board. We were able to implement a half-working Score Class but were unable to finish it in time.
+1.	We are not currently validating the placement of words on the board, legality so far only checks that a word played is a real word.
 2.	Occasionally, if the player tries to replace their tiles with tiles from the bag, they will have 1 less letter than they should.
 3. We are currently not preventing a player to draw more letters than he can hold in his Hand.
 4. The Controller class is currently not updating the view properly. When you click on something, it is not updated in the view. This will be fixed for the next milestone. 
-5. There is an example GUI running in BoardFrame (when Game is running). When the BoardFrame is launched, you can place letters on it from the rack. 
+5. There is an example GUI running in BoardFrame (when Game is running). When the BoardFrame is launched, you can place letters on it from the rack.
 
 ### Left For Remaining Milestones
 
