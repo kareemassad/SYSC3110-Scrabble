@@ -12,8 +12,10 @@ import java.util.Scanner;
 public class Game {
     // The game will have a board, a bag, and a list of players
     private Board board;
-    private Bag bag;
-    private ArrayList<Player> players;
+    private BoardFrame boardframe;
+    public Bag bag;
+    public Hand hand;
+    public ArrayList<Player> players;
     private int currentPlayerIndex;
     private Player currentPlayer;
     private int turnNumber;
@@ -21,6 +23,7 @@ public class Game {
 
     public Game() {
         this.board = new Board();
+        this.boardframe = new BoardFrame();
         this.bag = new Bag();
         this.players = new ArrayList<Player>();
         this.currentPlayerIndex = 0;
@@ -28,48 +31,48 @@ public class Game {
         this.maxTurns = 6;
     }
 
-    private void init_game(Game game) {
+    public void init_game(Game game) {
         // This will initialize the game
         // it will create the players, the board, and the bag
         // ask player how many players are playing
-        System.out.println("\n >>> How many players are playing? (int)");
-        Scanner scanner = new Scanner(System.in);
-        int num_players = scanner.nextInt();
+//        System.out.println("\n >>> How many players are playing? (int)");
+//        Scanner scanner = new Scanner(System.in);
+//        int num_players = scanner.nextInt();
 
-        if (num_players < 2 || num_players > 4) {
-            System.out.println("\n >>> Invalid number of players. Please enter a number between 2 and 4.");
-            init_game(game);
-        }
+//        if (num_players < 2 || num_players > 4) {
+//            System.out.println("\n >>> Invalid number of players. Please enter a number between 2 and 4.");
+//            init_game(game);
+//        }
 
-        // create players
-        System.out.println("\n >>> Adding " + num_players + " players");
-        for (int i = 0; i < num_players; i++) {
-            game.players.add(new Player(i));
-        }
+//        // create players
+////        System.out.println("\n >>> Adding " + num_players + " players");
+////        for (int i = 0; i < num_players; i++) {
+////            game.players.add(new Player(i));
+////        }
 
-        // print player info
-        for (Player player : game.players) {
-            System.out.println(player.playerDescription(player));
-        }
+//        // print player info
+//        for (Player player : game.players) {
+//            System.out.println(player.playerDescription(player));
+//        }
 
-        // create the bag
-        game.bag = new Bag();
-        game.bag.getGameLetters();
-        game.bag.print_bag();
+//        // create the bag
+//        game.bag = new Bag();
+//        game.bag.getGameLetters();
+//        game.bag.print_bag();
 
         // create each player's hand
-        System.out.println("\n >>> Creating each player's hand");
-        for (Player player : game.players) {
-            player.setHand(7);
-        }
-        // print player info
-        for (Player player : game.players) {
-            System.out.println(player.playerDescription(player));
-        }
+//        System.out.println("\n >>> Creating each player's hand");
+//        for (Player player : game.players) {
+//            player.setHand(7);
+//        }
+//        // print player info
+//        for (Player player : game.players) {
+//            System.out.println(player.playerDescription(player));
+//        }
 
         // create the board
-        game.board = new Board();
-        game.board.create_board();
+//        game.board = new Board();
+//        game.board.create_board();
     }
 
     // method to remove used tiles from player's hand
@@ -116,6 +119,10 @@ public class Game {
                 // it will place t,e,s,t on the board at 0,0, 0,1, 0,2, 0,3 horizontally
                 // place word
                 board.place_word(word, row, col, dir);
+                // check legality
+                Legality legality = new Legality(word);
+                // add score to player's total score
+                curr_player.addScore(new Word(word));
                 // remove tiles from player's hand
                 remove_tiles(word, curr_player);
 
@@ -146,7 +153,7 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.init_game(game);
+//        game.init_game(game);
 
         // game loop
         while (game.turnNumber < game.maxTurns) {
@@ -156,7 +163,7 @@ public class Game {
             System.out.println("\n >>> Current player: " + game.currentPlayer.playerDescription(game.currentPlayer));
 
             // print board
-            game.board.print_board(game.board.get_board());
+//            game.board.print_board(game.board.get_board());
 
             // play
             game.play(game.currentPlayer);
