@@ -74,4 +74,8 @@ If a player chooses to quit the game, the system will end the game. In the futur
 ## UML Diagrams
 
 ![UML Diagram](/imgs/ScrabbleUML-Milestone2.png)
-![SEQUENCE Diagram](/imgs/ScrabbleUML-Milestone2.png)
+
+### Sequence Diagram
+![SEQUENCE Diagram](/imgs/ScrabbleSequenceDiagram.png)
+
+
