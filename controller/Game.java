@@ -1,5 +1,11 @@
+package controller;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.Bag;
+import model.Player;
+import view.Board;
 
 /**
  * The main class of the game. This class will be responsible to use the other

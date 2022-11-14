@@ -1,4 +1,4 @@
-# SYSC3303-Scrabble
+# SYSC3110-Scrabble
 
 ## SYSC 3110 Project - Group 35
 
@@ -13,29 +13,28 @@ Note: All team members believe that all team members contributed equally as not 
 
 ## Future deliverables
 
-This deliverable is the first milestone of a series of four milestones.
+This deliverable is the second milestone of a series of four milestones.
 
 ## Known Issues
 
-1. We are not currently scoring and validating the placement of words on the board. We were able to implement a half-working `Score Class` but were unable to finish it in time.
-2. For now, we are not verifying that the tile that a user wants to place is actually in their hand (available to place)
-3. To avoid creating any issues related to the previous one, we do not check if a letter was actually in the hand before removing it from the hand (after it has allegedly been played). Trying to remove a letter that is not in the hand  will not cause an error, but eventually it should raise an error.
-4. We have both camel case and snake case mixed in our classes and UML diagrams, this will be fixed next Milestone.
-5. Occasionally, if the player tries to replace their tiles with tiles from the bag, they will have 1 less letter than they should.
-6. We currently do not have strong error checking built in to verify that user input is valid. This will be fixed in the next milestone.
+1.	We are not currently scoring and validating the placement of words on the board. We were able to implement a half-working Score Class but were unable to finish it in time.
+2.	Occasionally, if the player tries to replace their tiles with tiles from the bag, they will have 1 less letter than they should.
+3.	The size of the board (15) had to be hardcoded instead of using a final SIZE variable. 
+4. We are currently not preventing a player to draw more letters than he can hold in his Hand.
 
 ### Left For Remaining Milestones
 
-* Implement the GUI User Interface and Unit Tests (Milestone 2)
-* Finish the Score implementation to ensure that new letters and words are scored and ensuring that all tests pass (Milestone 3)
-* Create a Scrabble playing AI (Milestone 4)
-* Adapt the Score and Board classes to use premium and wild tiles (Milestone 4)
+•	Finish the Score implementation to ensure that new letters and words are scored and ensuring that all tests pass (Milestone 3)
+•	Create a Scrabble playing AI (Milestone 4)
+•	Adapt the Score and Board classes to use premium and wild tiles (Milestone 4)
+
 
 ## Design Decisions
 
-* We decided to use a .txt file to store the legal words. This will allow us to easily create different scrabble legal word sets. It is currently stored in the Words folder and imported into java in the `Legality Class`.
-* We decided to design it so all of the classes are seperated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Game.
-* Currently, we are using an `ArrayList` to store the letters in the `Bag Class` but we intend to change it to a `HashMap` to improve the efficiency to access letters from the bag.
+•	We decided to use a .txt file to store the legal words. This will allow us to easily create different scrabble legal word sets. It is currently stored in the Words folder and imported into java in the Legality Class.
+•	We decided to design it so all of the classes are separated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Game.
+•	We chose to refactor the Bag class to use a HashMap instead of an ArrayList to store the letters. We wanted to do this to improve the efficiency of accessing letters from the bag.
+•	We chose to implement a drag and drop logic for the GUI such that a player can place its letters on the board. This implies that we need to have a “submit” button so that the score is only calculated once the player is done with his word.
 
 ## User Manual
 
@@ -55,15 +54,11 @@ During their turn, a player has 4 options.
 * Pass their Turn
 * Quit the Game
 
-If a player chooses to place a word, they will be prompted to enter the word they want to place, the row and column they want to place it in, and the direction they want to place it in.
+If a player chooses to place a word, they will have to click on the letter they want to place and drag and drop it on the location of the board (the tile) they want to place it on, and repeat that for each letter of the word. Once done, they must click on the SUBMIT button so that the system can then determine if the word is legal or not and compute their score.
 
-The top left corner of the board can be considered as `(1,1)` and the bottom right corner of the board can be considered as `(15,15)`.
+If a player chooses lear as their word, and they want to place it in the top left corner of the board, they would enter 1 for the row, 1 for the column, and 0 (right) or 1 (down) for the direction.
 
-Later on, this will be replaced with `(1,A)` and `(15, O)` to match the actual Scrabble board before transitioning into a GUI.
-
-If a player chooses `lear` as their word, and they want to place it in the top left corner of the board, they would enter `1` for the row, `1` for the column, and `0 (right) or 1 (down)` for the direction.
-
-If a player chooses to exchange tiles, they will be prompted to enter the letters they want to exchange. The system will then replace the letters in their hand with new letters from the bag and pass their turn.
+If a player chooses to exchange tiles, they will be prompted to click on the letters they want to exchange. The system will then replace the letters in their hand with new letters from the bag and pass their turn.
 
 If a player chooses to pass their turn, the system will pass their turn and move on to the next player.
 

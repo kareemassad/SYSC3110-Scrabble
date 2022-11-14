@@ -1,3 +1,5 @@
+package model;
+
 import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.io.File;

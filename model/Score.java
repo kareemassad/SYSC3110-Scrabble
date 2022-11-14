@@ -1,3 +1,4 @@
+package model;
 // /*
 // Class Score is in charge of calculating and updating the score of a player
 // */

@@ -1,3 +1,5 @@
+package model;
+
 /**
  * A letter is a character and a score.
  * The Game class will need to initialize all available letters. Their scores
