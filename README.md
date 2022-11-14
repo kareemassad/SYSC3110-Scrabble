@@ -19,8 +19,9 @@ This deliverable is the second milestone of a series of four milestones.
 
 1.	We are not currently scoring and validating the placement of words on the board. We were able to implement a half-working Score Class but were unable to finish it in time.
 2.	Occasionally, if the player tries to replace their tiles with tiles from the bag, they will have 1 less letter than they should.
-3.	The size of the board (15) had to be hardcoded instead of using a final SIZE variable. 
-4. We are currently not preventing a player to draw more letters than he can hold in his Hand.
+3. We are currently not preventing a player to draw more letters than he can hold in his Hand.
+4. The Controller class is currently not updating the view properly. When you click on something, it is not updated in the view. This will be fixed for the next milestone. 
+5. There is an example GUI running in BoardFrame (when Game is running). When the BoardFrame is launched, you can place letters on it from the rack. 
 
 ### Left For Remaining Milestones
 
@@ -35,6 +36,11 @@ This deliverable is the second milestone of a series of four milestones.
 •	We decided to design it so all of the classes are separated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Game.
 •	We chose to refactor the Bag class to use a HashMap instead of an ArrayList to store the letters. We wanted to do this to improve the efficiency of accessing letters from the bag.
 •	We chose to implement a drag and drop logic for the GUI such that a player can place its letters on the board. This implies that we need to have a “submit” button so that the score is only calculated once the player is done with his word.
+•	the private class import_handler is for the grid squares, 
+•	The private class import_data is the actual transferable, the item that gets dragged over (it is a Sting)
+•	The private class export holds the protected function exported_ . As soon as you click on something to drag it, will create a transferable. The getSourceAction method gets a click. The export_done method is for the rack. As soon as a Letter is dragged out of the rack, it will put the letter out of the rack. 
+•	We have decided to hardcode the size of the scrabble board (15x15) since the size of a Scrabble board does not change.
+
 
 ## User Manual
 
