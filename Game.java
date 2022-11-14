@@ -1,15 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-
+/**
+ * The main class of the game. This class will be responsible to use the other
+ * classes to play the game.
+ *
+ * @author Kareem EL Assad 101107739
+ * @version 0.0
  */
 
 public class Game {
     // The game will have a board, a bag, and a list of players
     private Board board;
-    private Bag bag;
-    private ArrayList<Player> players;
+    private BoardFrame boardframe;
+    public Bag bag;
+    public Hand hand;
+    public ArrayList<Player> players;
     private int currentPlayerIndex;
     private Player currentPlayer;
     private int turnNumber;
@@ -17,6 +23,7 @@ public class Game {
 
     public Game() {
         this.board = new Board();
+        this.boardframe = new BoardFrame();
         this.bag = new Bag();
         this.players = new ArrayList<Player>();
         this.currentPlayerIndex = 0;
@@ -24,43 +31,48 @@ public class Game {
         this.maxTurns = 6;
     }
 
-    private void init_game(Game game) {
+    public void init_game(Game game) {
         // This will initialize the game
         // it will create the players, the board, and the bag
         // ask player how many players are playing
-        System.out.println("\n >>> How many players are playing? (int)");
-        Scanner scanner = new Scanner(System.in);
-        int num_players = scanner.nextInt();
+//        System.out.println("\n >>> How many players are playing? (int)");
+//        Scanner scanner = new Scanner(System.in);
+//        int num_players = scanner.nextInt();
 
-        // create players
-        System.out.println("\n >>> Adding " + num_players + " players");
-        for (int i = 0; i < num_players; i++) {
-            game.players.add(new Player(i));
-        }
+//        if (num_players < 2 || num_players > 4) {
+//            System.out.println("\n >>> Invalid number of players. Please enter a number between 2 and 4.");
+//            init_game(game);
+//        }
 
-        // print player info
-        for (Player player : game.players) {
-            System.out.println(player.playerDescription(player));
-        }
+//        // create players
+////        System.out.println("\n >>> Adding " + num_players + " players");
+////        for (int i = 0; i < num_players; i++) {
+////            game.players.add(new Player(i));
+////        }
 
-        // create the bag
-        game.bag = new Bag();
-        game.bag.getGameLetters();
-        game.bag.print_bag();
+//        // print player info
+//        for (Player player : game.players) {
+//            System.out.println(player.playerDescription(player));
+//        }
+
+//        // create the bag
+//        game.bag = new Bag();
+//        game.bag.getGameLetters();
+//        game.bag.print_bag();
 
         // create each player's hand
-        System.out.println("\n >>> Creating each player's hand");
-        for (Player player : game.players) {
-            player.setHand(7);
-        }
-        // print player info
-        for (Player player : game.players) {
-            System.out.println(player.playerDescription(player));
-        }
+//        System.out.println("\n >>> Creating each player's hand");
+//        for (Player player : game.players) {
+//            player.setHand(7);
+//        }
+//        // print player info
+//        for (Player player : game.players) {
+//            System.out.println(player.playerDescription(player));
+//        }
 
         // create the board
-        game.board = new Board();
-        game.board.create_board();
+//        game.board = new Board();
+//        game.board.create_board();
     }
 
     // method to remove used tiles from player's hand
@@ -139,7 +151,7 @@ public class Game {
 
     public static void main(String[] args) {
         Game game = new Game();
-        game.init_game(game);
+//        game.init_game(game);
 
         // game loop
         while (game.turnNumber < game.maxTurns) {
@@ -149,7 +161,7 @@ public class Game {
             System.out.println("\n >>> Current player: " + game.currentPlayer.playerDescription(game.currentPlayer));
 
             // print board
-            game.board.print_board(game.board.get_board());
+//            game.board.print_board(game.board.get_board());
 
             // play
             game.play(game.currentPlayer);

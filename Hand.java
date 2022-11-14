@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 
 public class Hand {
-    private ArrayList<Letter> letters;
+    private ArrayList<Letter> hand;
 
     public Hand() {
-        this.letters = new ArrayList<Letter>();
+        this.hand = new ArrayList<Letter>();
         // This could also be initialized with 7 letters to start if we prefer
     }
 
@@ -21,12 +21,12 @@ public class Hand {
      * This should be called with numLetters = 7 when the Hand is empty.
      */
     public void drawFromBag(Integer numLetters) {
-        if (this.letters.size() == 0) {
-            this.letters = Bag.drawLetters(numLetters);
-        } else if ((this.letters.size() + numLetters) > 7) {
+        if (this.hand.size() == 0) {
+            this.hand = Bag.drawLetters(numLetters);
+        } else if ((this.hand.size() + numLetters) > 8) {
             System.out.println("you are requesting to draw more letters than you can have");
         } else {
-            this.letters.addAll(Bag.drawLetters(numLetters));
+            this.hand.addAll(Bag.drawLetters(numLetters));
         }
     }
 
@@ -41,19 +41,23 @@ public class Hand {
      */
     public void removeFromHand(String letterToRemove) {
         letterToRemove.toUpperCase();
-        for (int i = 0; i < this.letters.size(); i++) {
-            if (letterToRemove.equals(this.letters.get(i).toString())) {
-                this.letters.remove(i);
+        for (int i = 0; i < this.hand.size(); i++) {
+            if (letterToRemove.equals(this.hand.get(i).toString())) {
+                this.hand.remove(i);
             }
         }
+    }
+
+    public ArrayList<Letter> getHand() {
+        return this.hand;
     }
 
     // needed for Player
     public String toString() {
         StringBuilder hand = null;
         hand = new StringBuilder();
-        for (Letter letter : this.letters) {
-            hand.append(letter.toString() + ", ");
+        for (Letter letter : this.hand) {
+            hand.append(letter.toString());
         }
         return hand.toString();
     }

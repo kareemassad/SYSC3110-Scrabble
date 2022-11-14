@@ -3,8 +3,13 @@ import java.util.HashSet;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-/*
-Class Legality is in charge of checking whether or not the word played is legal, as well as any attached words, ie a play is legal.
+
+/**
+ * Class Legality is in charge of checking whether or not the word played is
+ * legal, as well as any attached words, ie a play is legal.
+ *
+ * @author Kareem EL Assad 101107739
+ * @version 0.0
  */
 
 public class Legality {
