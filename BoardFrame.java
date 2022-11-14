@@ -1,6 +1,8 @@
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
@@ -10,12 +12,10 @@ import javax.swing.TransferHandler;
  * Creates the board GUI
  * @author Keefer Belanger 101152085
  */
-public class BoardFrame extends JFrame implements BoardView{
+public class BoardFrame extends JFrame{
 
-    Board board;
-    Letter character;
-    Bag bag;
-    Hand hand;
+    private Controller controller;
+    private Game model;
 
     //South panel initialization
     JPanel south_panel = new JPanel();
@@ -41,6 +41,7 @@ public class BoardFrame extends JFrame implements BoardView{
     JMenuBar menu_bar = new JMenuBar();
     JMenu options = new JMenu("Options");
     JMenu quit = new JMenu("Quit");
+    JMenu help = new JMenu("Help");
     JMenuItem save = new JMenuItem("Save");
     JMenuItem load = new JMenuItem("Load");
     JMenuItem redo = new JMenuItem("Redo");
@@ -76,12 +77,16 @@ public class BoardFrame extends JFrame implements BoardView{
     public BoardFrame(){
         super("Scrabble");
 
+        text_area.append("Welcome to Scrabble\n");
+        text_area.append("Please choose the number of players\n");
+        text_area.append("Then press the play button\n");
+
         this.setLayout(new BorderLayout());
         this.setSize(1920,1080);
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
-//        play_button.addActionListener();
+        play_button.addActionListener(controller);
         play_panel.add(play_button);
         submit_panel.add(submit_button);
         south_panel.add(submit_panel);
@@ -94,6 +99,7 @@ public class BoardFrame extends JFrame implements BoardView{
         num_of_players[1] = "3";
         num_of_players[2] = "4";
         num_combo_box = new JComboBox(num_of_players);
+        num_combo_box.addActionListener(controller);
         num_combo_box.setPreferredSize(new Dimension(50,50));
         combo_box_panel.add(num_players_label);
         combo_box_panel.add(num_combo_box);
@@ -110,6 +116,7 @@ public class BoardFrame extends JFrame implements BoardView{
         //Menu config
         this.setJMenuBar(menu_bar);
         menu_bar.add(options);
+        menu_bar.add(help);
         menu_bar.add(quit);
         options.add(save);
         options.add(load);
@@ -148,9 +155,6 @@ public class BoardFrame extends JFrame implements BoardView{
         letter_list1.setTransferHandler(new export_handler());
 
 //        list_model.addElement(bag.getGameLetters());
-        list_model.addElement("A");
-        list_model.addElement("B");
-        list_model.addElement("C");
         player_rack1.add(letter_list1);
         player_rack2.add(letter_list2);
         player_rack3.add(letter_list3);
@@ -239,7 +243,6 @@ public class BoardFrame extends JFrame implements BoardView{
                     buff.append("\n");
                 }
             }
-
             return new StringSelection(buff.toString());
         }
 
@@ -263,71 +266,9 @@ public class BoardFrame extends JFrame implements BoardView{
         }
     }
 
-
-//            if (!support.isDrop()) {
-//                return false;
-//            }
-//
-//            JList list = (JList)support.getComponent();
-//            DefaultListModel listModel = (DefaultListModel)list.getModel();
-//            JList.DropLocation dl = (JList.DropLocation)support.getDropLocation();
-//            int index = dl.getIndex();
-//            boolean insert = dl.isInsert();
-//
-//            // Get the string that is being dropped.
-//            Transferable t = support.getTransferable();
-//            String data;
-//            try {
-//                data = (String)t.getTransferData(DataFlavor.stringFlavor);
-//            }
-//            catch (Exception e) { return false; }
-//
-//            // Wherever there is a newline in the incoming data,
-//            // break it into a separate item in the list.
-//            String[] values = data.split("\n");
-//
-//            addIndex = index;
-//            addCount = values.length;
-//
-//            // Perform the actual import.
-//            for (int i = 0; i < values.length; i++) {
-//                if (insert) {
-//                    listModel.add(index++, values[i]);
-//                } else {
-//                    // If the items go beyond the end of the current
-//                    // list, add them in.
-//                    if (index < listModel.getSize()) {
-//                        listModel.set(index++, values[i]);
-//                    } else {
-//                        listModel.add(index++, values[i]);
-//                    }
-//                }
-//            }
-//            return true;
-
-
-        /**
-         * Remove the items moved from the list.
-         */
-//        protected void exportDone(JComponent c, Transferable data, int action) {
-//            JList source = (JList)c;
-//            DefaultListModel listModel  = (DefaultListModel)source.getModel();
-//
-//            if (action == TransferHandler.MOVE) {
-//                for (int i = indices.length - 1; i >= 0; i--) {
-//                    listModel.remove(indices[i]);
-//                }
-//            }
-//
-//            indices = null;
-//            addCount = 0;
-//            addIndex = -1;
-//        }
-
-
-//    public static void main(String[] args){
-//        EventQueue.invokeLater(() ->{
-//            new BoardFrame();
-//        });
-//    }
+    public static void main(String[] args){
+        EventQueue.invokeLater(() ->{
+            new BoardFrame();
+        });
+    }
 }
