@@ -14,7 +14,7 @@ public class HandTest {
     @Test
     public void initialHandSizeIsNull(){
         Hand h = new Hand();
-        assertNull(h.getHand());
+        assertEquals(0, h.getHand().size());
     }
 
     @Test
