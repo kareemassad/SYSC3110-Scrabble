@@ -26,6 +26,7 @@ This deliverable is the second milestone of a series of four milestones.
 ### Left For Remaining Milestones
 
 •	Finish the Score implementation to ensure that new letters and words are scored and ensuring that all tests pass (Milestone 3)
+• Alter implementation of when words are played ensuring Legality will pass correctly (Milestone 3)
 •	Create a Scrabble playing AI (Milestone 4)
 •	Adapt the Score and Board classes to use premium and wild tiles (Milestone 4)
 
