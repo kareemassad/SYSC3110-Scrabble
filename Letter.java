@@ -4,7 +4,7 @@
  * will be associated to them.
  * 
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.2
+ * @version 3.0
  */
 public class Letter {
 
@@ -15,6 +15,8 @@ public class Letter {
     private final Character character;
     private final int value;
     private String premium;
+    private int ROW;
+    private int COL;
 
     /**
      * The Game class will need to call this for every available letter in the game,
@@ -136,6 +138,13 @@ public class Letter {
     public String getPremium() {
         return this.premium;
     }
+
+    public void setCoordinates(int row, int col){
+        this.ROW = row;
+        this.COL = col;
+    }
+
+
 
     @Override
     public String toString() {

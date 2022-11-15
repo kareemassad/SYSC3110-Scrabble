@@ -4,14 +4,19 @@ import java.util.ArrayList;
  * A word can have up to 7 letters
  * 
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.1
+ * @version 3.0
  */
 
 public class Word {
     private ArrayList<Letter> letters;
     private ArrayList<String> premiums; // these two arrays will always have the same length
     private int score;
+    private int startingRow;
+    private int startingCol;
+    private int direction;
 
+
+    // Only used for testing
     public Word(String word) {
         letters = new ArrayList<Letter>();
         for (int i = 0; i < word.length(); i++) {
@@ -22,6 +27,7 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
+            // this will eventually need to change
     }
 
     public Word(ArrayList<Letter> letters) {
@@ -30,7 +36,15 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
+          // this will eventually need to change
     }
+
+    // TODO: add a constructor that takes a 2D array [Letter A, tuple (row, col)]
+    // this constructor will need to
+    // 1) Determine the direction based on which coordinate is changing, set the direction for the Word
+    // 2) Create the Word with the previous constructor (adds NONE as premiums for now as default)
+    // 3) Set coordinates for each letter
+    // 4) Set premium for each letter
 
     /**
      * This method creates a new word and assigns premium tiles to certain letters.
@@ -75,6 +89,17 @@ public class Word {
         return score;
     }
 
+    public void setStartingCoordinates(int startingRow, int startingCol){
+        this.startingRow = startingRow;
+        this.startingCol = startingCol;
+    }
+
+    public int getStartingRow(){
+        return this.startingRow;
+    }
+
+
+
     @Override
     public String toString() {
         StringBuilder word = null;
@@ -83,36 +108,6 @@ public class Word {
             word.append(letter.toString());
         }
         return word.toString();
-    }
-
-    /**
-     * The following is just for testing the Word and Letter classes.
-     * Should be removed eventually and replaced by the appropriate automated tests.
-     *
-     * @author Laurence Lamarche-Cliche 101173070
-     * @version 0.0
-     */
-    public static void main(String[] args) {
-        Letter L = new Letter(Letter.Character.L);
-        Letter O = new Letter(Letter.Character.O);
-        Letter K = new Letter(Letter.Character.K);
-        Letter L1 = new Letter(Letter.Character.L);
-        ArrayList<Letter> letters = new ArrayList<>();
-        letters.add(L);
-        letters.add(O);
-        letters.add(L1);
-
-        Word wordLetters = new Word(letters);
-        Word wordString = new Word("legal");
-        wordLetters.addLetter(wordLetters.getLetters().size(), K, "NONE");
-        System.out.println(wordLetters.toString());
-        System.out.println(wordString.toString());
-        Bag letterBag = new Bag();
-        Hand newHand = new Hand();
-        newHand.drawFromBag(7);
-        System.out.println(newHand);
-        newHand.drawFromBag(2);
-        System.out.println(newHand);
     }
 
 }
