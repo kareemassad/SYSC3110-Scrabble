@@ -4,6 +4,7 @@ import org.junit.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * This is testing the Bag Class
@@ -150,10 +151,9 @@ public class BagTest {
                 O1, O2, O3, O4, O5, O6, O7, O8, P1, P2, Q1, R1, R2, R3, R4, R5, R6, S1, S2, S3, S4,
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
 
+        assertEquals(98, gameLettersInBag.size());
+        assertEquals(gameLetters.size(), gameLettersInBag.size());
 
-        for (Letter letter : gameLetters) {
-            assertTrue(gameLettersInBag.containsAll(gameLetters));
-        }
     }
 
     @Test
