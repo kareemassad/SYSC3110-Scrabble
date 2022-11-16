@@ -28,6 +28,7 @@ public class Board {
 
     public Board() {
         this.direction = direction;
+        this.frame = frame;
 //        this.scrabble_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_rack = new ArrayList<Character>();

@@ -12,25 +12,24 @@ import javax.swing.TransferHandler;
  */
 public class BoardFrame extends JFrame{
 
-    private Controller controller;
     private Game model;
+    private Controller controller;
 
     //South panel initialization
     JPanel south_panel = new JPanel();
     JPanel submit_panel = new JPanel();
     JButton submit_button = new JButton("Submit");
     JPanel play_panel = new JPanel();
-//    JButton play_button = new JButton("Play");
+    JButton play_button = new JButton("Play");
 
     //Player count initialization
+    JMenuItem player_1 = new JMenuItem("Player 1");
+    JMenuItem player_2 = new JMenuItem();
+    JMenuItem player_3 = new JMenuItem();
+    JMenuItem player_4 = new JMenuItem();
 
-//    JButton player_2 = new JButton();
-//    JButton player_3 = new JButton();
-//    JButton player_4 = new JButton();
-
-    JComboBox num_combo_box;
+    JPopupMenu popup_menu = new JPopupMenu("Player Selection");
     JLabel num_players_label = new JLabel("Choose Number of Players");
-    JPanel combo_box_panel = new JPanel();
     String[] num_of_players = new String[3];
 
     //Scoreboard initialization
@@ -79,35 +78,36 @@ public class BoardFrame extends JFrame{
 
     public BoardFrame(){
         super("Scrabble");
+        this.controller = new Controller(model, this);
 
         text_area.append("Welcome to Scrabble\n");
         text_area.append("Please choose the number of players\n");
         text_area.append("Then press the play button\n");
 
         this.setLayout(new BorderLayout());
-        this.setSize(1920,1080);
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
-//        play_button.addActionListener(controller);
+        play_button.addActionListener(controller);
         submit_button.addActionListener(controller);
-//        play_panel.add(play_button);
+        play_panel.add(play_button);
         submit_panel.add(submit_button);
         south_panel.add(submit_panel);
         south_panel.add(play_panel);
         south_panel.setPreferredSize(new Dimension(0,100));
 
         //Player count config
-        combo_box_panel.setLayout(new GridLayout(2,1));
-        num_of_players[0] = "2";
-        num_of_players[1] = "3";
-        num_of_players[2] = "4";
-        num_combo_box = new JComboBox(num_of_players);
-        num_combo_box.addActionListener(controller);
-        num_combo_box.setPreferredSize(new Dimension(50,50));
-        combo_box_panel.add(num_players_label);
-        combo_box_panel.add(num_combo_box);
-        south_panel.add(combo_box_panel);
+        popup_menu.setLayout(new GridLayout(2,2));
+        popup_menu.add(player_1);
+//        num_of_players[0] = "2";
+//        num_of_players[1] = "3";
+//        num_of_players[2] = "4";
+//        num_combo_box = new JComboBox(num_of_players);
+//        num_combo_box.addActionListener(controller);
+//        num_combo_box.setPreferredSize(new Dimension(50,50));
+//        combo_box_panel.add(num_players_label);
+//        combo_box_panel.add(num_combo_box);
+//        south_panel.add(combo_box_panel);
 
         //Scoreboard config
         score_panel.setLayout(new GridLayout(1,4));
@@ -189,7 +189,7 @@ public class BoardFrame extends JFrame{
                 tile_content.setTransferHandler(new import_handler());
                 tile.setBorder(BorderFactory.createEtchedBorder());
 
-                tile_content.setPreferredSize(new Dimension(50,43));
+                tile_content.setPreferredSize(new Dimension(50,35));
                 tile.add(tile_content);
 
                 squares[row][col] = tile;
@@ -205,13 +205,14 @@ public class BoardFrame extends JFrame{
         this.add(grid_panel, BorderLayout.CENTER);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        pack();
     }
 
     private class import_handler extends TransferHandler {
-        public final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
+        public final DataFlavor SUPPORTED_DATA_FLAVOR = DataFlavor.stringFlavor;
 
         public boolean canImport(TransferSupport support) {
-            return support.isDataFlavorSupported(SUPPORTED_DATE_FLAVOR);
+            return support.isDataFlavorSupported(SUPPORTED_DATA_FLAVOR);
         }
 
         public boolean importData(TransferSupport support) {
@@ -219,10 +220,11 @@ public class BoardFrame extends JFrame{
             if (canImport(support)) {
                 try {
                     Transferable t = support.getTransferable();
-                    Object value = t.getTransferData(SUPPORTED_DATE_FLAVOR);
+                    Object value = t.getTransferData(SUPPORTED_DATA_FLAVOR);
                     if (value instanceof String) {
                         Component component = support.getComponent();
                         if (component instanceof JLabel) {
+                            System.out.println(value.getClass());
                             ((JLabel) component).setText(value.toString());
                             accept = true;
                         }
@@ -233,7 +235,6 @@ public class BoardFrame extends JFrame{
             }
             return accept;
         }
-
     }
 
     private class export_handler extends TransferHandler {
