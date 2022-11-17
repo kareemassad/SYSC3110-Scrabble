@@ -1,3 +1,5 @@
+package Tests;
+
 import static org.junit.Assert.*;
 
 import Model.Bag;

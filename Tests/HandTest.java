@@ -1,3 +1,5 @@
+package Tests;
+
 import Model.Bag;
 import Model.Hand;
 import Model.Letter;
