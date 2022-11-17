@@ -519,10 +519,4 @@ public class BoardFrame extends JFrame{
             addIndex = -1;
         }
     }
-
-//    public static void main(String[] args){
-//        EventQueue.invokeLater(() ->{
-//            new View.BoardFrame();
-//        });
-//    }
 }

@@ -92,12 +92,6 @@ public class Controller implements ActionListener{
         if(e.getSource() == view.quit){
             System.exit(0);
         }
-//        if(!game.players.isEmpty()){
-//            System.out.println("\n >>> Creating each player's hand");
-//            for(Model.Player player : game.players){
-//                player.setHand(7);
-//            }
-//        }
 
         if(e.getSource() == view.submit_button){
             System.out.println("submit");
