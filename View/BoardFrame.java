@@ -202,7 +202,9 @@ public class BoardFrame extends JFrame{
             for(int col = 0; col < 15; col++){
                 Font f = new Font(Font.DIALOG, Font.BOLD, 30);
                 JPanel tile = new JPanel();
-                JLabel tile_content = new JLabel();
+                tile.setLayout(new GridLayout());
+                tile.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+                JLabel tile_content = new JLabel(" ");
                 tile_content.setFont(f);
                 tile_content.setHorizontalAlignment(JLabel.CENTER);
                 tile_content.setTransferHandler(new import_handler());
@@ -210,6 +212,226 @@ public class BoardFrame extends JFrame{
 
                 tile_content.setPreferredSize(new Dimension(50,35));
                 tile.add(tile_content);
+
+                switch(row){
+                    //Coloring top row to bottom row (left to right)
+                    case 0:
+                        if(row == 0 && col == 0){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 1:
+                        if(row == 0 && col == 7){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 2:
+                        if(row == 0 && col == 14){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 3:
+                        if(row == 1 && col == 1){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 4:
+                        if(row == 1 && col == 5){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 5:
+                        if(row == 1 && col == 9){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 6:
+                        if(row == 1 && col == 13){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 7:
+                        if(row == 2 && col == 2){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 8:
+                        if(row == 2 && col == 6){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 9:
+                        if(row == 2 && col == 8){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 10:
+                        if(row == 2 && col == 12){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 11:
+                        if(row == 3 && col == 3){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 12:
+                        if(row == 3 && col == 7){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 13:
+                        if(row == 3 && col == 7){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 14:
+                        if(row == 3 && col == 11){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 15:
+                        if(row == 4 && col == 4){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 16:
+                        if(row == 4 && col == 10){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 17:
+                        if(row == 5 && col == 1){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 18:
+                        if(row == 5 && col == 5){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 19:
+                        if(row == 5 && col == 9){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 20:
+                        if(row == 5 && col == 13){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 21:
+                        if(row == 6 && col == 2){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 22:
+                        if(row == 6 && col == 6){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 23:
+                        if(row == 6 && col == 8){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 24:
+                        if(row == 6 && col == 12){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 25:
+                        if(row == 7 && col == 0){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 26:
+                        if(row == 7 && col == 3){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 27:
+                        if(row == 7 && col == 7){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 28:
+                        if(row == 7 && col == 11){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 29:
+                        if(row == 7 && col == 14){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 30:
+                        if(row == 8 && col == 2){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 31:
+                        if(row == 8 && col == 6){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 32:
+                        if(row == 8 && col == 8){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 33:
+                        if(row == 8 && col == 12){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 34:
+                        if(row == 9 && col == 1){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 35:
+                        if(row == 9 && col == 5){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 36:
+                        if(row == 9 && col == 9){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 37:
+                        if(row == 9 && col == 13){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 38:
+                        if(row == 10 && col == 4){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 39:
+                        if(row == 10 && col == 10){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 40:
+                        if(row == 11 && col == 3){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 41:
+                        if(row == 11 && col == 7){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 42:
+                        if(row == 11 && col == 11){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 43:
+                        if(row == 12 && col == 2){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 44:
+                        if(row == 12 && col == 6){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 45:
+                        if(row == 12 && col == 8){
+                            tile.setBackground(new Color(153,204,255));
+                        }
+                    case 46:
+                        if(row == 12 && col == 12){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 47:
+                        if(row == 13 && col == 1){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 48:
+                        if(row == 13 && col == 5){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 49:
+                        if(row == 13 && col == 9){
+                            tile.setBackground(new Color(51,153,255));
+                        }
+                    case 50:
+                        if(row == 13 && col == 13){
+                            tile.setBackground(new Color(255,204,229));
+                        }
+                    case 51:
+                        if(row == 14 && col == 0){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 52:
+                        if(row == 14 && col == 7){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                    case 53:
+                        if(row == 14 && col == 14){
+                            tile.setBackground(new Color(255,102,178));
+                        }
+                }
 
                 squares[row][col] = tile;
                 grid[row][col] = tile_content;
