@@ -1,4 +1,7 @@
 import static org.junit.Assert.*;
+
+import Model.Bag;
+import Model.Letter;
 import org.junit.*;
 
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * This is testing the Bag Class
+ * This is testing the Model.Bag Class
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.1
  */

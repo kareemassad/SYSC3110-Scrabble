@@ -1,6 +1,8 @@
+package Model;
+
 /**
  * A letter is a character and a score.
- * The Game class will need to initialize all available letters. Their scores
+ * The Model.Game class will need to initialize all available letters. Their scores
  * will be associated to them.
  * 
  * @author Laurence Lamarche-Cliche 101173070
@@ -17,9 +19,9 @@ public class Letter {
     private String premium;
 
     /**
-     * The Game class will need to call this for every available letter in the game,
+     * The Model.Game class will need to call this for every available letter in the game,
      * this way
-     * new Letter(A)
+     * new Model.Letter(A)
      */
     public Letter(Character character) {
         this.character = character;
@@ -122,10 +124,10 @@ public class Letter {
      * 
      * @param premium is one of
      *                NONE = "None";
-     *                DL = "Double Letter";
-     *                TL = "Triple Letter";
-     *                DW = "Double Word";
-     *                TW = "Triple Word";
+     *                DL = "Double Model.Letter";
+     *                TL = "Triple Model.Letter";
+     *                DW = "Double Model.Word";
+     *                TW = "Triple Model.Word";
      */
     public void setPremium(String premium) {
         this.premium = premium;

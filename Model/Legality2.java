@@ -1,5 +1,5 @@
-/*
-This class acts as a placeholder for how class Legality will work after restructuring other classes.
+package Model;/*
+This class acts as a placeholder for how class Model.Legality will work after restructuring other classes.
  */
 
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ public class Legality2 {
     private HashSet<String> legal_words = new HashSet<String>();
     private String file_path = "Words/english_words.txt";
 
-    // private ArrayList<Integer> coord; in Letter class
-    // private ArrayList<Integer> startCoord; in Word class
-    // private int dir; in Word class
+    // private ArrayList<Integer> coord; in Model.Letter class
+    // private ArrayList<Integer> startCoord; in Model.Word class
+    // private int dir; in Model.Word class
 
     public Legality2(Word word) {
         this.word = word;

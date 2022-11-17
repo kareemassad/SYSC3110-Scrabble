@@ -1,5 +1,5 @@
-/*
-Class Score is in charge of calculating and updating the score of a player
+package Model;/*
+Class Model.Score is in charge of calculating and updating the score of a player
  */
 
 // TODO needs to add score of all adjoining words

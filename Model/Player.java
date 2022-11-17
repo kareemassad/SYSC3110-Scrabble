@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+package Model;
 
 /*
-Class Player is in charge of all details pertaining to a player, including their hand, score, etc.
+Class Model.Player is in charge of all details pertaining to a player, including their hand, score, etc.
  */
 
 public class Player {
@@ -9,7 +9,7 @@ public class Player {
     private int score;
     private String name;
 
-    private int player_ID; // might be useful in Game
+    private int player_ID; // might be useful in Model.Game
 
     public Player(int player_ID) {
         this.player_ID = player_ID;
@@ -28,7 +28,7 @@ public class Player {
      * @return s is the string created of the player description.
      */
     public String playerDescription(Player player) {
-        String s = new String("Player ID: " + player.player_ID + "\n Score: " + player.score
+        String s = new String("Model.Player ID: " + player.player_ID + "\n Model.Score: " + player.score
                 + "\n Tiles: " + player.hand.toString() + "\n");
         return s;
     }

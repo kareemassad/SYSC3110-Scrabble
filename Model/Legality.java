@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.io.File;
@@ -5,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Class Legality is in charge of checking whether or not the word played is
+ * Class Model.Legality is in charge of checking whether or not the word played is
  * legal, as well as any attached words, ie a play is legal.
  *
  * @author Kareem EL Assad 101107739
@@ -13,7 +15,7 @@ import java.util.Scanner;
  */
 
 public class Legality {
-    // Legality is expected to receive a String and return a boolean. True if the
+    // Model.Legality is expected to receive a String and return a boolean. True if the
     // word is legal, false if it is not.
 
     private String word;
@@ -57,7 +59,7 @@ public class Legality {
 
     }
 
-    // needed for Score
+    // needed for Model.Score
     private boolean check_position_legality(String input) {
         // TODO: unsure how to check as board is incomp.
         return false;
@@ -75,7 +77,7 @@ public class Legality {
     // public static void main(String[] args) {
     // // test reading from file
     // String file_path = "Words/english_words.txt";
-    // Legality legality = new Legality("test");
+    // Model.Legality legality = new Model.Legality("test");
     // legality.create_word_list(file_path);
     // // test checkWord
     // String word = "test";

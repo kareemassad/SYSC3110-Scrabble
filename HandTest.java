@@ -1,3 +1,6 @@
+import Model.Bag;
+import Model.Hand;
+import Model.Letter;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -5,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
- * This is testing the Hand Class
+ * This is testing the Model.Hand Class
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.0
  */

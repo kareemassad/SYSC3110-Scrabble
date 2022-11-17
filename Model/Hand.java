@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 
 /**
@@ -16,9 +18,9 @@ public class Hand {
     }
 
     /**
-     * This draws the requested number of letters from the Bag and adds them to the
+     * This draws the requested number of letters from the Model.Bag and adds them to the
      * existing hand
-     * This should be called with numLetters = 7 when the Hand is empty.
+     * This should be called with numLetters = 7 when the Model.Hand is empty.
      */
     public void drawFromBag(Integer numLetters) {
         if (this.hand.size() == 0) {
@@ -31,11 +33,11 @@ public class Hand {
     }
 
     /**
-     * This removes the requested letter from the Hand (when it is played, it should
+     * This removes the requested letter from the Model.Hand (when it is played, it should
      * no remain in the hand).
      * If two identical letters are present, this will only remove one occurence of
      * the letter.
-     * Calling removeFromHand("A") on a Hand containing INEWAAT will result in the
+     * Calling removeFromHand("A") on a Model.Hand containing INEWAAT will result in the
      * hand becoming INEWAT
      * Only one letter can be removed at a time with this method.
      */
@@ -52,7 +54,7 @@ public class Hand {
         return this.hand;
     }
 
-    // needed for Player
+    // needed for Model.Player
     public String toString() {
         StringBuilder hand = null;
         hand = new StringBuilder();
@@ -63,7 +65,7 @@ public class Hand {
     }
 
     // set hand method
-    // public void setHand(ArrayList<Letter> letters) {
+    // public void setHand(ArrayList<Model.Letter> letters) {
     // this.letters = letters;
     // }
 

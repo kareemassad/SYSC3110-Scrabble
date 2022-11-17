@@ -1,3 +1,9 @@
+package View;
+
+import Model.Game;
+import Model.TextAreaOutputStream;
+import Controller.Controller;
+
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -18,47 +24,48 @@ public class BoardFrame extends JFrame{
     //South panel initialization
     JPanel south_panel = new JPanel();
     JPanel submit_panel = new JPanel();
-    JButton submit_button = new JButton("Submit");
+    public JButton submit_button = new JButton("Submit");
     JPanel play_panel = new JPanel();
-    JButton play_button = new JButton("Play");
+    public JButton play_button = new JButton("Play");
 
-    //Player count initialization
-    JMenuItem player_1_item = new JMenuItem("Player 1");
-    JMenuItem player_2_item = new JMenuItem("Player 2");
-    JMenuItem player_3_item = new JMenuItem("Player 3");
-    JMenuItem player_4_item = new JMenuItem("Player 4");
+    //Model.Player count initialization
+    public JMenuItem player_1_item = new JMenuItem("Player 1");
+    public JMenuItem player_2_item = new JMenuItem("Player 2");
+    public JMenuItem player_3_item = new JMenuItem("Player 3");
+    public JMenuItem player_4_item = new JMenuItem("Player 4");
 
-    JPopupMenu popup_menu = new JPopupMenu("Player Selection");
+    public JPopupMenu popup_menu = new JPopupMenu("Player Selection");
     JLabel num_players_label = new JLabel("Choose Number of Players");
     String[] num_of_players = new String[3];
 
     //Scoreboard initialization
     JPanel score_panel = new JPanel();
-    JLabel score_label1 = new JLabel("Player 1 Score:");
-    JLabel score_label2 = new JLabel("Player 2 Score:");
-    JLabel score_label3 = new JLabel("Player 3 Score:");
-    JLabel score_label4 = new JLabel("Player 4 Score:");
+    public JLabel score_label1 = new JLabel("Player 1 Score:");
+    public JLabel score_label2 = new JLabel("Player 2 Score:");
+    public JLabel score_label3 = new JLabel("Player 3 Score:");
+    public JLabel score_label4 = new JLabel("Player 4 Score:");
 
     //Menu initialization
     JMenuBar menu_bar = new JMenuBar();
     JMenu options = new JMenu("Options");
-    JMenu quit = new JMenu("Quit");
     JMenu help = new JMenu("Help");
+
+    public JMenuItem quit = new JMenuItem("Quit");
     JMenuItem save = new JMenuItem("Save");
     JMenuItem load = new JMenuItem("Load");
     JMenuItem redo = new JMenuItem("Redo");
     JMenuItem undo = new JMenuItem("Undo");
 
     //Text area initialization
-    JTextArea text_area = new JTextArea(10,20);
+    public JTextArea text_area = new JTextArea(10,20);
     JScrollPane scroll_pane = new JScrollPane(text_area);
 
-    //Player rack initialization
+    //Model.Player rack initialization
     JPanel rack_panel = new JPanel();
-    JPanel player_rack1 = new JPanel();
-    JPanel player_rack2 = new JPanel();
-    JPanel player_rack3 = new JPanel();
-    JPanel player_rack4 = new JPanel();
+    public JPanel player_rack1 = new JPanel();
+    public JPanel player_rack2 = new JPanel();
+    public JPanel player_rack3 = new JPanel();
+    public JPanel player_rack4 = new JPanel();
 
     JLabel player_num1 = new JLabel("Player 1 Rack");
     JLabel player_num2 = new JLabel("Player 2 Rack");
@@ -71,7 +78,7 @@ public class BoardFrame extends JFrame{
     JList letter_list3 = new JList(list_model);
     JList letter_list4 = new JList(list_model);
 
-    //Board initialization
+    //Model.Board initialization
     JPanel grid_panel = new JPanel();
     JLabel[][] grid = new JLabel[15][15];
     JPanel[][] squares = new JPanel[15][15];
@@ -96,7 +103,6 @@ public class BoardFrame extends JFrame{
         south_panel.setPreferredSize(new Dimension(0,100));
 
         //Player count config
-        popup_menu.setLabel("Player Selection");
         popup_menu.setLocation(10,10);
         popup_menu.setLayout(new GridLayout(4,1));
 
@@ -110,33 +116,30 @@ public class BoardFrame extends JFrame{
         popup_menu.add(player_3_item);
         popup_menu.add(player_4_item);
 
-//        num_of_players[0] = "2";
-//        num_of_players[1] = "3";
-//        num_of_players[2] = "4";
-//        num_combo_box = new JComboBox(num_of_players);
-//        num_combo_box.addActionListener(controller);
-//        num_combo_box.setPreferredSize(new Dimension(50,50));
-//        combo_box_panel.add(num_players_label);
-//        combo_box_panel.add(num_combo_box);
-//        south_panel.add(combo_box_panel);
-
         //Scoreboard config
         score_panel.setLayout(new GridLayout(1,4));
+        score_panel.setPreferredSize(new Dimension(0,35));
         score_panel.add(score_label1);
         score_panel.add(score_label2);
         score_panel.add(score_label3);
         score_panel.add(score_label4);
-        score_panel.setPreferredSize(new Dimension(0,35));
+
+        score_label1.setVisible(false);
+        score_label2.setVisible(false);
+        score_label3.setVisible(false);
+        score_label4.setVisible(false);
 
         //Menu config
         this.setJMenuBar(menu_bar);
         menu_bar.add(options);
         menu_bar.add(help);
-        menu_bar.add(quit);
         options.add(save);
         options.add(load);
         options.add(undo);
         options.add(redo);
+        options.add(quit);
+
+        quit.addActionListener(controller);
 
         //Text area config
         text_area.setEditable(false);
@@ -184,6 +187,9 @@ public class BoardFrame extends JFrame{
         player_rack4.add(letter_list4);
 
         player_rack1.setVisible(false);
+        player_rack2.setVisible(false);
+        player_rack3.setVisible(false);
+        player_rack4.setVisible(false);
 
         rack_panel.add(player_rack1);
         rack_panel.add(player_rack2);
@@ -294,7 +300,7 @@ public class BoardFrame extends JFrame{
 
 //    public static void main(String[] args){
 //        EventQueue.invokeLater(() ->{
-//            new BoardFrame();
+//            new View.BoardFrame();
 //        });
 //    }
 }

@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 
 /**
@@ -40,8 +42,8 @@ public class Word {
      * For example, if one wishes to have the word HOWL, and have the W on a TL
      * premium (x3),
      * one must call the constructor this way:
-     * Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
-     * Where H, O, W and L are Letter objects.
+     * Model.Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
+     * Where H, O, W and L are Model.Letter objects.
      */
     public Word(ArrayList<Letter> letters, ArrayList<String> premiums) {
         this.letters = new ArrayList<Letter>(letters);
@@ -86,7 +88,7 @@ public class Word {
     }
 
     /**
-     * The following is just for testing the Word and Letter classes.
+     * The following is just for testing the Model.Word and Model.Letter classes.
      * Should be removed eventually and replaced by the appropriate automated tests.
      *
      * @author Laurence Lamarche-Cliche 101173070

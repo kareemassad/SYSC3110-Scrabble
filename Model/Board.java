@@ -1,3 +1,7 @@
+package Model;
+
+import View.BoardFrame;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,7 +36,7 @@ public class Board {
 //        this.scrabble_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_board = new char[BOARD_SIZE][BOARD_SIZE];
 //        this.temp_rack = new ArrayList<Character>();
-//        this.frame = new BoardFrame();
+//        this.frame = new View.BoardFrame();
     }
 
 //    public void create_board() {
@@ -144,9 +148,9 @@ public class Board {
     }
 
 //    public static void main(String[] args) {
-//        Board b = new Board();
+//        Model.Board b = new Model.Board();
 //        // b.create_board();
-//        String c = "Word";
+//        String c = "Model.Word";
 //        String d = "Day";
 //
 //        b.place_word(c, 0, 0, 0);
