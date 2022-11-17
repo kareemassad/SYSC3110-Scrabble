@@ -30,13 +30,23 @@ public class Board {
     private ArrayList<Letter> temp_rack;
     private static HashMap<String, String> boardScores;
 
+
+    // TODO add a method to take the board GUI contents and put in inside the Letter[][] 2D array
+
+    //only used for testing
+    public Board(){
+        this.direction = direction;
+        this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+        this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+        this.temp_rack = new ArrayList<Letter>();
+    }
+
     public Board(Game game) {
         this.direction = direction;
         this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
         this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
         this.temp_rack = new ArrayList<Letter>();
-        this.frame = new BoardFrame(game); // do we need this?
-        System.out.println("done with Board constructor");
+        this.frame = new BoardFrame(game);
     }
 
 //    public void create_board() {

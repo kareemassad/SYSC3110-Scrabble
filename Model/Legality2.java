@@ -1,12 +1,13 @@
 package Model;
+/*
+This class acts as a placeholder for how class Legality will work after restructuring other classes.
+ */
 /**
  * This class acts as a placeholder for how class Legality will work after restructuring other classes.
  *
  * @author Becca Young
  * @version 3.0
  */
-
-import Model.Word;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,13 +19,17 @@ public class Legality2 {
     private Board board;
 
     private HashSet<String> legal_words = new HashSet<String>();
-    private String file_path = "Words/english_words.txt";
+    private final String file_path = "Words/english_words.txt";
 
-    // private ArrayList<Integer> coord; in Letter class
-    // private ArrayList<Integer> startCoord; in Word class
-    // private int dir; in Word class
+    private final int RIGHT = 0;
+    private final int DOWN = 1;
+    private final int INVALID = -1;
 
-    public Legality2(Word word) {
+    //private ArrayList<Integer> coord;          in Letter class
+    //private ArrayList<Integer> startCoord;     in Word class
+    //private int dir;                           in Word class
+
+    public Legality2(Word word){
         this.word = word;
         this.attachedWords.add(word);
         addAttachedWords();
@@ -35,9 +40,9 @@ public class Legality2 {
      * @author Laurence Lamarche-Cliche
      */
     private void addAttachedWords() {
-        // assuming the the board is a 2D array of Letters
+        // assuming the board is a 2D array of Letters
 
-        if (word.getDirection() == 1) { // cycle through each letter of the word
+        if (word.getDirection() == DOWN) { // cycle through each letter of the word
 
             for (Letter letter : word.getLetters()) { // the word is vertical, we look for attached words on sides (col +-
                 int row = letter.getRow();
@@ -45,7 +50,7 @@ public class Legality2 {
                 int newWordColumn = letter.getCol(); // will hold the starting column for the new word
                 int newWordLength = 0; // will hold the size of the new word
 
-                if (letter.getCol() == 0) { // only check to the right
+                if (letter.getCol() == RIGHT) { // only check to the right
                     while ((board.get_board()[row][column + 1].toString() != " ")) {
                         newWordLength++; // h
                         column++;
@@ -131,7 +136,7 @@ public class Legality2 {
 
     // checks only if the word is a real word
     private boolean checkSingleWord(Word word) {
-        if (legal_words.contains(word.toString())) {
+        if (legal_words.contains(word.toString())){
             return true;
         }
         return false;
@@ -139,8 +144,8 @@ public class Legality2 {
 
     // checks that all words, current word and all attached words, are real words
     private boolean checkAllWords() {
-        for (Word word : attachedWords) {
-            if (!checkSingleWord(word)) {
+        for(Word word : attachedWords) {
+            if(!checkSingleWord(word) || word.getDirection() == INVALID){
                 return false;
             }
         }
@@ -148,8 +153,8 @@ public class Legality2 {
     }
 
     // checks that play is legal
-    public boolean checkLegality() {
-        if (checkAllWords() && attachedWords.size() > 1) { // more than one because of Scrabble rule
+    public boolean checkLegality(){
+        if (checkAllWords() && attachedWords.size() > 1) {          // more than one because of Scrabble rule
             return true;
         }
         return false;
