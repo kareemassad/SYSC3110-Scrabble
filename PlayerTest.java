@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.0
  */
+/*
 public class PlayerTest {
 
     @Test
@@ -96,3 +97,5 @@ public class PlayerTest {
     }
 
 }
+
+ */

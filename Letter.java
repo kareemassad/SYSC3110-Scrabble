@@ -118,6 +118,8 @@ public class Letter {
     public int getValue() {
         return this.value;
     }
+    public int getRow() { return this.ROW; }
+    public int getCol() { return this.COL; }
 
     /**
      * This shall not be set in the constructor because the letters are created

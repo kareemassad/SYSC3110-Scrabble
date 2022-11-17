@@ -3,7 +3,7 @@
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.0
  */
-
+/*
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -136,3 +136,4 @@ public class WordTest {
         assertEquals("TUMBLE", tumble.toString());
     }
 }
+ */

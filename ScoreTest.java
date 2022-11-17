@@ -1,3 +1,4 @@
+
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import static org.junit.Assert.*;
  * @author Laurence Lamarche-Cliche 101173070
  * @version 0.0
  */
+/*
 public class ScoreTest {
 
     @Test
@@ -49,3 +51,4 @@ public class ScoreTest {
 
     }
 }
+ */
