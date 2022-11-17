@@ -24,10 +24,10 @@ public class Game {
     private int maxTurns;
 
     public Game() {
-        this.board = new Board();
-        this.boardframe = new BoardFrame();
-        this.bag = new Bag();
+        this.board = new Board(this);
         this.players = new ArrayList<Player>();
+        this.bag = new Bag();
+        this.boardframe = new BoardFrame(this);
         this.currentPlayerIndex = 0;
         this.turnNumber = 0;
         this.maxTurns = 6;

@@ -2,11 +2,11 @@ package Model;
 
 /**
  * A letter is a character and a score.
- * The Model.Game class will need to initialize all available letters. Their scores
+ * The Game class will need to initialize all available letters. Their scores
  * will be associated to them.
- * 
+ *
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.2
+ * @version 3.0
  */
 public class Letter {
 
@@ -17,15 +17,18 @@ public class Letter {
     private final Character character;
     private final int value;
     private String premium;
+    private int ROW;
+    private int COL;
 
     /**
-     * The Model.Game class will need to call this for every available letter in the game,
+     * The Game class will need to call this for every available letter in the game,
      * this way
-     * new Model.Letter(A)
+     * new Letter(A)
      */
     public Letter(Character character) {
         this.character = character;
         this.value = this.getValueFromCharacter(character);
+        this.premium = "NONE";
     }
 
     public Letter(char letter) {
@@ -33,7 +36,8 @@ public class Letter {
     }
 
     public static Character getCharacterFromChar(char c) {
-        switch (c) {
+        char cUpper = java.lang.Character.toUpperCase(c);
+        switch (cUpper) {
             case 'A':
                 return Character.A;
             case 'B':
@@ -121,13 +125,13 @@ public class Letter {
      * This shall not be set in the constructor because the letters are created
      * without a premium
      * Only letters that are placed can then have a premium set.
-     * 
+     *
      * @param premium is one of
      *                NONE = "None";
-     *                DL = "Double Model.Letter";
-     *                TL = "Triple Model.Letter";
-     *                DW = "Double Model.Word";
-     *                TW = "Triple Model.Word";
+     *                DL = "Double Letter";
+     *                TL = "Triple Letter";
+     *                DW = "Double Word";
+     *                TW = "Triple Word";
      */
     public void setPremium(String premium) {
         this.premium = premium;
@@ -135,6 +139,19 @@ public class Letter {
 
     public String getPremium() {
         return this.premium;
+    }
+
+    public void setCoordinates(int row, int col){
+        this.ROW = row;
+        this.COL = col;
+    }
+
+    public int getRow(){
+        return this.ROW;
+    }
+
+    public int getCol(){
+        return this.COL;
     }
 
     @Override

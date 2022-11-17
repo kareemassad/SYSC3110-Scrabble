@@ -18,7 +18,7 @@ import javax.swing.TransferHandler;
  */
 public class BoardFrame extends JFrame{
 
-    private Game model;
+    //private Game model;
     private Controller controller;
 
     //South panel initialization
@@ -70,20 +70,29 @@ public class BoardFrame extends JFrame{
     JLabel player_num3 = new JLabel("Player 3 Rack");
     JLabel player_num4 = new JLabel("Player 4 Rack");
 
-    DefaultListModel list_model = new DefaultListModel();
-    JList letter_list1 = new JList(list_model);
-    JList letter_list2 = new JList(list_model);
-    JList letter_list3 = new JList(list_model);
-    JList letter_list4 = new JList(list_model);
+    public DefaultListModel list_model1 = new DefaultListModel();
+    public DefaultListModel list_model2 = new DefaultListModel();
+    public DefaultListModel list_model3 = new DefaultListModel();
+    public DefaultListModel list_model4 = new DefaultListModel();
+
+    JList letter_list1 = new JList(list_model1);
+    JList letter_list2 = new JList(list_model2);
+    JList letter_list3 = new JList(list_model3);
+    JList letter_list4 = new JList(list_model4);
+
+    JScrollPane scroll1 = new JScrollPane(letter_list1);
+    JScrollPane scroll2 = new JScrollPane(letter_list2);
+    JScrollPane scroll3 = new JScrollPane(letter_list3);
+    JScrollPane scroll4 = new JScrollPane(letter_list4);
 
     //Model.Board initialization
     JPanel grid_panel = new JPanel();
     JLabel[][] grid = new JLabel[15][15];
     JPanel[][] squares = new JPanel[15][15];
 
-    public BoardFrame(){
+    public BoardFrame(Game game){
         super("Scrabble");
-        this.controller = new Controller(model, this);
+        this.controller = new Controller(game, this);
 
         text_area.append("Welcome to Scrabble\n");
         text_area.append("Press the play button to start the game\n");
@@ -170,19 +179,10 @@ public class BoardFrame extends JFrame{
         letter_list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         letter_list1.setTransferHandler(new export_handler());
 
-//        list_model.addElement(bag.getGameLetters());
-
-        //Example
-        list_model.addElement("A");
-        list_model.addElement("B");
-        list_model.addElement("C");
-        list_model.addElement("D");
-        list_model.addElement("E");
-
-        player_rack1.add(letter_list1);
-        player_rack2.add(letter_list2);
-        player_rack3.add(letter_list3);
-        player_rack4.add(letter_list4);
+        player_rack1.add(scroll1);
+        player_rack2.add(scroll2);
+        player_rack3.add(scroll3);
+        player_rack4.add(scroll4);
 
         player_rack1.setVisible(false);
         player_rack2.setVisible(false);

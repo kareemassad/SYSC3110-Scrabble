@@ -28,7 +28,7 @@ public class Player {
      * @return s is the string created of the player description.
      */
     public String playerDescription(Player player) {
-        String s = new String("Model.Player ID: " + player.player_ID + "\n Model.Score: " + player.score
+        String s = new String("Player ID: " + player.player_ID + "\n Score: " + player.score
                 + "\n Tiles: " + player.hand.toString() + "\n");
         return s;
     }

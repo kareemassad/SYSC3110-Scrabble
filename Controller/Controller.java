@@ -1,11 +1,11 @@
 package Controller;
 
-import Model.Game;
-import Model.Player;
+import Model.*;
 import View.BoardFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Controls the GUI
@@ -25,21 +25,35 @@ public class Controller implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.play_button){
             view.popup_menu.show(view, 125,100);
-            view.text_area.append("Select the number of players");
+            view.text_area.append("Select the number of players\n");
             view.play_button.setVisible(false);
+
+            game.bag = new Model.Bag();
+            game.bag.getGameLetters();
+//            game.bag.print_bag();
         }
 
+        //Create 1 Player
         if(e.getSource() == view.player_1_item){
             int num_players = 1;
 
             view.player_rack1.setVisible(true);
             view.score_label1.setVisible(true);
 
-            System.out.println("\n >>> Adding " + num_players + " player\n");
+            System.out.println(">>> Adding " + num_players + " player");
             for(int i = 0; i < num_players; i++){
                 game.players.add(new Player(i));
             }
+            System.out.println(">>> Creating each player's hand");
+            for (Player player : game.players) {
+                player.setHand(7);
+                for(int j = 0; j < player.getHand().getHand().size(); j++){
+                    view.list_model1.addElement(player.getHand().getHand().get(j));
+                }
+            }
         }
+
+        //Create 2 Players
         else if (e.getSource() == view.player_2_item) {
             int num_players = 2;
 
@@ -49,11 +63,21 @@ public class Controller implements ActionListener{
             view.score_label1.setVisible(true);
             view.score_label2.setVisible(true);
 
-            System.out.println("\n >>> Adding " + num_players + " players");
+            System.out.println(">>> Adding " + num_players + " players");
             for(int i = 0; i < num_players; i++){
                 game.players.add(new Player(i));
             }
+            System.out.println(">>> Creating each player's hand");
+            for (Player player : game.players) {
+                player.setHand(7);
+                for(int j = 0; j < player.getHand().getHand().size(); j++){
+                    view.list_model2.addElement(player.getHand().getHand().get(j));
+                }
+            }
+
         }
+
+        //Create 3 Players
         else if (e.getSource() == view.player_3_item) {
             int num_players = 3;
 
@@ -65,11 +89,20 @@ public class Controller implements ActionListener{
             view.score_label2.setVisible(true);
             view.score_label3.setVisible(true);
 
-            System.out.println("\n >>> Adding " + num_players + " players");
+            System.out.println(">>> Adding " + num_players + " players");
             for(int i = 0; i < num_players; i++){
                 game.players.add(new Player(i));
             }
+            System.out.println(">>> Creating each player's hand");
+            for (Player player : game.players) {
+                player.setHand(7);
+                for(int j = 0; j < player.getHand().getHand().size(); j++){
+                    view.list_model3.addElement(player.getHand().getHand().get(j));
+                }
+            }
         }
+
+        //Create 4 Players
         else if (e.getSource() == view.player_4_item) {
             int num_players = 4;
 
@@ -83,9 +116,16 @@ public class Controller implements ActionListener{
             view.score_label3.setVisible(true);
             view.score_label4.setVisible(true);
 
-            System.out.println("\n >>> Adding " + num_players + " players");
+            System.out.println(">>> Adding " + num_players + " players");
             for(int i = 0; i < num_players; i++){
                 game.players.add(new Player(i));
+            }
+            System.out.println(">>> Creating each player's hand");
+            for (Player player : game.players) {
+                player.setHand(7);
+                for(int j = 0; j < player.getHand().getHand().size(); j++){
+                    view.list_model4.addElement(player.getHand().getHand().get(j));
+                }
             }
         }
 
@@ -94,7 +134,9 @@ public class Controller implements ActionListener{
         }
 
         if(e.getSource() == view.submit_button){
-            System.out.println("submit");
+            for(Player player : game.players){
+                System.out.println(player.playerDescription(player));
+            }
         }
     }
 }

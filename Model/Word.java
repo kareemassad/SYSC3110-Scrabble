@@ -4,16 +4,21 @@ import java.util.ArrayList;
 
 /**
  * A word can have up to 7 letters
- * 
+ *
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.1
+ * @version 3.0
  */
 
 public class Word {
     private ArrayList<Letter> letters;
     private ArrayList<String> premiums; // these two arrays will always have the same length
     private int score;
+    private int startingRow;
+    private int startingCol;
+    private int direction;
 
+
+    // Only used for testing
     public Word(String word) {
         letters = new ArrayList<Letter>();
         for (int i = 0; i < word.length(); i++) {
@@ -24,6 +29,7 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
+        // this will eventually need to change
     }
 
     public Word(ArrayList<Letter> letters) {
@@ -32,7 +38,15 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
+        // this will eventually need to change
     }
+
+    // TODO: add a constructor that takes a 2D array [Letter A, tuple (row, col)]
+    // this constructor will need to
+    // 1) Determine the direction based on which coordinate is changing, set the direction for the Word
+    // 2) Create the Word with the previous constructor (adds NONE as premiums for now as default)
+    // 3) Set coordinates for each letter
+    // 4) Set premium for each letter
 
     /**
      * This method creates a new word and assigns premium tiles to certain letters.
@@ -42,8 +56,8 @@ public class Word {
      * For example, if one wishes to have the word HOWL, and have the W on a TL
      * premium (x3),
      * one must call the constructor this way:
-     * Model.Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
-     * Where H, O, W and L are Model.Letter objects.
+     * Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
+     * Where H, O, W and L are Letter objects.
      */
     public Word(ArrayList<Letter> letters, ArrayList<String> premiums) {
         this.letters = new ArrayList<Letter>(letters);
@@ -77,6 +91,26 @@ public class Word {
         return score;
     }
 
+    public void setStartingCoordinates(int startingRow, int startingCol){
+        this.startingRow = startingRow;
+        this.startingCol = startingCol;
+    }
+
+    public int getStartingRow(){
+        return this.startingRow;
+    }
+
+    /**
+     * @param direction is 0 for a horizontal word and 1 for a vertical word
+     */
+    public void setDirection(int direction){
+        this.direction = direction;
+    }
+
+    public int getDirection() {
+        return this.direction;
+    }
+
     @Override
     public String toString() {
         StringBuilder word = null;
@@ -88,7 +122,7 @@ public class Word {
     }
 
     /**
-     * The following is just for testing the Model.Word and Model.Letter classes.
+     * The following is just for testing the Word and Letter classes.
      * Should be removed eventually and replaced by the appropriate automated tests.
      *
      * @author Laurence Lamarche-Cliche 101173070

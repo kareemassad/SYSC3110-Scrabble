@@ -54,6 +54,10 @@ public class Hand {
         return this.hand;
     }
 
+    public int getSize(ArrayList<Letter> hand){
+        return hand.size();
+    }
+
     // needed for Model.Player
     public String toString() {
         StringBuilder hand = null;

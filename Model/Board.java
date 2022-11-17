@@ -30,13 +30,13 @@ public class Board {
     private ArrayList<Character> temp_rack;
     private static HashMap<String, String> boardScores;
 
-    public Board() {
+    public Board(Game game) {
         this.direction = direction;
-        this.frame = frame;
-//        this.scrabble_board = new char[BOARD_SIZE][BOARD_SIZE];
-//        this.temp_board = new char[BOARD_SIZE][BOARD_SIZE];
-//        this.temp_rack = new ArrayList<Character>();
-//        this.frame = new View.BoardFrame();
+//        this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+//        this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+//        this.temp_rack = new ArrayList<Letter>();
+        this.frame = new BoardFrame(game); // do we need this?
+        System.out.println("done with Board constructor");
     }
 
 //    public void create_board() {
