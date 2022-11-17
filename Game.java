@@ -21,7 +21,7 @@ public class Game {
     private int maxTurns;
 
     public Game() {
-        this.board = new Board();
+        this.board = new Board(this);
         this.players = new ArrayList<Player>();
         this.bag = new Bag();
         this.boardframe = new BoardFrame(this);
