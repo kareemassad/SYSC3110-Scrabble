@@ -19,42 +19,50 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.play_button){
-            System.out.print("play");
+            view.popup_menu.show(view,500,500);
+            view.text_area.append("Select the number of players");
+            view.play_button.setVisible(false);
         }
+
+        if(e.getSource() == view.player_1_item){
+            int num_players = 1;
+            view.player_rack1.setVisible(true);
+            System.out.println("\n >>> Adding " + num_players + " player\n");
+            for(int i = 0; i < num_players; i++){
+                game.players.add(new Player(i));
+            }
+        }
+        else if (e.getSource() == view.player_2_item) {
+            int num_players = 2;
+            System.out.println("\n >>> Adding " + num_players + " players");
+            for(int i = 0; i < num_players; i++){
+                game.players.add(new Player(i));
+            }
+        }
+        else if (e.getSource() == view.player_3_item) {
+            int num_players = 3;
+            System.out.println("\n >>> Adding " + num_players + " players");
+            for(int i = 0; i < num_players; i++){
+                game.players.add(new Player(i));
+            }
+        }
+        else if (e.getSource() == view.player_4_item) {
+            int num_players = 4;
+            System.out.println("\n >>> Adding " + num_players + " players");
+            for(int i = 0; i < num_players; i++){
+                game.players.add(new Player(i));
+            }
+        }
+
+//        if(!game.players.isEmpty()){
+//            System.out.println("\n >>> Creating each player's hand");
+//            for(Player player : game.players){
+//                player.setHand(7);
+//            }
+//        }
 
         if(e.getSource() == view.submit_button){
             System.out.println("submit");
         }
-
-//        if (e.getSource() == view.num_combo_box) {
-//            // get number of players from combo box
-//            int num_players = Integer.parseInt((String) view.num_combo_box.getSelectedItem());
-//            // create players
-//            System.out.println("\n >>> Adding " + num_players + " players");
-//            for (int i = 0; i < num_players; i++) {
-//                game.players.add(new Player(i));
-//            }
-//            // print player info
-//            for (Player player : game.players) {
-//                System.out.println(player.playerDescription(player));
-//            }
-//
-//            game.bag = new Bag();
-//            game.bag.getGameLetters();
-//
-//            // create each player's hand
-//            System.out.println("\n >>> Creating each player's hand");
-//            for (Player player : game.players) {
-//                player.setHand(7);
-//                view.list_model.addElement(player.getHand());
-//                view.letter_list1 = new JList(view.list_model);
-//            }
-//            // print player info
-//            for (Player player : game.players) {
-//                System.out.println(player.playerDescription(player));
-//            }
-//
-//            view.num_combo_box.setVisible(false);
-//        }
     }
 }

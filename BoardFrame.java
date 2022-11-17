@@ -23,10 +23,10 @@ public class BoardFrame extends JFrame{
     JButton play_button = new JButton("Play");
 
     //Player count initialization
-    JMenuItem player_1 = new JMenuItem("Player 1");
-    JMenuItem player_2 = new JMenuItem();
-    JMenuItem player_3 = new JMenuItem();
-    JMenuItem player_4 = new JMenuItem();
+    JMenuItem player_1_item = new JMenuItem("Player 1");
+    JMenuItem player_2_item = new JMenuItem("Player 2");
+    JMenuItem player_3_item = new JMenuItem("Player 3");
+    JMenuItem player_4_item = new JMenuItem("Player 4");
 
     JPopupMenu popup_menu = new JPopupMenu("Player Selection");
     JLabel num_players_label = new JLabel("Choose Number of Players");
@@ -81,8 +81,7 @@ public class BoardFrame extends JFrame{
         this.controller = new Controller(model, this);
 
         text_area.append("Welcome to Scrabble\n");
-        text_area.append("Please choose the number of players\n");
-        text_area.append("Then press the play button\n");
+        text_area.append("Press the play button to start the game\n");
 
         this.setLayout(new BorderLayout());
 
@@ -97,8 +96,20 @@ public class BoardFrame extends JFrame{
         south_panel.setPreferredSize(new Dimension(0,100));
 
         //Player count config
-        popup_menu.setLayout(new GridLayout(2,2));
-        popup_menu.add(player_1);
+        popup_menu.setLabel("Player Selection");
+        popup_menu.setLocation(10,10);
+        popup_menu.setLayout(new GridLayout(4,1));
+
+        player_1_item.addActionListener(controller);
+        player_2_item.addActionListener(controller);
+        player_3_item.addActionListener(controller);
+        player_4_item.addActionListener(controller);
+
+        popup_menu.add(player_1_item);
+        popup_menu.add(player_2_item);
+        popup_menu.add(player_3_item);
+        popup_menu.add(player_4_item);
+
 //        num_of_players[0] = "2";
 //        num_of_players[1] = "3";
 //        num_of_players[2] = "4";
@@ -171,6 +182,8 @@ public class BoardFrame extends JFrame{
         player_rack2.add(letter_list2);
         player_rack3.add(letter_list3);
         player_rack4.add(letter_list4);
+
+        player_rack1.setVisible(false);
 
         rack_panel.add(player_rack1);
         rack_panel.add(player_rack2);
