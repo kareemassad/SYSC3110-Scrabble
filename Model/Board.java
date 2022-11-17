@@ -35,7 +35,7 @@ public class Board {
         this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
         this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
         this.temp_rack = new ArrayList<Letter>();
-        this.frame = new BoardFrame(game); // do we need this?
+        //this.frame = new BoardFrame(game); // do we need this?
         System.out.println("done with Board constructor");
     }
 

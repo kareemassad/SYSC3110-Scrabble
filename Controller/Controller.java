@@ -30,7 +30,6 @@ public class Controller implements ActionListener{
 
             game.bag = new Model.Bag();
             game.bag.getGameLetters();
-//            game.bag.print_bag();
         }
 
         //Create 1 Player
@@ -72,9 +71,9 @@ public class Controller implements ActionListener{
                 player.setHand(7);
                 for(int j = 0; j < player.getHand().getHand().size(); j++){
                     view.list_model2.addElement(player.getHand().getHand().get(j));
+                    break;
                 }
             }
-
         }
 
         //Create 3 Players
@@ -96,9 +95,6 @@ public class Controller implements ActionListener{
             System.out.println(">>> Creating each player's hand");
             for (Player player : game.players) {
                 player.setHand(7);
-                for(int j = 0; j < player.getHand().getHand().size(); j++){
-                    view.list_model3.addElement(player.getHand().getHand().get(j));
-                }
             }
         }
 
@@ -123,9 +119,6 @@ public class Controller implements ActionListener{
             System.out.println(">>> Creating each player's hand");
             for (Player player : game.players) {
                 player.setHand(7);
-                for(int j = 0; j < player.getHand().getHand().size(); j++){
-                    view.list_model4.addElement(player.getHand().getHand().get(j));
-                }
             }
         }
 

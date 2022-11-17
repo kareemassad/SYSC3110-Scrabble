@@ -80,11 +80,6 @@ public class BoardFrame extends JFrame{
     JList letter_list3 = new JList(list_model3);
     JList letter_list4 = new JList(list_model4);
 
-    JScrollPane scroll1 = new JScrollPane(letter_list1);
-    JScrollPane scroll2 = new JScrollPane(letter_list2);
-    JScrollPane scroll3 = new JScrollPane(letter_list3);
-    JScrollPane scroll4 = new JScrollPane(letter_list4);
-
     //Model.Board initialization
     JPanel grid_panel = new JPanel();
     JLabel[][] grid = new JLabel[15][15];
@@ -179,10 +174,34 @@ public class BoardFrame extends JFrame{
         letter_list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         letter_list1.setTransferHandler(new export_handler());
 
-        player_rack1.add(scroll1);
-        player_rack2.add(scroll2);
-        player_rack3.add(scroll3);
-        player_rack4.add(scroll4);
+        letter_list1.setLayoutOrientation(JList.VERTICAL_WRAP);
+        letter_list1.setVisibleRowCount(1);
+
+        letter_list2.setDragEnabled(true);
+        letter_list2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        letter_list2.setTransferHandler(new export_handler());
+
+        letter_list2.setLayoutOrientation(JList.VERTICAL_WRAP);
+        letter_list2.setVisibleRowCount(1);
+
+        letter_list3.setDragEnabled(true);
+        letter_list3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        letter_list3.setTransferHandler(new export_handler());
+
+        letter_list3.setLayoutOrientation(JList.VERTICAL_WRAP);
+        letter_list3.setVisibleRowCount(1);
+
+        letter_list4.setDragEnabled(true);
+        letter_list4.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        letter_list4.setTransferHandler(new export_handler());
+
+        letter_list4.setLayoutOrientation(JList.VERTICAL_WRAP);
+        letter_list4.setVisibleRowCount(1);
+
+        player_rack1.add(letter_list1);
+        player_rack2.add(letter_list2);
+        player_rack3.add(letter_list3);
+        player_rack4.add(letter_list4);
 
         player_rack1.setVisible(false);
         player_rack2.setVisible(false);
