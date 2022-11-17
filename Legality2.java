@@ -46,25 +46,25 @@ public class Legality2 {
                 int newWordLength = 0; // will hold the size of the new word
 
                 if (letter.getCol() == 0) { // only check to the right
-                    while ((board.get_board()[row][column + 1] != " ")) {
+                    while ((board.get_board()[row][column + 1].toString() != " ")) {
                         newWordLength++; // h
                         column++;
                     }
                 } else if (letter.getCol() == 14) { //only check left
-                    while ((board.get_board()[row][column - 1] != " ")) {
+                    while ((board.get_board()[row][column - 1].toString() != " ")) {
                         newWordColumn--;
                         column--;
                         newWordLength++;
                     }
-                } else if ((board.get_board()[row][column - 1] != " ") &&
-                        (board.get_board()[row][column + 1] != " ")) { // nothing right or left
+                } else if ((board.get_board()[row][column - 1].toString() != " ") &&
+                        (board.get_board()[row][column + 1].toString() != " ")) { // nothing right or left
                     break; // break out of for loop and go to next letter
                 } else { // I have letters left OR right, find beginning of word
-                    while ((board.get_board()[row][column - 1] != " ") || (column > 0)) { // there is a word there, find start
+                    while ((board.get_board()[row][column - 1].toString() != " ") || (column > 0)) { // there is a word there, find start
                         newWordColumn--;
                         column--;
                     } // now column points to the start of the word :), iterate right to find the end
-                    while ((board.get_board()[row][column + 1] != " ") || (column < 14)) {
+                    while ((board.get_board()[row][column + 1].toString() != " ") || (column < 14)) {
                         newWordLength++;
                         column++;
                     } // now, newWordLength points the last index of the letter
@@ -90,26 +90,26 @@ public class Legality2 {
                 int newWordLength = 0; // will hold the size of the new word
 
                 if (letter.getRow() == 0) { // only check below
-                    while ((board.get_board()[row + 1][column] != " ")) {
+                    while ((board.get_board()[row + 1][column].toString() != " ")) {
                         newWordLength++; // h
                         row++;
                     }
                 } else if (letter.getRow() == 14) { //only check above
-                    while ((board.get_board()[row - 1][column] != " ")) {
+                    while ((board.get_board()[row - 1][column].toString() != " ")) {
                         newWordRow--;
                         row--;
                         newWordLength++;
                     }
-                } else if ((board.get_board()[row - 1][column] != " ") &&
-                        (board.get_board()[row + 1][column] != " ")) { // nothing above or below
+                } else if ((board.get_board()[row - 1][column].toString() != " ") &&
+                        (board.get_board()[row + 1][column].toString() != " ")) { // nothing above or below
                     break; // break out of for loop and go to next letter
                 }
                 else { // I have letters up OR down, find beginning of word (up)
-                    while ((board.get_board()[row - 1][column] != " ") || (row > 0)) { // there is a word there, find start
+                    while ((board.get_board()[row - 1][column].toString() != " ") || (row > 0)) { // there is a word there, find start
                         newWordRow--;
                         row--;
                     } // now row points to the start of the word :), iterate down to find the end
-                    while ((board.get_board()[row + 1][column] != " ") || (row < 14)) {
+                    while ((board.get_board()[row + 1][column].toString() != " ") || (row < 14)) {
                         newWordLength++;
                         row++;
                     } // now, newWordLength points the last index of the letter
