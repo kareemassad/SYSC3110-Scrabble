@@ -2,7 +2,7 @@
  * A letter is a character and a score.
  * The Game class will need to initialize all available letters. Their scores
  * will be associated to them.
- * 
+ *
  * @author Laurence Lamarche-Cliche 101173070
  * @version 3.0
  */
@@ -123,7 +123,7 @@ public class Letter {
      * This shall not be set in the constructor because the letters are created
      * without a premium
      * Only letters that are placed can then have a premium set.
-     * 
+     *
      * @param premium is one of
      *                NONE = "None";
      *                DL = "Double Letter";
@@ -144,7 +144,13 @@ public class Letter {
         this.COL = col;
     }
 
+    public int getRow(){
+        return this.ROW;
+    }
 
+    public int getCol(){
+        return this.COL;
+    }
 
     @Override
     public String toString() {

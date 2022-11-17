@@ -27,7 +27,7 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
-            // this will eventually need to change
+        // this will eventually need to change
     }
 
     public Word(ArrayList<Letter> letters) {
@@ -36,7 +36,7 @@ public class Word {
         for (int i = 0; i < this.letters.size(); i++) {
             premiums.add("NONE");
         } // this populates the premium array with NONE's by default
-          // this will eventually need to change
+        // this will eventually need to change
     }
 
     // TODO: add a constructor that takes a 2D array [Letter A, tuple (row, col)]
@@ -98,7 +98,16 @@ public class Word {
         return this.startingRow;
     }
 
+    /**
+     * @param direction is 0 for a horizontal word and 1 for a vertical word
+     */
+    public void setDirection(int direction){
+        this.direction = direction;
+    }
 
+    public int getDirection() {
+        return this.direction;
+    }
 
     @Override
     public String toString() {
@@ -108,6 +117,36 @@ public class Word {
             word.append(letter.toString());
         }
         return word.toString();
+    }
+
+    /**
+     * The following is just for testing the Word and Letter classes.
+     * Should be removed eventually and replaced by the appropriate automated tests.
+     *
+     * @author Laurence Lamarche-Cliche 101173070
+     * @version 0.0
+     */
+    public static void main(String[] args) {
+        Letter L = new Letter(Letter.Character.L);
+        Letter O = new Letter(Letter.Character.O);
+        Letter K = new Letter(Letter.Character.K);
+        Letter L1 = new Letter(Letter.Character.L);
+        ArrayList<Letter> letters = new ArrayList<>();
+        letters.add(L);
+        letters.add(O);
+        letters.add(L1);
+
+        Word wordLetters = new Word(letters);
+        Word wordString = new Word("legal");
+        wordLetters.addLetter(wordLetters.getLetters().size(), K, "NONE");
+        System.out.println(wordLetters.toString());
+        System.out.println(wordString.toString());
+        Bag letterBag = new Bag();
+        Hand newHand = new Hand();
+        newHand.drawFromBag(7);
+        System.out.println(newHand);
+        newHand.drawFromBag(2);
+        System.out.println(newHand);
     }
 
 }
