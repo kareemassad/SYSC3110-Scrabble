@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Controls the GUI
+ * Controls the GUI through use of models
  * @author Keefer Belanger 101152085
  */
 public class Controller implements ActionListener{
