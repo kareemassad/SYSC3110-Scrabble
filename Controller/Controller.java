@@ -24,7 +24,7 @@ public class Controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == view.play_button){
-            view.popup_menu.show(view,500,500);
+            view.popup_menu.show(view, 125,100);
             view.text_area.append("Select the number of players");
             view.play_button.setVisible(false);
         }

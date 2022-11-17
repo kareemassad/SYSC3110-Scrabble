@@ -28,15 +28,13 @@ public class BoardFrame extends JFrame{
     JPanel play_panel = new JPanel();
     public JButton play_button = new JButton("Play");
 
-    //Model.Player count initialization
+    //Player count initialization
     public JMenuItem player_1_item = new JMenuItem("Player 1");
     public JMenuItem player_2_item = new JMenuItem("Player 2");
     public JMenuItem player_3_item = new JMenuItem("Player 3");
     public JMenuItem player_4_item = new JMenuItem("Player 4");
 
     public JPopupMenu popup_menu = new JPopupMenu("Player Selection");
-    JLabel num_players_label = new JLabel("Choose Number of Players");
-    String[] num_of_players = new String[3];
 
     //Scoreboard initialization
     JPanel score_panel = new JPanel();
@@ -60,7 +58,7 @@ public class BoardFrame extends JFrame{
     public JTextArea text_area = new JTextArea(10,20);
     JScrollPane scroll_pane = new JScrollPane(text_area);
 
-    //Model.Player rack initialization
+    //Player rack initialization
     JPanel rack_panel = new JPanel();
     public JPanel player_rack1 = new JPanel();
     public JPanel player_rack2 = new JPanel();
@@ -103,7 +101,7 @@ public class BoardFrame extends JFrame{
         south_panel.setPreferredSize(new Dimension(0,100));
 
         //Player count config
-        popup_menu.setLocation(10,10);
+        popup_menu.setLocation(play_button.getLocation());
         popup_menu.setLayout(new GridLayout(4,1));
 
         player_1_item.addActionListener(controller);
