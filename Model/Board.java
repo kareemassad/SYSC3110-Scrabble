@@ -25,16 +25,16 @@ public class Board {
     private final int DOWN = 1;
     public final int BOARD_SIZE = 15;
     private int direction;
-    private char[][] scrabble_board;
-    private char[][] temp_board;
-    private ArrayList<Character> temp_rack;
+    private Letter[][] scrabble_board;
+    private Letter[][] temp_board;
+    private ArrayList<Letter> temp_rack;
     private static HashMap<String, String> boardScores;
 
     public Board(Game game) {
         this.direction = direction;
-//        this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
-//        this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
-//        this.temp_rack = new ArrayList<Letter>();
+        this.scrabble_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+        this.temp_board = new Letter[BOARD_SIZE][BOARD_SIZE];
+        this.temp_rack = new ArrayList<Letter>();
         this.frame = new BoardFrame(game); // do we need this?
         System.out.println("done with Board constructor");
     }
@@ -71,31 +71,46 @@ public class Board {
 
     /**
      * Place a tile on the board
-     * 
-     * @param word The tile that's going to be placed
+     *
+     * @param letter The letter that's going to be placed
      * @param row  The row cord
      * @param col  The column cord
      */
-    public void place_word(String word, int row, int col, int dir) {
+    public void place_letter(Letter letter, int row, int col) {
+//        if (row < 0 || row > 14 || col < 0 || col > 14) {
+//            return;
+//        } don't think this is needed anymore
+
+        this.scrabble_board[row][col] = letter;
+    }
+
+    /**
+     * Place a word on the board
+     * @param word The word that is doing to be placed
+     * @param row  The row cord
+     * @param col  The column cord
+     * @param dir the direction of the word
+     */
+    public void place_word(Word word, int row, int col, int dir) {
         if (row < 0 || row > 14 || col < 0 || col > 14) {
             return;
         }
 
-        for (int k = 0; k < word.length(); k++) {
+        for (int k = 0; k < word.getLetters().size(); k++) {
             if (dir == RIGHT) {
-                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
+                this.scrabble_board[row - 1][col - 1] = word.getLetters().get(k);
                 col++;
 
                 // System.out.println(scrabble_board[row][col + 1]);
             } else if (dir == DOWN) {
-                this.scrabble_board[row - 1][col - 1] = word.toUpperCase().charAt(k);
+                this.scrabble_board[row - 1][col - 1] = word.getLetters().get(k);
                 row++;
             }
 
         }
     }
 
-    public char[][] get_board() {
+    public Letter[][] get_board() {
         return this.scrabble_board;
     }
 
@@ -148,9 +163,9 @@ public class Board {
     }
 
 //    public static void main(String[] args) {
-//        Model.Board b = new Model.Board();
+//        Board b = new Board();
 //        // b.create_board();
-//        String c = "Model.Word";
+//        String c = "Word";
 //        String d = "Day";
 //
 //        b.place_word(c, 0, 0, 0);
