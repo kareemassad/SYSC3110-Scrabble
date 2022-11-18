@@ -71,7 +71,6 @@ public class Controller implements ActionListener{
                 player.setHand(7);
                 for(int j = 0; j < player.getHand().getHand().size(); j++){
                     view.list_model2.addElement(player.getHand().getHand().get(j));
-                    break;
                 }
             }
         }
