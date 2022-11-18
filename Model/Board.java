@@ -50,7 +50,7 @@ public class Board {
         //this.frame = new BoardFrame(game); // do we need this?
         System.out.println("done with Board constructor");
 
-        this.frame = new BoardFrame(game);
+        //this.frame = new BoardFrame(game);
 
     }
 

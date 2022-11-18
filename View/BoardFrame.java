@@ -2,7 +2,7 @@ package View;
 
 import Model.Game;
 import Model.TextAreaOutputStream;
-import Controller.Controller;
+import Controller.*;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -20,13 +20,15 @@ public class BoardFrame extends JFrame{
 
     //private Game model;
     private Controller controller;
-
+    private DropController drop_controller;
+    
     //South panel initialization
     JPanel south_panel = new JPanel();
     JPanel submit_panel = new JPanel();
     public JButton submit_button = new JButton("Submit");
     JPanel play_panel = new JPanel();
     public JButton play_button = new JButton("Play");
+    public JButton player_desc_button = new JButton("Player Description");
 
     //Player count initialization
     public JMenuItem player_1_item = new JMenuItem("Player 1");
@@ -88,6 +90,7 @@ public class BoardFrame extends JFrame{
     public BoardFrame(Game game){
         super("Scrabble");
         this.controller = new Controller(game, this);
+        this.drop_controller = new DropController(game,this);
 
         text_area.append("Welcome to Scrabble\n");
         text_area.append("Press the play button to start the game\n");
@@ -96,9 +99,13 @@ public class BoardFrame extends JFrame{
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
+        player_desc_button.addActionListener(controller);
+        player_desc_button.setVisible(false);
+        player_desc_button.setEnabled(false);
         play_button.addActionListener(controller);
         submit_button.addActionListener(controller);
         play_panel.add(play_button);
+        play_panel.add(player_desc_button);
         submit_panel.add(submit_button);
         south_panel.add(submit_panel);
         south_panel.add(play_panel);
@@ -222,6 +229,7 @@ public class BoardFrame extends JFrame{
                 tile.setLayout(new GridLayout());
                 tile.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 JLabel tile_content = new JLabel(" ");
+                tile_content.addInputMethodListener(drop_controller);
                 tile_content.setFont(f);
                 tile_content.setHorizontalAlignment(JLabel.CENTER);
                 tile_content.setTransferHandler(new import_handler());

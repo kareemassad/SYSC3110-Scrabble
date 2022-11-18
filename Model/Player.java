@@ -9,7 +9,7 @@ public class Player {
     private int score;
     private String name;
 
-    private int player_ID; // might be useful in Model.Game
+    public int player_ID; // might be useful in Model.Game
 
     public Player(int player_ID) {
         this.player_ID = player_ID;
