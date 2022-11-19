@@ -20,8 +20,8 @@ public class BoardFrame extends JFrame{
 
     //private Game model;
     private Controller controller;
-    private DropController drop_controller;
-    
+//    private DropController drop_controller;
+
     //South panel initialization
     JPanel south_panel = new JPanel();
     JPanel submit_panel = new JPanel();
@@ -90,7 +90,7 @@ public class BoardFrame extends JFrame{
     public BoardFrame(Game game){
         super("Scrabble");
         this.controller = new Controller(game, this);
-        this.drop_controller = new DropController(game,this);
+//        this.drop_controller = new DropController(game,this);
 
         text_area.append("Welcome to Scrabble\n");
         text_area.append("Press the play button to start the game\n");
@@ -229,7 +229,7 @@ public class BoardFrame extends JFrame{
                 tile.setLayout(new GridLayout());
                 tile.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
                 JLabel tile_content = new JLabel(" ");
-                tile_content.addInputMethodListener(drop_controller);
+//                tile_content.addInputMethodListener(drop_controller);
                 tile_content.setFont(f);
                 tile_content.setHorizontalAlignment(JLabel.CENTER);
                 tile_content.setTransferHandler(new import_handler());
