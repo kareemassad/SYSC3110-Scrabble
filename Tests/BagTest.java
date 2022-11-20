@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * This is testing the Model.Bag Class
+ * This is testing the Bag Class
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.1
+ * @version 3.0
  */
 public class BagTest {
 
@@ -156,9 +156,7 @@ public class BagTest {
                 T1, T2, T3, T4, T5, T6, U1, U2, U3, U4, V1, V2, W1, W2, X1, Y1, Y2, Z1);
 
 
-        for (Letter letter : gameLetters) {
-            assertTrue(gameLettersInBag.containsAll(gameLetters));
-        }
+        assertEquals(98, gameLettersInBag.size());
     }
 
     @Test
@@ -186,8 +184,6 @@ public class BagTest {
         assertEquals(6, draw6Letters.size());
         ArrayList<Letter> draw7Letters = Bag.drawLetters(7);
         assertEquals(7, draw7Letters.size());
-
     }
-
 
 }

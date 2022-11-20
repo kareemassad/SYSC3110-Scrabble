@@ -1,57 +1,85 @@
 package Model;
 
-/*
-Class Model.Player is in charge of all details pertaining to a player, including their hand, score, etc.
+import java.util.ArrayList;
+
+/**
+ * This class is the Player, responsible for holding his score and its letters
+ *
+ * @author Becca Young
+ * @version 3.0
  */
-
 public class Player {
-    private Hand hand;
+    private String handString;
+    private ArrayList<Letter> handLetters;
     private int score;
-    private String name;
-
     private int player_ID; // might be useful in Model.Game
 
     public Player(int player_ID) {
         this.player_ID = player_ID;
-        this.hand = new Hand();
         this.score = 0;
-    }
-
-    /*
-     * Creates a player description in the format to be printed, with elements name,
-     * score, and hand to print at start
-     * of player turn.
-     *
-     * @author Becca Young 101183297
-     *
-     * @param player is the player which the description is created for.
-     * @return s is the string created of the player description.
-     */
-    public String playerDescription(Player player) {
-        String s = new String("Player ID: " + player.player_ID + "\n Score: " + player.score
-                + "\n Tiles: " + player.hand.toString() + "\n");
-        return s;
+        setHand();
     }
 
     public int getScore() {
         return this.score;
     }
 
-    public Hand getHand() {
-        return this.hand;
+    public int getID(){
+        return this.player_ID;
     }
 
-    // set hand method
-    public void setHand(int num_letters) {
-        this.hand.drawFromBag(num_letters);
+    public String getHandString() {
+        return this.handString;
     }
 
-    public void remove_from_hand(String letter) {
-        this.hand.removeFromHand(letter);
+    public ArrayList<Letter> getHandLetters(){
+        return this.handLetters;
     }
 
-    public void add_to_hand(int words_to_replace) {
-        this.hand.drawFromBag(words_to_replace);
+    //set the letters in the player's hand
+    private void setHand() {
+        this.handLetters = Bag.drawLetters(7); // set the initial bag content
+        handToString();
+    }
+
+    // set the letters in the player's
+    private void handToString(){
+        StringBuilder s = new StringBuilder();
+        for (Letter letter: this.handLetters){
+            s.append(letter.toString() + " ");
+        }
+        this.handString = s.toString();
+    }
+
+    public void removeFromHand(String letterToRemove) {
+        letterToRemove.toUpperCase();
+        for (int i = 0; i < this.handLetters.size(); i++) {
+            if (letterToRemove.equals(this.handLetters.get(i).toString())) {
+                this.handLetters.remove(i);
+                handToString();
+                return;
+            }
+        }
+        handToString();
+    }
+
+    // check this because these letters need to be placed back in bag
+    public void exchangeTiles(){
+        for (Letter letter: this.handLetters){
+            removeFromHand(letter.toString());
+        }
+        setHand(); // set a new hand
+    }
+
+    public void addToHand(int numLettersToAdd) {
+        if (this.handLetters.size() + numLettersToAdd > 7){ return; }
+        else {
+            ArrayList<Letter> lettersToAdd = Bag.drawLetters(numLettersToAdd);
+            for (Letter letter: lettersToAdd){
+                this.handLetters.add(letter);
+            }
+        }
+        handToString();
     }
 
     public void addScore(Word word){

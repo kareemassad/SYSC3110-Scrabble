@@ -1,14 +1,12 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
 /**
  * A word can have up to 7 letters
- *
- * @author Laurence Lamarche-Cliche 101173070
+ * @author Laurence Lamarche-Cliche 101173070 & Becca Young 101183297
  * @version 3.0
  */
 
@@ -23,55 +21,16 @@ public class Word {
     private final int DOWN = 1;
     private final int INVALID = -1;
 
-    /*
-    // Only used for testing
-    public Word(String word) {
-        letters = new ArrayList<Letter>();
-        for (int i = 0; i < word.length(); i++) {
-            letters.add(new Letter(word.charAt(i)));
-        }
-        this.letters = new ArrayList<Letter>(letters);
-        this.premiums = new ArrayList<String>();
-        for (int i = 0; i < this.letters.size(); i++) {
-            premiums.add("NONE");
-        } // this populates the premium array with NONE's by default
-        // this will eventually need to change
-    }
-     */
 
     public Word(ArrayList<Letter> letters) {
-        this.letters = new ArrayList<Letter>(letters);
-        sortLetters(letters);
+        this.letters = letters;
+        //setDirection(letters);
         setDirection(letters);
+        sortLetters(letters);
         setStartingCoordinates();
+        this.letters = new ArrayList<Letter>(letters);
     }
 
-    /**
-     * This method creates a new word and assigns premium tiles to certain letters.
-     * The letters without a premium must be associated with a "NONE" String.
-     * For example, if one wishes to have the word HOWL, and have the W on a TL
-     * premium (x3),
-     * one must call the constructor this way:
-     * Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
-     * Where H, O, W and L are Letter objects.
-     */
-    public Word(ArrayList<Letter> letters, ArrayList<String> premiums) {
-        this.letters = new ArrayList<Letter>(letters);
-        sortLetters(letters);
-        for (int i = 0; i < this.letters.size(); i++) {
-            letters.get(i).setPremium(premiums.get(i)); // set the premium for each letter to the corresponding String
-        }
-        setDirection(letters);
-        setStartingCoordinates();
-
-    }
-
-    // TODO: add a constructor that takes a 2D array [Letter A, tuple (row, col)]
-    // this constructor will need to
-    // 1) Determine the direction based on which coordinate is changing, set the direction for the Word
-    // 2) Create the Word with the previous constructor (adds NONE as premiums for now as default)
-    // 3) Set coordinates for each letter
-    // 4) Set premium for each letter
 
     private void sortLetters(ArrayList<Letter> letters){
         ArrayList<Letter> newLetters;
@@ -84,40 +43,28 @@ public class Word {
     }
 
     private void setDirection(ArrayList<Letter> letters){
-        int countCOL = 0;
-        int countROW = 0;
+        boolean rowChanging = false;
+        boolean colChanging = false;
+        //TODO add a check for if size is 1. Need to count other letters to see direction.
 
-        ArrayList<Integer> cols = new ArrayList<Integer>();
-        for (Letter letter : letters){
-            cols.add(letter.getCol());
-        }
-        Collections.sort(cols);
-
-        ArrayList<Integer> rows = new ArrayList<Integer>();
-        for (Letter letter : letters){
-            rows.add(letter.getRow());
-        }
-        Collections.sort(rows);
-
-        int prevCol = -1;
-        for (int col : cols) {
-            if (col != prevCol) {
-                countCOL += 1;
+        //assuming size is at least 2
+        for (int i = 0; i < 1; i++){
+            if (letters.get(i).getRow() != letters.get(i+1).getRow()){
+                rowChanging = true;
             }
-            prevCol = col;
-        }
-
-        int prevRow = -1;
-        for (int row : rows) {
-            if (row != prevRow) {
-                countROW += 1;
+            if (letters.get(i).getCol() != letters.get(i+1).getCol()){
+                colChanging = true;
             }
-            prevCol = row;
+            if (rowChanging == colChanging){
+                this.direction = INVALID; // invalid
+            }
+            else if (rowChanging){
+                this.direction = DOWN;
+            }
+            else if (colChanging){
+                this.direction = RIGHT;
+            }
         }
-
-        if (countROW > 1 && countCOL > 1) { this.direction = INVALID; }
-        else if (countROW == 1 && countCOL > 1) { this.direction = RIGHT; }
-        else if (countROW > 1 && countCOL == 1) { this.direction = DOWN; }
     }
 
     /**
@@ -127,7 +74,7 @@ public class Word {
      * If the letter than one wishes to add is not on a premium tile, premium shall
      * be input as 1.
      */
-    public void addLetter(int position, Letter letter, String premium) {      // Can we take this out?
+    public void addLetter(int position, Letter letter) {      // Can we take this out?
         this.letters.add(position, letter);
     }
 
@@ -157,7 +104,6 @@ public class Word {
     }
 
 
-
     @Override
     public String toString() {
         StringBuilder word = null;
@@ -167,5 +113,4 @@ public class Word {
         }
         return word.toString();
     }
-
 }

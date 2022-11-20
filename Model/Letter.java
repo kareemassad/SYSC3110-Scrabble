@@ -1,5 +1,6 @@
 package Model;
 
+
 /**
  * A letter is a character and a score.
  * The Game class will need to initialize all available letters. Their scores
@@ -17,18 +18,23 @@ public class Letter {
     private final Character character;
     private final int value;
     private String premium;
-    private int ROW;
-    private int COL;
+    private int row;
+    private int col;
 
     /**
-     * The Game class will need to call this for every available letter in the game,
-     * this way
-     * new Letter(A)
+     * Initialize a new Letter object this way:
+     * new Letter(Character.A)
      */
     public Letter(Character character) {
         this.character = character;
         this.value = this.getValueFromCharacter(character);
         this.premium = "NONE";
+        this.row = -1;
+        this.col = -1;
+    }
+
+    public Letter(String letterPremiumString){
+        this(letterPremiumString.charAt(0));
     }
 
     public Letter(char letter) {
@@ -142,16 +148,17 @@ public class Letter {
     }
 
     public void setCoordinates(int row, int col){
-        this.ROW = row;
-        this.COL = col;
+        if ((row > 14) || (col > 14) || (row < 0) || (col < 0)) { return; } // remains -1
+        this.row = row;
+        this.col = col;
     }
 
     public int getRow(){
-        return this.ROW;
+        return this.row;
     }
 
     public int getCol(){
-        return this.COL;
+        return this.col;
     }
 
     @Override

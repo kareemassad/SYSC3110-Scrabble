@@ -30,12 +30,12 @@ This deliverable is the second milestone of a series of four milestones.
 * Implement the GUI User Interface and Unit Tests (Milestone 2)
 * Finish the Model.Score implementation to ensure that new letters and words are scored and ensuring that all tests pass (Milestone 3)
 * Create a Scrabble playing AI (Milestone 4)
-* Adapt the Model.Score and Model.Board classes to use premium and wild tiles (Milestone 4)
+* Adapt the Model.Score and Model.ScrabbleBoard classes to use premium and wild tiles (Milestone 4)
 
 ## Design Decisions
 
 * We decided to use a .txt file to store the legal words. This will allow us to easily create different scrabble legal word sets. It is currently stored in the Words folder and imported into java in the `Model.Legality Class`.
-* We decided to design it so all of the classes are seperated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Model.Game.
+* We decided to design it so all of the classes are seperated with their own methods instead of having them all in one class to loosen the coupling of the classes so we could change that class without having a direct effect on the other classes. We also did this to increase the cohesion between classes so they could all have their own tasks to later be called in Model.ScrabbleGame.
 * Currently, we are using an `ArrayList` to store the letters in the `Model.Bag Class` but we intend to change it to a `HashMap` to improve the efficiency to access letters from the bag.
 =======
 1.	We are not currently validating the placement of words on the board, legality so far only checks that a word played is a real wordin the text-based version.
@@ -67,7 +67,7 @@ The method import_data gets the actual transferable, the item that gets dragged 
 
 ## User Manual
 
-Once the user chooses to play Scrabble (by running Model.Game.java), they will be asked to choose the number of players (between 2 and 4)
+Once the user chooses to play Scrabble (by running Model.ScrabbleGame.java), they will be asked to choose the number of players (between 2 and 4)
 
 The number of players will be created along with their ID, Scores, and Hands.
 The Model.Bag of available letters will be printed to the console then the game will automatically assign a rack of letters to each player.
@@ -81,7 +81,7 @@ During their turn, a player has 4 options.
 * Place a word
 * Exchange tiles
 * Pass their Turn
-* Quit the Model.Game
+* Quit the Model.ScrabbleGame
 
 If a player chooses to place a word, they will have to click on the letter they want to place and drag and drop it on the location of the board (the tile) they want to place it on, and repeat that for each letter of the word. Once done, they must click on the SUBMIT button so that the system can then determine if the word is legal or not and compute their score.
 

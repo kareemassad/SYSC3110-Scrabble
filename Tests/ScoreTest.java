@@ -1,26 +1,48 @@
 package Tests;
 
+import static org.junit.Assert.*;
+
+import Model.Letter;
+import Model.Score;
+import Model.Word;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collections;
-import static org.junit.Assert.*;
 
 /**
  * This is testing the Score Class
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.0
+ * @version 3.0
  */
-/*
+
 public class ScoreTest {
     @Test
     public void testConstructor(){
-        Word hello = new Word("HELLO");
+        Letter H = new Letter('H');
+        Letter E = new Letter('E');
+        Letter L = new Letter('L');
+        Letter L2 = new Letter('L');
+        Letter O = new Letter('O');
+        ArrayList<Letter> helloLetters = new ArrayList<>();
+        Collections.addAll(helloLetters, H, E, L, L2, O);
+
+        Word hello = new Word(helloLetters);
         Score score = new Score(hello);
         assertNotNull(score);
     }
+
     @Test
     public void testGetWordScore() {
-        Word hello = new Word("HELLO");
+
+        Letter H = new Letter('H');
+        Letter E = new Letter('E');
+        Letter L = new Letter('L');
+        Letter L2 = new Letter('L');
+        Letter O = new Letter('O');
+        ArrayList<Letter> helloLetters = new ArrayList<>();
+        Collections.addAll(helloLetters, H, E, L, L2, O);
+
+        Word hello = new Word(helloLetters);
         Score helloScore = new Score(hello);
         assertNotNull(helloScore.getWordScore());
         assertEquals(8, helloScore.getWordScore());
@@ -45,4 +67,3 @@ public class ScoreTest {
         assertEquals(6, hiDoubleIScore.getWordScore());
     }
 }
- */
