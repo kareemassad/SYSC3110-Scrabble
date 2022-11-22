@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The main class of the game. This class is the model responsible to use the other
+ * The main class of the game. This class is the model responsible to use the
+ * other
  * classes to play the game.
  *
  * @author Kareem EL Assad 101107739 & Laurence Lamarche-Cliche 101173070
@@ -16,13 +17,15 @@ import java.util.List;
 
 public class ScrabbleGame {
     public static final int SIZE = 15;
-    public ArrayList<Player> players;
+    public ArrayList<HumanPlayer> players;
     private int currentPlayerIndex;
     private List<ScrabbleView> views;
     private String[][] board;
     private Status status;
 
-    public enum Status {PLACING_TILES, DONE, PASS, EXCHANGE};
+    public enum Status {
+        PLACING_TILES, DONE, PASS, EXCHANGE
+    };
 
     public ScrabbleGame() {
         Bag gameBag = new Bag();
@@ -32,22 +35,28 @@ public class ScrabbleGame {
                 board[i][j] = " "; // fix that
             }
         }
-        this.players = new ArrayList<Player>();
+        this.players = new ArrayList<HumanPlayer>();
         currentPlayerIndex = 0;
         views = new ArrayList<>();
 
     }
 
-    public void addPlayers(int selectionCode){
+    public void addPlayers(int selectionCode) {
         int numPlayers;
-        if (selectionCode == 3) { numPlayers = 1; }
-        else if (selectionCode == 2) { numPlayers = 2; }
-        else if (selectionCode == 1) { numPlayers = 3; }
-        else { numPlayers = 4; }
+        if (selectionCode == 3) {
+            numPlayers = 1;
+        } else if (selectionCode == 2) {
+            numPlayers = 2;
+        } else if (selectionCode == 1) {
+            numPlayers = 3;
+        } else {
+            numPlayers = 4;
+        }
 
-        for (int i = 0; i < numPlayers; i++){
-            this.players.add(new Player(i));
-        } // first player will always have index 0, the other ones, 1, 2 and 3 (if we have that many players)
+        for (int i = 0; i < numPlayers; i++) {
+            this.players.add(new HumanPlayer(i));
+        } // first player will always have index 0, the other ones, 1, 2 and 3 (if we have
+          // that many players)
     }
 
     public void addBoardView(ScrabbleView v) {
@@ -55,10 +64,9 @@ public class ScrabbleGame {
     }
 
     public void changeTurn(int currentPlayerIndex) {
-        if (currentPlayerIndex == (players.size() - 1)){
+        if (currentPlayerIndex == (players.size() - 1)) {
             this.currentPlayerIndex = 0; // start back at the start
-        }
-        else {
+        } else {
             this.currentPlayerIndex++;
         }
         status = Status.PLACING_TILES; // the only possibility for now
@@ -66,41 +74,42 @@ public class ScrabbleGame {
         getCurrentPlayer().addToHand(missingLetters);
     }
 
-    public int getCurrentPlayerIndex(){
+    public int getCurrentPlayerIndex() {
         return this.currentPlayerIndex;
     }
 
-    public Player getCurrentPlayer(){
+    public HumanPlayer getCurrentPlayer() {
         return this.players.get(currentPlayerIndex);
     }
 
-    public String[][] getBoard(){
+    public String[][] getBoard() {
         return board;
     }
 
-    public void updateStatus(Status status){
+    public void updateStatus(Status status) {
 
         if ((status == Status.DONE) || (status == Status.PASS)) {
             changeTurn(currentPlayerIndex);
-            //getCurrentPlayer().
+            // getCurrentPlayer().
         }
         if (status == Status.EXCHANGE) {
             getCurrentPlayer().exchangeTiles();
             changeTurn(currentPlayerIndex);
         }
 
-        for (ScrabbleView v: views){
+        for (ScrabbleView v : views) {
             v.updateView(new ScrabbleEvent(this, "NONE", -1, -1, currentPlayerIndex));
             // we don't want to place any letter now
         }
     }
 
     public void placeLetter(String letterToPlace, int row, int col) {
-        if (board[row][col] != " ") return;
+        if (board[row][col] != " ")
+            return;
         board[row][col] = letterToPlace;
         getCurrentPlayer().removeFromHand(letterToPlace);
 
-        for (ScrabbleView v: views){
+        for (ScrabbleView v : views) {
             v.updateView(new ScrabbleEvent(this, letterToPlace, row, col, currentPlayerIndex));
         }
 

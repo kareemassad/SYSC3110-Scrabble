@@ -1,6 +1,6 @@
 package View;
 
-import Model.Player;
+import Model.HumanPlayer;
 import Model.ScrabbleEvent;
 import Model.ScrabbleGame;
 import Controller.ScrabbleController;
@@ -8,14 +8,14 @@ import Controller.ScrabbleController;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
  * Creates the board GUI
+ * 
  * @author Keefer Belanger 101152085 & Laurence Lamarche-Cliche 101173070
- * Version 3.0
+ *         Version 3.0
  */
 
-public class ScrabbleFrame extends JFrame implements ScrabbleView{
+public class ScrabbleFrame extends JFrame implements ScrabbleView {
 
     // the panels
     public JPanel PlayerPanel;
@@ -34,7 +34,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
     private ScrabbleGame model;
     private ScrabbleController bc;
 
-    public ScrabbleFrame(){
+    public ScrabbleFrame() {
         super("Scrabble!");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -45,7 +45,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         bc = new ScrabbleController(model, this);
 
         // The current player's panel and options
-        PlayerPanel = new JPanel(new GridLayout(12,1));
+        PlayerPanel = new JPanel(new GridLayout(12, 1));
         currentPlayerText = new JTextArea("Current player's rack will be displayed here");
         currentPlayerHandPanel = new JPanel(new GridLayout(1, 7));
 
@@ -55,7 +55,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
 
         passButton = new JButton("pass");
         passButton.setActionCommand("passTurn");
-        //passButton.setEnabled(false);
+        // passButton.setEnabled(false);
         passButton.addActionListener(bc);
 
         exchangeTilesButton = new JButton("exchange tiles");
@@ -68,7 +68,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         PlayerPanel.add(submitButton);
         PlayerPanel.add(passButton);
         PlayerPanel.add(exchangeTilesButton);
-        PlayerPanel.setPreferredSize(new Dimension(300,30));
+        PlayerPanel.setPreferredSize(new Dimension(300, 30));
 
         // The score panel
         scorePanel = new JPanel(new BorderLayout());
@@ -76,7 +76,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         scorePanel.add(scorePanelText);
         scorePanel.setPreferredSize(new Dimension(300, 0));
 
-        //Menu initialization
+        // Menu initialization
         JMenuBar menu_bar = new JMenuBar();
         JMenu options = new JMenu("Options");
         JMenu help = new JMenu("Help");
@@ -101,7 +101,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
 
         // setting up the board and the buttons for the board
         boardPanel = new JPanel(new GridLayout(ScrabbleGame.SIZE, ScrabbleGame.SIZE));
-        boardPanel.setSize(new Dimension(800,800));
+        boardPanel.setSize(new Dimension(800, 800));
         boardButtons = new JButton[ScrabbleGame.SIZE][ScrabbleGame.SIZE];
         for (int i = 0; i < ScrabbleGame.SIZE; i++) {
             for (int j = 0; j < ScrabbleGame.SIZE; j++) {
@@ -110,7 +110,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
                 boardButtons[i][j] = b;
                 int x = i;
                 int y = j;
-                //b.addActionListener(e -> model.play(x,y));
+                // b.addActionListener(e -> model.play(x,y));
                 b.addActionListener(bc);
                 boardPanel.add(b);
             }
@@ -123,7 +123,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         this.setVisible(true);
 
         // The number of players selection window
-        String[] playerOptions = new String[] {"4", "3", "2", "1"};
+        String[] playerOptions = new String[] { "4", "3", "2", "1" };
         int response = JOptionPane.showOptionDialog(null,
                 "Please select the number of players", "Player selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -136,12 +136,12 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         displayCurrentPlayerHand();
     }
 
-    public void displayCurrentPlayerHand(){
+    public void displayCurrentPlayerHand() {
         currentPlayerText.setText("Player " + model.getCurrentPlayerIndex() + "'s hand:");
         String hand = this.model.getCurrentPlayer().getHandString(); // this returns a string
         JButton[] playerHandButtons = new JButton[hand.length()];
         int i = 0;
-        for (String letter : hand.split(" ")){
+        for (String letter : hand.split(" ")) {
             JButton letterButton = new JButton(letter); // set the label of the button to be the letter
             letterButton.setActionCommand(letter); // this is what saves the letter string to be placed on the board
             playerHandButtons[i] = letterButton;
@@ -152,17 +152,17 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         currentPlayerHandPanel.updateUI();
     }
 
-    public void hidePreviousPlayerHand(){
+    public void hidePreviousPlayerHand() {
         currentPlayerText.selectAll();
         currentPlayerText.replaceSelection("");
         currentPlayerHandPanel.removeAll();
     }
 
-    public void updateScore(){
+    public void updateScore() {
         scorePanelText.selectAll();
         scorePanelText.replaceSelection(""); // clear the previous scores
         StringBuilder score = new StringBuilder("GAME SCORE:\n\n");
-        for (Player player: model.players){
+        for (HumanPlayer player : model.players) {
             score.append("Player " + player.getID() + ": " + player.getScore() + "\n");
         }
         scorePanelText.setText(score.toString());

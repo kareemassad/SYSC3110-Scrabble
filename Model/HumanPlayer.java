@@ -8,13 +8,13 @@ import java.util.ArrayList;
  * @author Becca Young
  * @version 3.0
  */
-public class Player {
+public class HumanPlayer {
     private String handString;
     private ArrayList<Letter> handLetters;
     private int score;
     private int player_ID; // might be useful in Model.Game
 
-    public Player(int player_ID) {
+    public HumanPlayer(int player_ID) {
         this.player_ID = player_ID;
         this.score = 0;
         setHand();
@@ -24,7 +24,7 @@ public class Player {
         return this.score;
     }
 
-    public int getID(){
+    public int getID() {
         return this.player_ID;
     }
 
@@ -32,20 +32,20 @@ public class Player {
         return this.handString;
     }
 
-    public ArrayList<Letter> getHandLetters(){
+    public ArrayList<Letter> getHandLetters() {
         return this.handLetters;
     }
 
-    //set the letters in the player's hand
+    // set the letters in the player's hand
     private void setHand() {
         this.handLetters = Bag.drawLetters(7); // set the initial bag content
         handToString();
     }
 
     // set the letters in the player's
-    private void handToString(){
+    private void handToString() {
         StringBuilder s = new StringBuilder();
-        for (Letter letter: this.handLetters){
+        for (Letter letter : this.handLetters) {
             s.append(letter.toString() + " ");
         }
         this.handString = s.toString();
@@ -64,25 +64,26 @@ public class Player {
     }
 
     // check this because these letters need to be placed back in bag
-    public void exchangeTiles(){
-        for (Letter letter: this.handLetters){
+    public void exchangeTiles() {
+        for (Letter letter : this.handLetters) {
             removeFromHand(letter.toString());
         }
         setHand(); // set a new hand
     }
 
     public void addToHand(int numLettersToAdd) {
-        if (this.handLetters.size() + numLettersToAdd > 7){ return; }
-        else {
+        if (this.handLetters.size() + numLettersToAdd > 7) {
+            return;
+        } else {
             ArrayList<Letter> lettersToAdd = Bag.drawLetters(numLettersToAdd);
-            for (Letter letter: lettersToAdd){
+            for (Letter letter : lettersToAdd) {
                 this.handLetters.add(letter);
             }
         }
         handToString();
     }
 
-    public void addScore(Word word){
+    public void addScore(Word word) {
         Score turnScore = new Score(word);
         this.score += turnScore.getWordScore();
     }
