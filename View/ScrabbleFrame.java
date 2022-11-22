@@ -49,16 +49,16 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         currentPlayerText = new JTextArea("Current player's rack will be displayed here");
         currentPlayerHandPanel = new JPanel(new GridLayout(1, 7));
 
-        submitButton = new JButton("submit");
+        submitButton = new JButton("Submit");
         submitButton.setActionCommand("submit");
         submitButton.addActionListener(bc);
 
-        passButton = new JButton("pass");
+        passButton = new JButton("Pass");
         passButton.setActionCommand("passTurn");
         //passButton.setEnabled(false);
         passButton.addActionListener(bc);
 
-        exchangeTilesButton = new JButton("exchange tiles");
+        exchangeTilesButton = new JButton("Exchange tiles");
         exchangeTilesButton.setActionCommand("exchangeTiles");
         exchangeTilesButton.setEnabled(false);
         exchangeTilesButton.addActionListener(bc);

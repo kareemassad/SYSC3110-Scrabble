@@ -27,7 +27,7 @@ public class ScrabbleGame {
     public ScrabbleGame() {
         Bag gameBag = new Bag();
         board = new String[SIZE][SIZE];
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 board[i][j] = " "; // fix that
             }
@@ -44,6 +44,8 @@ public class ScrabbleGame {
         else if (selectionCode == 2) { numPlayers = 2; }
         else if (selectionCode == 1) { numPlayers = 3; }
         else { numPlayers = 4; }
+
+        // if selection is 1, get the AI player
 
         for (int i = 0; i < numPlayers; i++){
             this.players.add(new Player(i));
@@ -79,9 +81,14 @@ public class ScrabbleGame {
     }
 
     public static Letter getLetter(int row, int col){
-        Letter newLetter = new Letter(board[row][col]); // using the string constructor
-        newLetter.setCoordinates(row, col);
-        return newLetter;
+        if (board[row][col] == " "){
+            return new Letter(Letter.Character.NONE);
+        }
+        else {
+            Letter newLetter = new Letter(board[row][col]); // using the string constructor
+            newLetter.setCoordinates(row, col);
+            return newLetter;
+        }
     }
 
     public void updateStatus(Status status){
@@ -111,7 +118,16 @@ public class ScrabbleGame {
         }
     }
 
-    public void placeWord(Word word, int startingRow, int startingCol, int direction){
-        // call placeLetter with each letter of the word, in a loop...
+    // this is to be called by the AI player :)
+    public void placeWord(String word, int startingRow, int startingCol, int direction){
+        // this assumes that the word will not go out of bounds!
+        for (int i = 0; i < word.length(); i++){
+            if (direction == 0) { // word is going right,
+                placeLetter(String.valueOf(word.charAt(i)), startingRow, startingCol+i);
+            }
+            else { // direction is down
+                placeLetter(String.valueOf(word.charAt(i)), startingRow+i, startingCol);
+            }
+        }
     }
 }
