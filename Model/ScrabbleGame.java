@@ -19,7 +19,7 @@ public class ScrabbleGame {
     public ArrayList<Player> players;
     private int currentPlayerIndex;
     private List<ScrabbleView> views;
-    private String[][] board;
+    private static String[][] board;
     private Status status;
 
     public enum Status {PLACING_TILES, DONE, PASS, EXCHANGE};
@@ -76,6 +76,12 @@ public class ScrabbleGame {
 
     public String[][] getBoard(){
         return board;
+    }
+
+    public static Letter getLetter(int row, int col){
+        Letter newLetter = new Letter(board[row][col]); // using the string constructor
+        newLetter.setCoordinates(row, col);
+        return newLetter;
     }
 
     public void updateStatus(Status status){
