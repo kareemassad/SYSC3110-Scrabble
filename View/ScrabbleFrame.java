@@ -331,7 +331,9 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
                         if(i == 14 && j == 14){
                             b.setBackground(new Color(255,102,178));
                         }
+
                 }
+                b.setOpaque(true);
             }
         }
         // adding all the panel to this (the parent JFrame)

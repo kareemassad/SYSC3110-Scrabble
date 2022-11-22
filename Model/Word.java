@@ -27,7 +27,8 @@ public class Word {
         //setDirection(letters);
         setDirection(letters);
         sortLetters(letters);
-        setStartingCoordinates();
+        setStartingCoordinates(); // I don't think we need this anymore
+        addAdjoiningLetter();
         this.letters = new ArrayList<Letter>(letters);
     }
 
@@ -45,7 +46,7 @@ public class Word {
     private void setDirection(ArrayList<Letter> letters){
         boolean rowChanging = false;
         boolean colChanging = false;
-        //TODO add a check for if size is 1. Need to count other letters to see direction.
+        //TODO add a check for if size is 1. Need to find the direction using other letters location.
 
         //assuming size is at least 2
         for (int i = 0; i < 1; i++){
@@ -67,12 +68,49 @@ public class Word {
         }
     }
 
+    private ArrayList<Integer> checkForHole(int direction){
+        boolean isHole = false;
+        ArrayList<Integer> holeToFill = new ArrayList<Integer>();
+        if (direction == 0) {
+            for (int i = 0; i < letters.size()-1; i++) {
+                if (letters.get(i).getCol() != letters.get(i + 1).getCol() + 1) {
+                    holeToFill.add(0, i + 1); // the index in the WORD where a letter is missing
+                    holeToFill.add(1, letters.get(i).getRow()); // the row with the letters
+                    holeToFill.add(2, letters.get(i).getCol()+1); // the column where there is a hole
+                    // H A *B* S - B is not in word.
+                    // H(0).getCol = 0, A(1).getCol = 1, S(2).getCol = 3
+                    // I shall add at index 2
+                }
+            }
+        } else { // direction is down
+            for (int i = 0; i < letters.size()-1; i++) {
+                if (letters.get(i).getRow() != letters.get(i + 1).getRow() + 1) {
+                    holeToFill.add(0, i + 1); // the index in the WORD where a letter is missing
+                    holeToFill.add(1, letters.get(i).getRow()+1); // the row where there is a hole
+                    holeToFill.add(2, letters.get(i).getCol()); // the column with all the other letters
+                }
+            }
+        }
+        return holeToFill; // TODO verify that this is size 0 if it does not enter the if statements
+    }
+
+    public void addAdjoiningLetter(){
+        ArrayList<Integer> holeToFill = checkForHole(direction); //
+        if (holeToFill.size() > 0) { // there is a hole, fill it with the letter
+            addLetter(holeToFill.get(0), ScrabbleGame.getLetter(holeToFill.get(1), holeToFill.get(2)));
+            // add the letter (get it from the model) at the given index position
+        }
+        else { // there is no hole
+            // TODO: need to add the one at the end or at the beginning
+        }
+
+    }
+
+
     /**
      * This method adds a given letter at a given position.
      * This can be used when a player adds a letter at the beginning or at the end
      * of an existing word
-     * If the letter than one wishes to add is not on a premium tile, premium shall
-     * be input as 1.
      */
     public void addLetter(int position, Letter letter) {      // Can we take this out?
         this.letters.add(position, letter);
