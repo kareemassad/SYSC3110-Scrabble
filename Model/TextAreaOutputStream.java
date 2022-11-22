@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * Takes all output print statements and allows them
+ * to be printed into the text area
+ * @author Keefer Belanger 101152085
+ */
 public class TextAreaOutputStream extends OutputStream {
     private final JTextArea text_area;
 

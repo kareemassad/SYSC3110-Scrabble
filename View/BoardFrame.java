@@ -1,7 +1,6 @@
 package View;
 
-import Model.Game;
-import Model.TextAreaOutputStream;
+import Model.*;
 import Controller.*;
 
 import java.awt.datatransfer.DataFlavor;
@@ -10,6 +9,7 @@ import java.awt.datatransfer.Transferable;
 import java.io.PrintStream;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.TransferHandler;
 
 /**
@@ -20,7 +20,7 @@ public class BoardFrame extends JFrame{
 
     //private Game model;
     private Controller controller;
-//    private DropController drop_controller;
+    private Player player;
 
     //South panel initialization
     JPanel south_panel = new JPanel();
@@ -82,20 +82,26 @@ public class BoardFrame extends JFrame{
     JList letter_list3 = new JList(list_model3);
     JList letter_list4 = new JList(list_model4);
 
-    //Model.Board initialization
+    public JLabel tile_content;
+    public JPanel tile;
+
+    //Board initialization
     JPanel grid_panel = new JPanel();
-    JLabel[][] grid = new JLabel[15][15];
-    JPanel[][] squares = new JPanel[15][15];
+    public JLabel[][] grid = new JLabel[15][15];
+    public JPanel[][] squares = new JPanel[15][15];
+
+    public ArrayList<String> content_list;
 
     public BoardFrame(Game game){
         super("Scrabble");
         this.controller = new Controller(game, this);
-//        this.drop_controller = new DropController(game,this);
 
         text_area.append("Welcome to Scrabble\n");
         text_area.append("Press the play button to start the game\n");
 
         this.setLayout(new BorderLayout());
+
+        content_list = new ArrayList();
 
         //South panel config
         south_panel.setLayout(new GridLayout(1,3));
@@ -225,11 +231,10 @@ public class BoardFrame extends JFrame{
         for(int row = 0; row < 15; row++){
             for(int col = 0; col < 15; col++){
                 Font f = new Font(Font.DIALOG, Font.BOLD, 30);
-                JPanel tile = new JPanel();
+                tile = new JPanel();
                 tile.setLayout(new GridLayout());
                 tile.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-                JLabel tile_content = new JLabel(" ");
-//                tile_content.addInputMethodListener(drop_controller);
+                tile_content = new JLabel(" ");
                 tile_content.setFont(f);
                 tile_content.setHorizontalAlignment(JLabel.CENTER);
                 tile_content.setTransferHandler(new import_handler());
@@ -490,8 +495,11 @@ public class BoardFrame extends JFrame{
                     if (value instanceof String) {
                         Component component = support.getComponent();
                         if (component instanceof JLabel) {
-                            System.out.println(value.getClass());
                             ((JLabel) component).setText(value.toString());
+
+                            String b = ((JLabel) component).getText();
+                            content_list.add(b);
+
                             accept = true;
                         }
                     }
@@ -530,8 +538,8 @@ public class BoardFrame extends JFrame{
         }
 
         protected void exportDone(JComponent c, Transferable data, int action) {
-            JList source = (JList)c;
-            DefaultListModel listModel  = (DefaultListModel)source.getModel();
+            JList source = (JList) c;
+            DefaultListModel listModel = (DefaultListModel) source.getModel();
 
             if (action == TransferHandler.MOVE) {
                 for (int i = indices.length - 1; i >= 0; i--) {

@@ -3,9 +3,10 @@ package Controller;
 import Model.*;
 import View.BoardFrame;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Controls the GUI through use of models
@@ -106,7 +107,20 @@ public class Controller implements ActionListener{
         }
 
         if(e.getSource() == view.submit_button){
+            Component[] components = view.tile.getComponents();
+            for(Component component : components){
+                if(component instanceof JLabel){
+                    if(!view.tile_content.getText().isEmpty()){
+                        for(String values : view.content_list){
+                            StringBuilder sb = new StringBuilder();
+//                            System.out.print(values);
 
+                            sb.append(values);
+                            System.out.print(sb);
+                        }
+                    }
+                }
+            }
         }
 
         if(e.getSource() == view.player_desc_button){
