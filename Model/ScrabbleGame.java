@@ -109,6 +109,9 @@ public class ScrabbleGame {
         for (ScrabbleView v: views){
             v.updateView(new ScrabbleEvent(this, letterToPlace, row, col, currentPlayerIndex));
         }
+    }
 
+    public void placeWord(Word word, int startingRow, int startingCol, int direction){
+        // call placeLetter with each letter of the word, in a loop...
     }
 }
