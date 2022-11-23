@@ -21,6 +21,7 @@ public class ScrabbleGame {
     private List<ScrabbleView> views;
     private static String[][] board;
     private Status status;
+    ArrayList<Letter> lettersPlayed;
 
     public enum Status {PLACING_TILES, DONE, PASS, EXCHANGE};
 
@@ -36,6 +37,10 @@ public class ScrabbleGame {
         currentPlayerIndex = 0;
         views = new ArrayList<>();
 
+    }
+
+    public ScrabbleGame getGame() {
+        return this;
     }
 
     public void addPlayers(int selectionCode){
