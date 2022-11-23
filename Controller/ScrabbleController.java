@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.*;
+import Model.Legality2;
+import Model.Score;
 import View.ScrabbleFrame;
 
 import java.awt.event.ActionEvent;
@@ -38,15 +40,24 @@ public class ScrabbleController implements ActionListener {
                 model.placeLetter(letterToPlace.toString(), row, col);
             }
             if (e.getActionCommand() == "submit") { // a player is done placing its word! do the things!
-                // check legality
-                // score the word
+
                 Word finalWord = new Word(wordToScore);
-                String wordString = finalWord.toString(); // just testing for now
-                model.getCurrentPlayer().addScore(finalWord);
-                // update player's score
-                model.updateStatus(ScrabbleGame.Status.DONE); // we want to save the word and compute it
-                this.wordToScore = new ArrayList<>(); // clear the word so we don't keep adding to it
-                // delete the word from the controller's array. Will still be saved in the model.
+                // check legality
+                Legality2 legal = new Legality2(finalWord, model);
+                boolean legality = legal.checkLegality();
+
+                if (legality) {
+                    // score the word
+                    String wordString = finalWord.toString(); // just testing for now
+                    model.getCurrentPlayer().addScore(finalWord);
+                    // update player's score
+                    model.updateStatus(ScrabbleGame.Status.DONE); // we want to save the word and compute it
+                    this.wordToScore = new ArrayList<>(); // clear the word so we don't keep adding to it
+                    // delete the word from the controller's array. Will still be saved in the model.
+                }
+                else {
+                    // letters back in hand
+                }
             }
             if (e.getActionCommand() == "quitGame"){
                 System.exit(0);

@@ -27,8 +27,10 @@ public class Legality2 {
     //private ArrayList<Integer> startCoord;     in Word class
     //private int dir;                           in Word class
 
-    public Legality2(Word word){
+    public Legality2(Word word, ScrabbleGame model){
         this.word = word;
+        this.model = model;
+        this.attachedWords = new ArrayList<>();
         this.attachedWords.add(word);
         addAttachedWords();
     }
@@ -38,7 +40,6 @@ public class Legality2 {
      * @author Laurence Lamarche-Cliche
      */
     private void addAttachedWords() {
-        // assuming the board is a 2D array of Letters
 
         if (word.getDirection() == DOWN) { // cycle through each letter of the word
 

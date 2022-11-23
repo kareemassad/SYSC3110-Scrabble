@@ -25,7 +25,10 @@ public class ScrabbleGame {
     private List<ScrabbleView> views;
     private static String[][] board;
     private Status status;
+
     private HashSet<String> legalWords;
+    ArrayList<Letter> lettersPlayed;
+
 
     public enum Status {
         PLACING_TILES, DONE, PASS, EXCHANGE
@@ -50,6 +53,7 @@ public class ScrabbleGame {
 
     }
 
+
     // create a method to parse english_words.txt and store it in a set
     // return the set
     public HashSet<String> getLegalWords() {
@@ -64,6 +68,13 @@ public class ScrabbleGame {
     }
 
     public void addPlayers(int selectionCode) {
+
+    public ScrabbleGame getGame() {
+        return this;
+    }
+
+    public void addPlayers(int selectionCode){
+
         int numPlayers;
         if (selectionCode == 3) {
             numPlayers = 1;
