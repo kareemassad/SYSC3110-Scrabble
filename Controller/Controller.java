@@ -113,7 +113,6 @@ public class Controller implements ActionListener{
                     if(!view.tile_content.getText().isEmpty()){
                         for(String values : view.content_list){
                             StringBuilder sb = new StringBuilder();
-//                            System.out.print(values);
 
                             sb.append(values);
                             System.out.print(sb);
