@@ -21,6 +21,9 @@ This deliverable is the third milestone of a series of four milestones.
 2. Our Legality class’s logic works, but it is not implemented in the game because it was not finished in time. When given a word, it can determine if it is part of the database or not. 
 3. The logic for Exchanging tiles has not been implemented in time and therefore, the button has been disabled for now. The function exchangeTiles() in the Model.Player class does not currently work.
 4. There is a BUG (apparently, it does not generate any error messages, or show up in the debugger) that prevents us from using the last 5 rows AND columns of the board. When we try placing a letter on it by pressing the button, nothing happens. Therefore, please play for now using only the first 10x10 squares of the board.
+5. Our AiPlayer class works but is not integrated into the entire project. This is because we were not able to fix the GUI in time to reflect the AI players. Currently, the AI players can select a legal word and place it on the board but it is represented as a normal player. There is no way to instantiate the AI players either. We plan on fixing that by making a default size for the game ex:4, and asking the user for a # of human players. We will fill the remaining spots with AI.
+6. There is a weird bug with the board after a player places a tile. It correctly removes that tile from the board but the game persists the last used character. Therefore, if a player were to click on any of the other buttons, they are still able to place that same letter infinitely.
+7. Similar to that, if the player clicks on the same button X# of times, the game will thing each click is a new letter. So, it would misinterpret {cat} for {cattttt}
 
 ### Left For Remaining Milestones
 
@@ -36,7 +39,7 @@ This deliverable is the third milestone of a series of four milestones.
 * We are using a 2D array of Strings to represent the board, and this is done because we can place Letter objects using their toString() method and because we can append to these strings the premium tiles logic, which we have also implemented as a String. That way, we can save the premium for the letter and the letter when we will want to implement the save and load features and have ScrabbleGame.board[row][col] = “A” when there is no premium, and “ADL” when there is, for example, a DL (double letter) premium to store. The ScrabbleFrame class can display only the first character, and store the other ones inside a Letter object when reloading a saved board. 
 * We chose to abandon the drag and drop logic that we had tried for milestone 2 and replace the board’s panels with a grid made of buttons. Then, to place a tile, a player must click on the letter from its hand, then click on the board location at which he wants to place it. The controller saves the letter to place with the first click, and places it on the second click.
 * We decided the create a Player interface and have HumanPlayer and AIPlayer classes implement that interface. The AI player is automatically initialized when the game is started with the selected number of player as 1.
-
+* We decided to use a HashSet to store the list of legal words as: We don't care for the order, each word is unique, and we primarily need good access / .contains calls
 
 ## User Manual
 
