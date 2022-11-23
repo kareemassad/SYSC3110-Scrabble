@@ -47,6 +47,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         // The current player's panel and options
         PlayerPanel = new JPanel(new GridLayout(12,1));
         currentPlayerText = new JTextArea("Current player's rack will be displayed here");
+        currentPlayerText.setEditable(false);
         currentPlayerHandPanel = new JPanel(new GridLayout(1, 7));
 
         submitButton = new JButton("Submit");
@@ -73,6 +74,7 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         // The score panel
         scorePanel = new JPanel(new BorderLayout());
         scorePanelText = new JTextArea("Score");
+        scorePanelText.setEditable(false);
         scorePanel.add(scorePanelText);
         scorePanel.setPreferredSize(new Dimension(300, 0));
 
@@ -101,15 +103,17 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
 
         // setting up the board and the buttons for the board
         boardPanel = new JPanel(new GridLayout(ScrabbleGame.SIZE, ScrabbleGame.SIZE));
-        boardPanel.setSize(new Dimension(800,800));
+//        boardPanel.setSize(new Dimension(800,800));
         boardButtons = new JButton[ScrabbleGame.SIZE][ScrabbleGame.SIZE];
         for (int i = 0; i < ScrabbleGame.SIZE; i++) {
             for (int j = 0; j < ScrabbleGame.SIZE; j++) {
+                Font f = new Font(Font.DIALOG, Font.BOLD, 30);
                 JButton b = new JButton(" ");
+                b.setFont(f);
                 b.setActionCommand(i + " " + j); // this is what provides the coordinates
                 boardButtons[i][j] = b;
-                int x = i;
-                int y = j;
+//                int x = i;
+//                int y = j;
                 //b.addActionListener(e -> model.play(x,y));
                 b.addActionListener(bc);
                 boardPanel.add(b);

@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Controls the GUI buttons
+ * @author Keefer Belanger 101152085 & Laurence Lamarche-Cliche 101173070
+ */
 public class ScrabbleController implements ActionListener {
 
     private ScrabbleGame model;
