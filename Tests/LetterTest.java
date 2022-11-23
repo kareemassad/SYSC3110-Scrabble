@@ -1,6 +1,7 @@
 package Tests;
 
 import Model.Letter;
+import Model.ScrabbleGame;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -68,8 +69,6 @@ public class LetterTest {
         A.setCoordinates(15, 2); // this should never happen with GUI because the location does not exist...
         assertEquals(-1, A.getRow()); // invalid index (15), should remain the default coordinates
         assertEquals(-1, A.getCol());
-
-
     }
 
     @Test
@@ -78,5 +77,9 @@ public class LetterTest {
         Letter B = new Letter('B');
         assertEquals("A", A.toString());
         assertEquals("B", B.toString());
+        Letter None = new Letter(Letter.Character.NONE);
+        assertEquals(" ", None.toString());
+        Letter blankTile = new Letter(Letter.Character.BLANKTILE);
+        assertEquals("_", blankTile.toString());
     }
 }
