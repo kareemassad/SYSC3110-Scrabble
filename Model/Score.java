@@ -1,6 +1,10 @@
-package Model;/*
-/*
-Class Score is in charge of calculating and updating the score of a player
+package Model;
+
+/**
+ * This class acts as a placeholder for how class Legality will work after restructuring other classes.
+ *
+ * @author Becca Young
+ * @version 3.0
  */
 
 // TODO needs to add score of all adjoining words
@@ -34,6 +38,7 @@ public class Score {
         int score = 0;
         boolean DW = false;
         boolean TW = false;
+
         ArrayList<Letter> letters = word.getLetters();
 
         for(Letter letter: letters) {
@@ -41,10 +46,18 @@ public class Score {
             String premium = letter.getPremium();
 
             switch (premium) {
-                case "DL" -> letterVal *= 2;
-                case "TL" -> letterVal *= 3;
-                case "DW" -> DW = true;
-                case "TW" -> TW = true;
+                case "DL":
+                    letterVal *= 2;
+                    break;
+                case "TL":
+                    letterVal *= 3;
+                    break;
+                case "DW":
+                    DW = true;
+                    break;
+                case "TW":
+                    TW = true;
+                    break;
             }
             score += letterVal;
         }

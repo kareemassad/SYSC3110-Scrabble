@@ -1,14 +1,12 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
 /**
  * A word can have up to 7 letters
- *
- * @author Laurence Lamarche-Cliche 101173070
+ * @author Laurence Lamarche-Cliche 101173070 & Becca Young 101183297
  * @version 3.0
  */
 
@@ -18,60 +16,26 @@ public class Word {
     private int startingRow;
     private int startingCol;
     private int direction;
+    private boolean missingLetters;
 
     private final int RIGHT = 0;
     private final int DOWN = 1;
     private final int INVALID = -1;
 
-    /*
-    // Only used for testing
-    public Word(String word) {
-        letters = new ArrayList<Letter>();
-        for (int i = 0; i < word.length(); i++) {
-            letters.add(new Letter(word.charAt(i)));
-        }
-        this.letters = new ArrayList<Letter>(letters);
-        this.premiums = new ArrayList<String>();
-        for (int i = 0; i < this.letters.size(); i++) {
-            premiums.add("NONE");
-        } // this populates the premium array with NONE's by default
-        // this will eventually need to change
-    }
-     */
 
     public Word(ArrayList<Letter> letters) {
-        this.letters = new ArrayList<Letter>(letters);
-        sortLetters(letters);
+        this.letters = letters;
+        missingLetters = true;
+        //setDirection(letters);
         setDirection(letters);
-        setStartingCoordinates();
-    }
-
-    /**
-     * This method creates a new word and assigns premium tiles to certain letters.
-     * The letters without a premium must be associated with a "NONE" String.
-     * For example, if one wishes to have the word HOWL, and have the W on a TL
-     * premium (x3),
-     * one must call the constructor this way:
-     * Word([H, O, W, L], ["NONE", "NONE", "TL", "NONE"])
-     * Where H, O, W and L are Letter objects.
-     */
-    public Word(ArrayList<Letter> letters, ArrayList<String> premiums) {
-        this.letters = new ArrayList<Letter>(letters);
         sortLetters(letters);
-        for (int i = 0; i < this.letters.size(); i++) {
-            letters.get(i).setPremium(premiums.get(i)); // set the premium for each letter to the corresponding String
+        setStartingCoordinates(); // I don't think we need this anymore
+        if (missingLetters) {
+            addAdjoiningLetter();
         }
-        setDirection(letters);
-        setStartingCoordinates();
-
+        this.letters = new ArrayList<Letter>(letters);
     }
 
-    // TODO: add a constructor that takes a 2D array [Letter A, tuple (row, col)]
-    // this constructor will need to
-    // 1) Determine the direction based on which coordinate is changing, set the direction for the Word
-    // 2) Create the Word with the previous constructor (adds NONE as premiums for now as default)
-    // 3) Set coordinates for each letter
-    // 4) Set premium for each letter
 
     private void sortLetters(ArrayList<Letter> letters){
         ArrayList<Letter> newLetters;
@@ -84,50 +48,244 @@ public class Word {
     }
 
     private void setDirection(ArrayList<Letter> letters){
-        int countCOL = 0;
-        int countROW = 0;
+        boolean rowChanging = false;
+        boolean colChanging = false;
 
-        ArrayList<Integer> cols = new ArrayList<Integer>();
-        for (Letter letter : letters){
-            cols.add(letter.getCol());
+        if (letters.size() == 0){
+            throw new IndexOutOfBoundsException("You must place at least one letter, the word cannot be empty");
         }
-        Collections.sort(cols);
-
-        ArrayList<Integer> rows = new ArrayList<Integer>();
-        for (Letter letter : letters){
-            rows.add(letter.getRow());
-        }
-        Collections.sort(rows);
-
-        int prevCol = -1;
-        for (int col : cols) {
-            if (col != prevCol) {
-                countCOL += 1;
+        if (letters.size() == 1) {
+            if ((letters.get(0).getCol() == 14)) { // am on the right, don't check right!
+                // if there is some letter to the left,
+                if ((ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() - 1)).toString() != " ") {
+                    direction = RIGHT; // need to add letter left!
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    addLetter(0, newLetter); // add letter at beginning
+                    missingLetters = false;
+                } else {
+                    direction = DOWN;
+                    if ((letters.get(0).getRow() == 0) ||
+                            ((ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol())).toString() != " ") )
+                    { // don't check up, the letter is down!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        addLetter(1, newLetter); // add the letter at the end
+                        missingLetters = false;
+                    }
+                    else { // safe to add up!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        addLetter(0, newLetter); // add the letter at the beginning
+                        missingLetters = false;
+                    }
+                }
             }
-            prevCol = col;
-        }
 
-        int prevRow = -1;
-        for (int row : rows) {
-            if (row != prevRow) {
-                countROW += 1;
+            else if ((letters.get(0).getCol() == 0)) { // am on the left, don't check left!
+                if ((ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() + 1)).toString() != " ") {
+                    direction = RIGHT; // need to add letter right
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() + 1);
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() + 1);
+                    addLetter(1, newLetter); // add letter at the end
+                    missingLetters = false;
+                } else {
+                    direction = DOWN;
+                    if ((letters.get(0).getRow() == 0)) { // don't check up, the letter is down!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        addLetter(1, newLetter); // add the letter at the end
+                        missingLetters = false;
+                    }
+                    else if ((letters.get(0).getRow() == 14)){ // don't check down, the letter is up!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        addLetter(0, newLetter); // add the letter at the beginning
+                        missingLetters = false;
+                    }
+                    else if ((ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol())).toString() != " "){
+                        // the letter is down
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        addLetter(1, newLetter); // add the letter at the end
+                        missingLetters = false;
+                    }
+                    else { // safe to add up!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        addLetter(0, newLetter); // add the letter at the beginning
+                        missingLetters = false;
+                    }
+                }
             }
-            prevCol = row;
+
+            else { // safe to check left or right, we are in columns 1 to 13. Start with right
+                if ((ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() + 1)).toString() != " ") {
+                    direction = RIGHT; // need to add letter right
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() + 1);
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() + 1);
+                    addLetter(1, newLetter); // add letter at the end
+                    missingLetters = false;
+                }
+                else if ((ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() - 1)).toString() != " ") {
+                    direction = RIGHT; // need to add letter left
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    addLetter(0, newLetter); // add letter at the beginning
+                    missingLetters = false;
+                }
+                else {
+                    direction = DOWN;
+                    if (letters.get(0).getRow() == 0) { // don't check up, the letter is down!
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        addLetter(1, newLetter); // add the letter at the end
+                        missingLetters = false;
+                    }
+                    else if (letters.get(0).getRow() == 14) { // don't check down, the letter is up
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        addLetter(0, newLetter); // add the letter at the beginning
+                        missingLetters = false;
+                    }
+                    else if ((ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol())).toString() != " "){ //letter is up
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                        addLetter(0, newLetter); // add the letter at the beginning
+                        missingLetters = false;
+                    }
+                    else { // safe to add down
+                        Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        newLetter.setCoordinates(letters.get(0).getRow()+1, letters.get(0).getCol());
+                        addLetter(1, newLetter); // add the letter at the end
+                        missingLetters = false;
+                    }
+                }
+            }
         }
 
-        if (countROW > 1 && countCOL > 1) { this.direction = INVALID; }
-        else if (countROW == 1 && countCOL > 1) { this.direction = RIGHT; }
-        else if (countROW > 1 && countCOL == 1) { this.direction = DOWN; }
+        else { //assuming size is at least 2
+            for (int i = 0; i < 1; i++) {
+                if (letters.get(i).getRow() != letters.get(i + 1).getRow()) {
+                    rowChanging = true;
+                }
+                if (letters.get(i).getCol() != letters.get(i + 1).getCol()) {
+                    colChanging = true;
+                }
+                if (rowChanging == colChanging) {
+                    this.direction = INVALID; // invalid
+                } else if (rowChanging) {
+                    this.direction = DOWN;
+                } else if (colChanging) {
+                    this.direction = RIGHT;
+                }
+            }
+        }
     }
+
+    private ArrayList<Integer> checkForHole(int direction){
+        boolean isHole = false;
+        ArrayList<Integer> holeToFill = new ArrayList<Integer>();
+        if (direction == 0) {
+            for (int i = 0; i < letters.size()-1; i++) {
+                if (letters.get(i).getCol() != letters.get(i + 1).getCol() + 1) {
+                    holeToFill.add(0, i + 1); // the index in the WORD where a letter is missing
+                    holeToFill.add(1, letters.get(i).getRow()); // the row with the letters
+                    holeToFill.add(2, letters.get(i).getCol()+1); // the column where there is a hole
+                    // H A *B* S - B is not in word.
+                    // H(0).getCol = 0, A(1).getCol = 1, S(2).getCol = 3
+                    // I shall add at index 2
+                }
+            }
+        } else { // direction is down
+            for (int i = 0; i < letters.size()-1; i++) {
+                if (letters.get(i).getRow() != letters.get(i + 1).getRow() + 1) {
+                    holeToFill.add(0, i + 1); // the index in the WORD where a letter is missing
+                    holeToFill.add(1, letters.get(i).getRow()+1); // the row where there is a hole
+                    holeToFill.add(2, letters.get(i).getCol()); // the column with all the other letters
+                }
+            }
+        }
+        return holeToFill; // TODO verify that this is size 0 if it does not enter the if statements
+    }
+
+    // This method should only be called if the letter has not been added already by the direction check :)
+    // If a player placed more than one letter on the board, this function should be called.
+    public void addAdjoiningLetter(){
+        ArrayList<Integer> holeToFill = checkForHole(direction); //
+        if (holeToFill.size() > 0) { // there is a hole, fill it with the letter
+            addLetter(holeToFill.get(0), ScrabbleGame.getLetter(holeToFill.get(1), holeToFill.get(2)));
+            // add the letter (get it from the model) at the given index position
+        }
+        else { // there is no hole
+            if (direction == RIGHT){ // need to add either right or left
+                if (letters.get(0).getCol() == 0) {
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(letters.size()-1).getRow(),
+                            letters.get(letters.size()-1).getCol() + 1); // add letter to the right of the last letter
+                    newLetter.setCoordinates(letters.get(letters.size()-1).getRow(), letters.get(letters.size()-1).getCol() + 1);
+                    addLetter(letters.size(), newLetter); // add letter at the end
+                }
+                else if (letters.get(letters.size()-1).getCol() == 14) { // we don't need to check right, add left
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(),
+                            letters.get(0).getCol() - 1); // add letter to the left of first letter
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    addLetter(0, newLetter); // add letter at beginning
+                    this.startingCol = newLetter.getCol();
+                }
+                else if (ScrabbleGame.getLetter(letters.get(0).getRow()-1, letters.get(0).getCol()).toString() != " ") {
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow(),
+                            letters.get(0).getCol() - 1); // add letter to the left of first letter
+                    newLetter.setCoordinates(letters.get(0).getRow(), letters.get(0).getCol() - 1);
+                    addLetter(0, newLetter); // add letter at beginning
+                    this.startingCol = newLetter.getCol();
+                }
+                else { // add at the end
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(letters.size()-1).getRow(),
+                            letters.get(letters.size()-1).getCol() + 1); // add letter to the right of the last letter
+                    newLetter.setCoordinates(letters.get(letters.size()-1).getRow(), letters.get(letters.size()-1).getCol() + 1);
+                    addLetter(letters.size(), newLetter); // add letter at the end
+                }
+            }
+            else { // direction is down
+                if (startingRow == 0) { // add at the end for sure
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(letters.size()-1).getRow() + 1,
+                            letters.get(letters.size()-1).getCol()); // add letter below the last letter
+                    newLetter.setCoordinates(letters.get(letters.size()-1).getRow()+1, letters.get(letters.size()-1).getCol());
+                    addLetter(letters.size(), newLetter); // add letter at the end
+                }
+                else if (letters.get(letters.size()-1).getRow() == 14) { // add at beginning for sure
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow() - 1,
+                            letters.get(0).getCol()); // add letter above the first letter
+                    newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                    addLetter(0, newLetter); // add letter at beginning
+                    this.startingRow = newLetter.getRow();
+                }
+                // check if anything down at the end
+                else if (ScrabbleGame.getLetter(letters.get(letters.size()-1).getRow()+1, letters.get(0).getCol()).toString() != " ") {
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(letters.size()-1).getRow() + 1,
+                            letters.get(letters.size()-1).getCol()); // add letter below the last letter
+                    newLetter.setCoordinates(letters.get(letters.size()-1).getRow()+1, letters.get(letters.size()-1).getCol());
+                    addLetter(letters.size(), newLetter); // add letter at the end
+                }
+                else { // add at the beginning and update startingRow
+                    Letter newLetter = ScrabbleGame.getLetter(letters.get(0).getRow() - 1,
+                            letters.get(0).getCol()); // add letter above the first letter
+                    newLetter.setCoordinates(letters.get(0).getRow()-1, letters.get(0).getCol());
+                    addLetter(0, newLetter); // add letter at beginning
+                    this.startingRow = newLetter.getRow();
+                }
+            }
+        }
+
+    }
+
 
     /**
      * This method adds a given letter at a given position.
      * This can be used when a player adds a letter at the beginning or at the end
      * of an existing word
-     * If the letter than one wishes to add is not on a premium tile, premium shall
-     * be input as 1.
      */
-    public void addLetter(int position, Letter letter, String premium) {      // Can we take this out?
+    public void addLetter(int position, Letter letter) {      // Can we take this out?
         this.letters.add(position, letter);
     }
 
@@ -157,7 +315,6 @@ public class Word {
     }
 
 
-
     @Override
     public String toString() {
         StringBuilder word = null;
@@ -167,5 +324,4 @@ public class Word {
         }
         return word.toString();
     }
-
 }

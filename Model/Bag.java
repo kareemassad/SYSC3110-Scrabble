@@ -3,10 +3,9 @@ package Model;
 import java.util.*;
 
 /**
- * A word can have up to 7 letters
- *
+ * The bag contains all the available letters for the game
  * @author Laurence Lamarche-Cliche 101173070
- * @version 0.1
+ * @version 3.0
  */
 
 public class Bag {
@@ -178,11 +177,13 @@ public class Bag {
 
     public static ArrayList<Letter> drawLetters(Integer numberOfLetters) {
         ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
+
         for (int i = 0; i < numberOfLetters; i++) {
             Letter randomLetter = Bag.getRandomElement(Bag.gameLetters);
             lettersDrawn.add(randomLetter);
-            Bag.gameLetters.remove(randomLetter); // test this
+            Bag.gameLetters.remove(randomLetter); // that letter cannot be drawn again
         }
         return lettersDrawn;
     }
+
 }

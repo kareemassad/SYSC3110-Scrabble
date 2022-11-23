@@ -1,5 +1,6 @@
 package Model;
 
+
 /**
  * A letter is a character and a score.
  * The Game class will need to initialize all available letters. Their scores
@@ -11,24 +12,34 @@ package Model;
 public class Letter {
 
     public enum Character {
-        A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z
+        NONE, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, BLANKTILE
     }
 
     private final Character character;
     private final int value;
     private String premium;
-    private int ROW;
-    private int COL;
+    private int row;
+    private int col;
 
     /**
-     * The Game class will need to call this for every available letter in the game,
-     * this way
-     * new Letter(A)
+     * Initialize a new Letter object this way:
+     * new Letter(Character.A)
      */
     public Letter(Character character) {
         this.character = character;
         this.value = this.getValueFromCharacter(character);
         this.premium = "NONE";
+        this.row = -1;
+        this.col = -1;
+    }
+
+    /**
+     * Initialize a new Letter object this way:
+     * new Letter("LDL")
+     * Where the letter is the first character, and the premium is the following 2 characters.
+     */
+    public Letter(String letterPremiumString){
+        this(letterPremiumString.charAt(0));
     }
 
     public Letter(char letter) {
@@ -90,6 +101,10 @@ public class Letter {
                 return Character.Y;
             case 'Z':
                 return Character.Z;
+            case ' ':
+                return Character.NONE;
+            case '_':
+                return Character.BLANKTILE;
             default:
                 throw new IllegalArgumentException("No such letter!");
         }
@@ -112,7 +127,7 @@ public class Letter {
         } else if (c == Character.Q | c == Character.Z) {
             return 10;
         } else {
-            // blank tile
+            // blank tile or NONE
             return 0;
         }
     }
@@ -142,22 +157,31 @@ public class Letter {
     }
 
     public void setCoordinates(int row, int col){
-        this.ROW = row;
-        this.COL = col;
+        if ((row > 14) || (col > 14) || (row < 0) || (col < 0)) { return; } // remains -1
+        this.row = row;
+        this.col = col;
     }
 
     public int getRow(){
-        return this.ROW;
+        return this.row;
     }
 
     public int getCol(){
-        return this.COL;
+        return this.col;
     }
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(this.character.name().charAt(0)); // we print L if we have letter L1
-        return s.toString();
+        if (character == Character.NONE){
+            return " ";
+        }
+        else if (character == Character.BLANKTILE){
+            return "_";
+        }
+        else {
+            StringBuilder s = new StringBuilder();
+            s.append(this.character.name().charAt(0)); // we print L if we have letter L1
+            return s.toString();
+        }
     }
 }

@@ -1,7 +1,5 @@
 package Model;
-/*
-This class acts as a placeholder for how class Legality will work after restructuring other classes.
- */
+
 /**
  * This class acts as a placeholder for how class Legality will work after restructuring other classes.
  *
@@ -16,7 +14,7 @@ public class Legality2 {
 
     private Word word;
     private ArrayList<Word> attachedWords;
-    private Board board;
+    private ScrabbleGame model;
 
     private HashSet<String> legal_words = new HashSet<String>();
     private final String file_path = "Words/english_words.txt";
@@ -51,25 +49,25 @@ public class Legality2 {
                 int newWordLength = 0; // will hold the size of the new word
 
                 if (letter.getCol() == RIGHT) { // only check to the right
-                    while ((board.get_board()[row][column + 1].toString() != " ")) {
+                    while ((model.getBoard()[row][column + 1] != " ")) {
                         newWordLength++; // h
                         column++;
                     }
                 } else if (letter.getCol() == 14) { //only check left
-                    while ((board.get_board()[row][column - 1].toString() != " ")) {
+                    while ((model.getBoard()[row][column - 1] != " ")) {
                         newWordColumn--;
                         column--;
                         newWordLength++;
                     }
-                } else if ((board.get_board()[row][column - 1].toString() != " ") &&
-                        (board.get_board()[row][column + 1].toString() != " ")) { // nothing right or left
+                } else if ((model.getBoard()[row][column - 1] != " ") &&
+                        (model.getBoard()[row][column + 1] != " ")) { // nothing right or left
                     break; // break out of for loop and go to next letter
                 } else { // I have letters left OR right, find beginning of word
-                    while ((board.get_board()[row][column - 1].toString() != " ") || (column > 0)) { // there is a word there, find start
+                    while ((model.getBoard()[row][column - 1] != " ") || (column > 0)) { // there is a word there, find start
                         newWordColumn--;
                         column--;
                     } // now column points to the start of the word :), iterate right to find the end
-                    while ((board.get_board()[row][column + 1].toString() != " ") || (column < 14)) {
+                    while ((model.getBoard()[row][column + 1] != " ") || (column < 14)) {
                         newWordLength++;
                         column++;
                     } // now, newWordLength points the last index of the letter
@@ -79,8 +77,9 @@ public class Legality2 {
                     // create the array with all the letters in this word
                     ArrayList<Letter> newWordLetters = new ArrayList<Letter>();
                     for (int i = 0; i < newWordLength; i++) {
-                        newWordLetters.add(board.get_board()[row][newWordColumn + i]);
-                        // these letters already hold their premiums and all
+                        newWordLetters.add(new Letter(model.getBoard()[row][newWordColumn + i]));
+                        // these letters DO NOT hold their premium and all! NEED TO ADD THEM.
+                        //TODO add the premiums. Need to be appended to the string or something
                     }
                     Word newWord = new Word(newWordLetters);
                     this.attachedWords.add(newWord);
@@ -95,26 +94,26 @@ public class Legality2 {
                 int newWordLength = 0; // will hold the size of the new word
 
                 if (letter.getRow() == 0) { // only check below
-                    while ((board.get_board()[row + 1][column].toString() != " ")) {
+                    while ((model.getBoard()[row + 1][column] != " ")) {
                         newWordLength++; // h
                         row++;
                     }
                 } else if (letter.getRow() == 14) { //only check above
-                    while ((board.get_board()[row - 1][column].toString() != " ")) {
+                    while ((model.getBoard()[row - 1][column] != " ")) {
                         newWordRow--;
                         row--;
                         newWordLength++;
                     }
-                } else if ((board.get_board()[row - 1][column].toString() != " ") &&
-                        (board.get_board()[row + 1][column].toString() != " ")) { // nothing above or below
+                } else if ((model.getBoard()[row - 1][column] != " ") &&
+                        (model.getBoard()[row + 1][column] != " ")) { // nothing above or below
                     break; // break out of for loop and go to next letter
                 }
                 else { // I have letters up OR down, find beginning of word (up)
-                    while ((board.get_board()[row - 1][column].toString() != " ") || (row > 0)) { // there is a word there, find start
+                    while ((model.getBoard()[row - 1][column] != " ") || (row > 0)) { // there is a word there, find start
                         newWordRow--;
                         row--;
                     } // now row points to the start of the word :), iterate down to find the end
-                    while ((board.get_board()[row + 1][column].toString() != " ") || (row < 14)) {
+                    while ((model.getBoard()[row + 1][column] != " ") || (row < 14)) {
                         newWordLength++;
                         row++;
                     } // now, newWordLength points the last index of the letter
@@ -124,8 +123,8 @@ public class Legality2 {
                     // create the array with all the letters in this word
                     ArrayList<Letter> newWordLetters = new ArrayList<Letter>();
                     for (int i = 0; i < newWordLength; i++) {
-                        newWordLetters.add(board.get_board()[newWordRow + i][column]);
-                        // these letters already hold their premiums and all
+                        newWordLetters.add(new Letter(model.getBoard()[newWordRow + i][column]));
+                        // TODO: add the premiums to these letters
                     }
                     Word newWord = new Word(newWordLetters);
                     this.attachedWords.add(newWord);
