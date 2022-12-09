@@ -32,7 +32,7 @@ public class ScrabbleController implements ActionListener {
             letterToPlace = new Letter(e.getActionCommand());
         }
         else {
-            if (e.getActionCommand().length() == 3) { // I have board coordinates, where to place the letter!
+            if (e.getActionCommand().length() >= 3 && e.getActionCommand().length() <= 5) { // I have board coordinates, where to place the letter!
                 String[] input = e.getActionCommand().split(" ");
                 int row = Integer.parseInt(input[0]);
                 int col = Integer.parseInt(input[1]);
