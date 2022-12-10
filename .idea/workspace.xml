@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7f33efc-0bc3-4a70-a34d-0b6ed60aeb86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Tests/SaveGameStateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/ScrabbleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ScrabbleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/AiPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/AiPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Bag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/HumanPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Legality2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Legality2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Letter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Letter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Score.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ScrabbleEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ScrabbleEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/ScrabbleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ScrabbleGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/ScrabbleFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/ScrabbleFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/ScrabbleUML.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
