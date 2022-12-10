@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d7f33efc-0bc3-4a70-a34d-0b6ed60aeb86" name="Changes" comment="" />
+    <list default="true" id="d7f33efc-0bc3-4a70-a34d-0b6ed60aeb86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Tests/SaveGameStateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/ScrabbleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ScrabbleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/AiPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/AiPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Bag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/HumanPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Legality2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Legality2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Letter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Letter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Score.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/ScrabbleEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ScrabbleEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/ScrabbleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/ScrabbleGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Word.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/ScrabbleFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/ScrabbleFrame.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit3 Test Class" />
+        <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -29,31 +47,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "testing.instrumented.configuration"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2492212" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
       <recent name="junit.framework.TestCase" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AiPlayerTest">
+  <component name="RunManager" selected="Application.ScrabbleFrame">
     <configuration name="ScrabbleFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.ScrabbleFrame" />
       <module name="SYSC3110-Scrabble" />
@@ -76,26 +86,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BagTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SaveGameStateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SYSC3110-Scrabble" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.BagTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SaveGameStateTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaveGameStateTest.getTurn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SYSC3110-Scrabble" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SaveGameStateTest" />
+      <option name="METHOD_NAME" value="getTurn" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SaveGameStateTest.saveGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SYSC3110-Scrabble" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SaveGameStateTest" />
+      <option name="METHOD_NAME" value="saveGame" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AiPlayerTest" />
-        <item itemvalue="JUnit.BagTest" />
         <item itemvalue="Application.ScrabbleFrame" />
+        <item itemvalue="JUnit.SaveGameStateTest" />
+        <item itemvalue="JUnit.SaveGameStateTest.saveGame" />
+        <item itemvalue="JUnit.SaveGameStateTest.getTurn" />
+        <item itemvalue="JUnit.AiPlayerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -120,6 +146,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

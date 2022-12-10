@@ -28,9 +28,10 @@ public class ScrabbleController implements ActionListener {
         if (e.getActionCommand().length() == 1) { // A player clicked on a letter, save it here!
             // save the letter
             letterToPlace = new Letter(e.getActionCommand());
-        }
-        else {
-            if (e.getActionCommand().length() == 3) { // I have board coordinates, where to place the letter!
+        } else {
+            if (e.getActionCommand().length() == 3 && e.getActionCommand().length() <= 5) { // I have board coordinates,
+                                                                                            // where to place the
+                                                                                            // letter!
                 String[] input = e.getActionCommand().split(" ");
                 int row = Integer.parseInt(input[0]);
                 int col = Integer.parseInt(input[1]);
@@ -53,24 +54,21 @@ public class ScrabbleController implements ActionListener {
                     // update player's score
                     model.updateStatus(ScrabbleGame.Status.DONE); // we want to save the word and compute it
                     this.wordToScore = new ArrayList<>(); // clear the word so we don't keep adding to it
-                    // delete the word from the controller's array. Will still be saved in the model.
-                }
-                else {
+                    // delete the word from the controller's array. Will still be saved in the
+                    // model.
+                } else {
                     // letters back in hand
                 }
             }
-            if (e.getActionCommand() == "quitGame"){
+            if (e.getActionCommand() == "quitGame") {
                 System.exit(0);
-            }
-            else if (e.getActionCommand() == "passTurn"){
+            } else if (e.getActionCommand() == "passTurn") {
                 model.updateStatus(ScrabbleGame.Status.PASS); // we want to change the player's turn and move on
                 // confirm this works
-            }
-            else if (e.getActionCommand() == "exchangeTiles"){
+            } else if (e.getActionCommand() == "exchangeTiles") {
                 model.updateStatus(ScrabbleGame.Status.EXCHANGE);
                 // confirm this works
             }
-
 
         }
     }

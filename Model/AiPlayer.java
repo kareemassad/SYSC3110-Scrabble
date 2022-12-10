@@ -1,12 +1,10 @@
 package Model;
 
-import java.lang.constant.DirectMethodHandleDesc;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import Model.ScrabbleGame.Direction;
-
-public class AiPlayer extends Player {
+public class AiPlayer extends Player implements Serializable {
     private ScrabbleGame game;
     private Word playedWord;
     private Word bestWord;

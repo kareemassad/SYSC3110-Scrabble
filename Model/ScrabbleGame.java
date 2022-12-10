@@ -3,11 +3,18 @@ package Model;
 import View.ScrabbleFrame;
 import View.ScrabbleView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+
+import Controller.SaveGameState;
 
 /**
  * The main class of the game. This class is the model responsible to use the
@@ -18,17 +25,17 @@ import java.util.Set;
  * @version 3.0
  */
 
-public class ScrabbleGame {
+public class ScrabbleGame implements Serializable {
     public static final int SIZE = 15;
-    public ArrayList<Player> players;
+    public static ArrayList<Player> players;
     private int currentPlayerIndex;
     private List<ScrabbleView> views;
     private static String[][] board;
+    private static int turn;
     private Status status;
 
     private HashSet<String> legalWords;
     ArrayList<Letter> lettersPlayed;
-
 
     public enum Status {
         PLACING_TILES, DONE, PASS, EXCHANGE
@@ -53,6 +60,33 @@ public class ScrabbleGame {
 
     }
 
+    public void serialize(String fileName) {
+        try {
+            OutputStream outputStream = new FileOutputStream(fileName);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            objectOutputStream.writeObject(this);
+            objectOutputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setGameContents(ScrabbleGame game) {
+        this.board = game.board;
+        this.players = game.players;
+        this.currentPlayerIndex = game.currentPlayerIndex;
+        this.views = game.views;
+        this.legalWords = game.legalWords;
+        this.lettersPlayed = game.lettersPlayed;
+        this.turn = game.turn;
+        this.status = game.status;
+    }
+
+    public void serializedSetGameContents(SaveGameState game) {
+        // TODO FOR BECCA, INTEGRATE SAVEGAMESTATE INTO SCRABBLEGAME
+        // NOTE TO TA, Becca Dropped the class so this is not implemented
+    }
 
     // create a method to parse english_words.txt and store it in a set
     // return the set
@@ -67,13 +101,15 @@ public class ScrabbleGame {
         return legalWords;
     }
 
-    public void addPlayers(int selectionCode) {
-
     public ScrabbleGame getGame() {
         return this;
     }
 
-    public void addPlayers(int selectionCode){
+    public static ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void addPlayers(int selectionCode) {
 
         int numPlayers;
         if (selectionCode == 3) {
@@ -115,6 +151,10 @@ public class ScrabbleGame {
 
     public Player getCurrentPlayer() {
         return this.players.get(currentPlayerIndex);
+    }
+
+    public int getPlayerCount() {
+        return this.players.size();
     }
 
     public static String[][] getBoard() {
@@ -239,5 +279,13 @@ public class ScrabbleGame {
     public Word getLastHorizontalWordPlayed() {
         ArrayList<Word> horizontalWords = getHorizontalWords();
         return horizontalWords.get(horizontalWords.size() - 1);
+    }
+
+    public static int getNumPlayers() {
+        return players.size();
+    }
+
+    public static int getTurn() {
+        return turn;
     }
 }

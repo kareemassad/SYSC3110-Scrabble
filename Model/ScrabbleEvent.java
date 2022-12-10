@@ -1,13 +1,16 @@
 package Model;
+
+import java.io.Serializable;
 import java.util.EventObject;
 
 /**
  * This is the Event Object class
+ * 
  * @author Laurence Lamarche-Cliche 101173070
  * @version 1.0
  */
 
-public class ScrabbleEvent extends EventObject {
+public class ScrabbleEvent extends EventObject implements Serializable {
     private int row;
     private int col;
     private int currentPlayerIndex;

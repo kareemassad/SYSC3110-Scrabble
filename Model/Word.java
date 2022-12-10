@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.util.Comparator;
  * @version 3.0
  */
 
-public class Word {
+public class Word implements Serializable {
     private ArrayList<Letter> letters;
     private int score;
     private int startingRow;
