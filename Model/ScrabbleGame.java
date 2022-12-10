@@ -20,7 +20,7 @@ public class ScrabbleGame {
     public ArrayList<HumanPlayer> players;
     private int currentPlayerIndex;
     private List<ScrabbleView> views;
-    private String[][] board;
+    private static String[][] board;
     private Status status;
 
     public enum Status {
@@ -30,7 +30,7 @@ public class ScrabbleGame {
     public ScrabbleGame() {
         Bag gameBag = new Bag();
         board = new String[SIZE][SIZE];
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 board[i][j] = " "; // fix that
             }
@@ -86,6 +86,16 @@ public class ScrabbleGame {
         return board;
     }
 
+    public static Letter getLetter(int row, int col) {
+        if (board[row][col] == " ") {
+            return new Letter(Letter.Character.NONE);
+        } else {
+            Letter newLetter = new Letter(board[row][col]); // using the string constructor
+            newLetter.setCoordinates(row, col);
+            return newLetter;
+        }
+    }
+
     public void updateStatus(Status status) {
 
         if ((status == Status.DONE) || (status == Status.PASS)) {
@@ -112,6 +122,17 @@ public class ScrabbleGame {
         for (ScrabbleView v : views) {
             v.updateView(new ScrabbleEvent(this, letterToPlace, row, col, currentPlayerIndex));
         }
+    }
 
+    // this is to be called by the AI player :)
+    public void placeWord(String word, int startingRow, int startingCol, int direction) {
+        // this assumes that the word will not go out of bounds!
+        for (int i = 0; i < word.length(); i++) {
+            if (direction == 0) { // word is going right,
+                placeLetter(String.valueOf(word.charAt(i)), startingRow, startingCol + i);
+            } else { // direction is down
+                placeLetter(String.valueOf(word.charAt(i)), startingRow + i, startingCol);
+            }
+        }
     }
 }

@@ -186,15 +186,4 @@ public class Bag {
         return lettersDrawn;
     }
 
-    public static String drawLettersString(Integer numberOfLetters) {
-        //ArrayList<Letter> lettersDrawn = new ArrayList<Letter>();
-        StringBuilder lettersDrawn = new StringBuilder();
-        for (int i = 0; i < numberOfLetters; i++) {
-            Letter randomLetter = Bag.getRandomElement(Bag.gameLetters);
-            //lettersDrawn.add(randomLetter);
-            lettersDrawn.append(randomLetter.toString()+ " ");
-            Bag.gameLetters.remove(randomLetter); // that letter cannot be drawn again
-        }
-        return lettersDrawn.toString();
-    }
 }
