@@ -101,6 +101,12 @@ public class ScrabbleFrame extends JFrame implements ScrabbleView{
         quit.addActionListener(bc);
         quit.setActionCommand("quitGame");
 
+        save.addActionListener(bc);
+        save.setActionCommand("saveGame");
+
+        load.addActionListener(bc);
+        load.setActionCommand("loadGame");
+
         // setting up the board and the buttons for the board
         boardPanel = new JPanel(new GridLayout(ScrabbleGame.SIZE, ScrabbleGame.SIZE));
 //        boardPanel.setSize(new Dimension(800,800));

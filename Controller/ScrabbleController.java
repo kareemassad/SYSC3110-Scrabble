@@ -63,8 +63,12 @@ public class ScrabbleController implements ActionListener {
                 model.updateStatus(ScrabbleGame.Status.EXCHANGE);
                 // confirm this works
             }
-
-
+            else if (e.getActionCommand() == "saveGame"){
+                model.saveBoard();
+            }
+            else if (e.getActionCommand() == "loadGame") {
+                model.loadGame();
+            }
         }
     }
 }

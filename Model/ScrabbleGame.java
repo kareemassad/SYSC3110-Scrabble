@@ -22,6 +22,8 @@ public class ScrabbleGame {
     private static String[][] board;
     private Status status;
 
+    private static String[][] tempBoard;
+
     public enum Status {PLACING_TILES, DONE, PASS, EXCHANGE};
 
     public ScrabbleGame() {
@@ -77,6 +79,16 @@ public class ScrabbleGame {
     }
 
     public String[][] getBoard(){
+        return board;
+    }
+
+    public String[][] saveBoard(){
+        tempBoard = board;
+        return tempBoard;
+    }
+
+    public String[][] loadGame(){
+        board = tempBoard;
         return board;
     }
 
