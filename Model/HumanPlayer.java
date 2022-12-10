@@ -2,13 +2,15 @@ package Model;
 
 import java.util.ArrayList;
 
+import View.Player;
+
 /**
  * This class is the Player, responsible for holding his score and its letters
  *
  * @author Becca Young
  * @version 3.0
  */
-public class HumanPlayer {
+public class HumanPlayer implements Player {
     private String handString;
     private ArrayList<Letter> handLetters;
     private int score;
@@ -83,8 +85,13 @@ public class HumanPlayer {
         handToString();
     }
 
-    public void addScore(Word word) {
+    public void addToScore(Word word) {
         Score turnScore = new Score(word);
         this.score += turnScore.getWordScore();
+    }
+
+    @Override
+    public void setScore(int score) {
+        this.score = score;
     }
 }

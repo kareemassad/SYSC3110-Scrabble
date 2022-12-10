@@ -1,5 +1,7 @@
 package Model;
 
-public class AiPlayer implements HumanPlayer {
+import View.Player;
+
+public class AiPlayer implements Player {
 
 }

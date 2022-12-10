@@ -2,6 +2,7 @@ package Tests;
 
 import Model.Bag;
 import Model.Letter;
+import Model.Score;
 import Model.HumanPlayer;
 import Model.Word;
 import org.junit.Test;
@@ -40,7 +41,8 @@ public class PlayerTest {
         ArrayList<Letter> hiLetters = new ArrayList<Letter>();
         Collections.addAll(hiLetters, H, I);
         Word hi = new Word(hiLetters);
-        p.addScore(hi);
+        Score turnScore = new Score(hi);
+        p.score += turnScore.getWordScore();
         assertEquals(5, p.getScore());
 
         Letter H2 = new Letter('H');
@@ -52,7 +54,8 @@ public class PlayerTest {
         Collections.addAll(helloLetters, H2, E, L, L2, O);
 
         Word hello = new Word(helloLetters);
-        p.addScore(hello);
+        Score turnScore = new Score(hello);
+        p.score += turnScore.getWordScore();
         assertEquals(13, p.getScore());
     }
 

@@ -26,8 +26,7 @@ public class ScrabbleController implements ActionListener {
         if (e.getActionCommand().length() == 1) { // A player clicked on a letter, save it here!
             // save the letter
             letterToPlace = new Letter(e.getActionCommand());
-        }
-        else {
+        } else {
             if (e.getActionCommand().length() == 3) { // I have board coordinates, where to place the letter!
                 String[] input = e.getActionCommand().split(" ");
                 int row = Integer.parseInt(input[0]);
@@ -42,24 +41,23 @@ public class ScrabbleController implements ActionListener {
                 // score the word
                 Word finalWord = new Word(wordToScore);
                 String wordString = finalWord.toString(); // just testing for now
-                model.getCurrentPlayer().addScore(finalWord);
+                Score turnScore = new Score(finalWord);
+                model.getCurrentPlayer().score += turnScore.getWordScore();
                 // update player's score
                 model.updateStatus(ScrabbleGame.Status.DONE); // we want to save the word and compute it
                 this.wordToScore = new ArrayList<>(); // clear the word so we don't keep adding to it
-                // delete the word from the controller's array. Will still be saved in the model.
+                // delete the word from the controller's array. Will still be saved in the
+                // model.
             }
-            if (e.getActionCommand() == "quitGame"){
+            if (e.getActionCommand() == "quitGame") {
                 System.exit(0);
-            }
-            else if (e.getActionCommand() == "passTurn"){
+            } else if (e.getActionCommand() == "passTurn") {
                 model.updateStatus(ScrabbleGame.Status.PASS); // we want to change the player's turn and move on
                 // confirm this works
-            }
-            else if (e.getActionCommand() == "exchangeTiles"){
+            } else if (e.getActionCommand() == "exchangeTiles") {
                 model.updateStatus(ScrabbleGame.Status.EXCHANGE);
                 // confirm this works
             }
-
 
         }
     }
