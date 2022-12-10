@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.Serializable;
+
 /**
  * This class acts as a placeholder for how class Legality will work after restructuring other classes.
  *
@@ -11,7 +13,7 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Score {
+public class Score implements Serializable {
     private int wordScore = 0;
     private final Word word;
 
@@ -20,18 +22,22 @@ public class Score {
         this.wordScore = calculateWord(word);
     }
 
-    /* Returns the total score of a word played.
+    /*
+     * Returns the total score of a word played.
      *
      * @author Becca Young 101183297
+     * 
      * @return wordScore the total score of a word played
      */
     public int getWordScore() {
         return this.wordScore;
     }
 
-    /* Calculates the score of a word played
+    /*
+     * Calculates the score of a word played
      *
      * @author Becca Young 101183297
+     * 
      * @return the score of the word played in the location it was played.
      */
     private int calculateWord(Word word) {
@@ -41,7 +47,7 @@ public class Score {
 
         ArrayList<Letter> letters = word.getLetters();
 
-        for(Letter letter: letters) {
+        for (Letter letter : letters) {
             int letterVal = letter.getValue();
             String premium = letter.getPremium();
 
@@ -61,10 +67,9 @@ public class Score {
             }
             score += letterVal;
         }
-        if (DW){
+        if (DW) {
             score *= 2;
-        }
-        else if (TW){
+        } else if (TW) {
             score *= 3;
         }
 

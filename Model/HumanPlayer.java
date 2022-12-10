@@ -1,6 +1,8 @@
 package Model;
 
-public class HumanPlayer extends Player {
+import java.io.Serializable;
+
+public class HumanPlayer extends Player implements Serializable {
 
     public HumanPlayer(int player_ID) {
         super(player_ID);

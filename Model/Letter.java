@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 
 /**
  * A letter is a character and a score.
@@ -9,7 +10,7 @@ package Model;
  * @author Laurence Lamarche-Cliche 101173070
  * @version 3.0
  */
-public class Letter {
+public class Letter implements Serializable {
 
     public enum Character {
         NONE, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, BLANKTILE
@@ -36,9 +37,10 @@ public class Letter {
     /**
      * Initialize a new Letter object this way:
      * new Letter("LDL")
-     * Where the letter is the first character, and the premium is the following 2 characters.
+     * Where the letter is the first character, and the premium is the following 2
+     * characters.
      */
-    public Letter(String letterPremiumString){
+    public Letter(String letterPremiumString) {
         this(letterPremiumString.charAt(0));
     }
 
@@ -156,29 +158,29 @@ public class Letter {
         return this.premium;
     }
 
-    public void setCoordinates(int row, int col){
-        if ((row > 14) || (col > 14) || (row < 0) || (col < 0)) { return; } // remains -1
+    public void setCoordinates(int row, int col) {
+        if ((row > 14) || (col > 14) || (row < 0) || (col < 0)) {
+            return;
+        } // remains -1
         this.row = row;
         this.col = col;
     }
 
-    public int getRow(){
+    public int getRow() {
         return this.row;
     }
 
-    public int getCol(){
+    public int getCol() {
         return this.col;
     }
 
     @Override
     public String toString() {
-        if (character == Character.NONE){
+        if (character == Character.NONE) {
             return " ";
-        }
-        else if (character == Character.BLANKTILE){
+        } else if (character == Character.BLANKTILE) {
             return "_";
-        }
-        else {
+        } else {
             StringBuilder s = new StringBuilder();
             s.append(this.character.name().charAt(0)); // we print L if we have letter L1
             return s.toString();

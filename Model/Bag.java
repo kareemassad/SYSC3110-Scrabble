@@ -1,14 +1,16 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * The bag contains all the available letters for the game
+ * 
  * @author Laurence Lamarche-Cliche 101173070
  * @version 3.0
  */
 
-public class Bag {
+public class Bag implements Serializable {
     public static HashSet<Letter> gameLetters;
 
     public Bag() {
@@ -136,7 +138,6 @@ public class Bag {
         Letter Y2 = new Letter(Letter.Character.Y);
 
         Letter Z1 = new Letter(Letter.Character.Z);
-
 
         Collections.addAll(gameLetters, A1, A2, A3, A4, A5, A6, A7, A8, A9, B1, B2, C1, C2, D1, D2, D3, D4,
                 E1, E2, E3, E4, E5, E6, E7, E8, E9, E10, E11, E12, F1, F2, G1, G2, G3, H1, H2,
